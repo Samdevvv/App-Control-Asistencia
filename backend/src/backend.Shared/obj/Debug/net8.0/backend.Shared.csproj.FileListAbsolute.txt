@@ -1,0 +1,12 @@
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\bin\Debug\net8.0\backend.Shared.deps.json
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\bin\Debug\net8.0\backend.Shared.dll
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\bin\Debug\net8.0\backend.Shared.pdb
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\backend.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\backend.Shared.AssemblyInfoInputs.cache
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\backend.Shared.AssemblyInfo.cs
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\backend.Shared.csproj.CoreCompileInputs.cache
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\backend.Shared.sourcelink.json
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\backend.Shared.dll
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\refint\backend.Shared.dll
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\backend.Shared.pdb
+C:\Users\programacion 28\Desktop\App Control de Asistencia\backend\src\backend.Shared\obj\Debug\net8.0\ref\backend.Shared.dll
