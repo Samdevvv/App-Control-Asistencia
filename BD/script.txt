@@ -1,0 +1,81 @@
+create database control_asistencia;
+use control_asistencia;
+
+create table departamentos (
+    id_departamento int primary key auto_increment,
+    nombre varchar(100) unique not null,
+    descripcion text
+);
+
+create table empleados (
+    id_empleado int primary key auto_increment,
+    codigo varchar(20) unique not null, 
+    nombre varchar(100) not null,
+    apellido varchar(100) not null,
+    correo varchar(100) unique not null,
+    telefono varchar(15),
+    fecha_contratacion date not null,
+    id_departamento int,
+    estado enum('activo', 'inactivo') default 'activo',
+    huella_biometrica blob,
+    rostro_biometrico blob,
+    foreign key (id_departamento) references departamentos(id_departamento)
+);
+
+create table turnos (
+    id_turno int primary key auto_increment,
+    nombre varchar(50) not null,
+    hora_entrada time not null,
+    hora_salida time not null,
+    tolerancia_minutos int default 5
+);
+
+create table empleado_turno (
+    id_empleado int,
+    id_turno int,
+    fecha_inicio date not null,
+    fecha_fin date default null,
+    primary key (id_empleado, id_turno, fecha_inicio),
+    foreign key (id_empleado) references empleados(id_empleado) on delete cascade,
+    foreign key (id_turno) references turnos(id_turno) on delete cascade
+);
+
+create table asistencias (
+    id_asistencia int primary key auto_increment,
+    id_empleado int not null,
+    fecha date not null,
+    hora_entrada time default null,
+    hora_salida time default null,
+    tipo_registro enum('huella', 'rostro') not null,
+    estado enum('a tiempo', 'tarde', 'ausente') default 'a tiempo',
+    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+);
+
+create table permisos (
+    id_permiso int primary key auto_increment,
+    id_empleado int not null,
+    fecha_inicio date not null,
+    fecha_fin date not null,
+    motivo text not null,
+    estado enum('pendiente', 'aprobado', 'rechazado') default 'pendiente',
+    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+);
+
+create table historial_faltas (
+    id_historial int primary key auto_increment,
+    id_empleado int not null,
+    cantidad_faltas int default 0,
+    ultima_falta date default null,
+    motivo_ultima_falta text default null,
+    estado_disciplinario enum('normal', 'advertencia', 'sancionado', 'despido') default 'normal',
+    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+);
+
+create table usuarios (
+    id_usuario int primary key auto_increment,
+    id_empleado int unique not null,
+    username varchar(50) unique not null,
+    password_hash varchar(255) not null,
+    rol enum('administrador', 'rrhh', 'empleado') not null,
+    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+);
