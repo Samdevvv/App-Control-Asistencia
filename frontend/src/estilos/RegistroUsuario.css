@@ -1,0 +1,173 @@
+.registro-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    font-family: Poppins, sans-serif;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 150px;
+    background-color: #0046b8;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    border-radius: 0px 40px 0px 0px;
+}
+
+.sidebar-item {
+    padding: 10px;
+    margin: 10px 0;
+    text-align: center;
+    font-size: 16px;
+    position: relative;
+}
+
+.right .sidebar-item{
+    position: relative;
+    top: 100px;
+}
+
+.sidebar.right {
+    border-radius: 40px 0px 0px 0px;
+    position: relative;
+}
+
+.user-profile {
+    position: absolute;
+    top: 10px;
+    padding: 16px;
+    text-align: center;
+    width: 70%;
+}
+
+.user-profile .avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+/* --- CONTENIDO --- */
+.registro-content {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.titulo {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.formulario {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.formulario input,
+.formulario select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    /* Elimina flex: 1 para que no ocupen todo el ancho */
+    min-width: calc(50% - 5px); /* Establece un ancho mínimo para que dos quepan (considerando el gap) */
+    font-size: 14px;
+    box-sizing: border-box; /* Importante para que el padding y el border no aumenten el ancho total */
+}
+
+/* --- BOTONES --- */
+.botones {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.btn-confirmar,
+.btn-cancelar {
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    flex: 1 1 200px;
+}
+
+.btn-confirmar {
+    background-color: #1f7a1f;
+    color: white;
+    border: none;
+}
+
+.btn-cancelar {
+    background-color: #d32929;
+    color: white;
+    border: none;
+}
+
+/* --- TABLA --- */
+.tabla {
+    flex: 1;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 768px) {
+    .registro-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        width: 100%;
+        height: auto;
+        justify-content: space-around;
+        padding: 10px 0;
+    }
+
+    .sidebar.right {
+        order: 2;
+    }
+
+    .user-profile {
+        position: static;
+        margin-top: 10px;
+    }
+
+    .registro-content {
+        padding: 15px;
+    }
+
+    .formulario input,
+    .formulario select {
+        min-width: 100%;
+    }
+
+    .botones {
+        flex-direction: column;
+    }
+
+    .btn-confirmar,
+    .btn-cancelar {
+        width: 100%;
+    }
+
+    .tabla {
+        font-size: 24px;
+    }
+}
