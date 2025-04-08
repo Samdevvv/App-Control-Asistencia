@@ -114,3 +114,24 @@ create table usuarios (
     rol enum('administrador', 'rrhh', 'empleado') not null,
     foreign key (id_empleado) references empleados(id_empleado) on delete cascade
 );
+
+create index idx_sucursales_id_region on sucursales(id_region);
+
+create index idx_oficinas_id_sucursal on oficinas(id_sucursal);
+
+create index idx_empleados_id_oficina on empleados(id_oficina);
+create index idx_empleados_id_departamento on empleados(id_departamento);
+create index idx_empleados_id_cargo on empleados(id_cargo);
+
+create index idx_empleado_turno_id_empleado on empleado_turno(id_empleado);
+create index idx_empleado_turno_id_turno on empleado_turno(id_turno);
+
+create index idx_asistencias_id_empleado on asistencias(id_empleado);
+create index idx_asistencias_fecha on asistencias(fecha);
+
+create index idx_permisos_id_empleado on permisos(id_empleado);
+create index idx_permisos_fecha_inicio on permisos(fecha_inicio);
+
+create index idx_historial_faltas_id_empleado on historial_faltas(id_empleado);
+
+create index idx_usuarios_username on usuarios(username);
