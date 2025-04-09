@@ -33,7 +33,7 @@ function Login() {
           <div className="login-logo">
             <img src={logo} alt="Logo" />
           </div>
-          <h1 className="login-title">Control de Asistencia</h1>
+          <h1 className="login-title">Control De Asistencia</h1>
           
           <form className="login-form" onSubmit={handleSubmit}>
             <div className="form-group">
