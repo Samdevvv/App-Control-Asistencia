@@ -3,7 +3,9 @@ import "../estilos/Regiones.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash, FaGlobeAmericas } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
 
-function ModuloRegiones() {
+
+
+function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
   // Estado para el formulario
   const [formData, setFormData] = useState({
     nombre: "",
@@ -99,11 +101,6 @@ function ModuloRegiones() {
     setCurrentRegionId(null);
   };
 
-  // Función para cambiar el modo de visualización
-  const toggleViewMode = () => {
-    setViewMode(viewMode === "tabla" ? "tarjetas" : "tabla");
-  };
-
   // Filtrar regiones basadas en el término de búsqueda
   const filteredRegions = regiones.filter(
     (region) =>
@@ -115,44 +112,7 @@ function ModuloRegiones() {
 
   return (
     <div className="modulo-container">
-      {/* Sidebar Izquierda */}
-      <div className="sidebar">
-        <div className="sidebar-logo">
-          <MdFingerprint className="logo-icon" />
-          <span>AsistControl</span>
-        </div>
-        
-        <div className="sidebar-menu">
-          <div className="sidebar-item">
-            <MdDashboard className="sidebar-icon" />
-            <span>Dashboard</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUsers className="sidebar-icon" />
-            <span>Empleados</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUserAlt className="sidebar-icon" />
-            <span>Usuarios</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Sucursales</span>
-          </div>
-          <div className="sidebar-item active">
-            <FaMapMarkerAlt className="sidebar-icon" />
-            <span>Regiones</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Oficinas</span>
-          </div>
-          <div className="sidebar-item">
-            <FaFileAlt className="sidebar-icon" />
-            <span>Reportes</span>
-          </div>
-        </div>
-      </div>
+     
 
       {/* Contenido principal */}
       <div className="modulo-content">
@@ -365,23 +325,7 @@ function ModuloRegiones() {
         )}
       </div>
 
-      {/* Sidebar derecha */}
-      <div className="sidebar right">
-        <div className="user-profile">
-          <div className="avatar">
-            <FaUserAlt />
-          </div>
-          <div className="user-info">
-            <h3>Admin Usuario</h3>
-            <p>Administrador</p>
-          </div>
-        </div>
-
-        <div className="sidebar-item logout">
-          <MdExitToApp className="sidebar-icon" />
-          <span>Cerrar Sesión</span>
-        </div>
-      </div>
+    
     </div>
   );
 }

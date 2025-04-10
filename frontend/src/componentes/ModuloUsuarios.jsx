@@ -3,7 +3,8 @@ import "../estilos/ModuloUsuarios.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
 
-function ModuloUsuarios() {
+
+function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
   // Estado para el formulario
   const [formData, setFormData] = useState({
     nombre: "",
@@ -39,6 +40,20 @@ function ModuloUsuarios() {
     });
   };
 
+  // Función para editar un usuario
+  const handleEdit = (user) => {
+    setFormData({
+      nombre: user.nombre,
+      apellido: user.apellido,
+      email: user.email,
+      usuario: user.usuario,
+      password: "", // No mostramos la contraseña por seguridad
+      perfil: user.perfil,
+    });
+    setIsEditing(true);
+    setCurrentUserId(user.id);
+  };
+
   // Manejo de envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,20 +83,6 @@ function ModuloUsuarios() {
       password: "",
       perfil: "",
     });
-  };
-
-  // Función para editar un usuario
-  const handleEdit = (user) => {
-    setFormData({
-      nombre: user.nombre,
-      apellido: user.apellido,
-      email: user.email,
-      usuario: user.usuario,
-      password: "", // No mostramos la contraseña por seguridad
-      perfil: user.perfil,
-    });
-    setIsEditing(true);
-    setCurrentUserId(user.id);
   };
 
   // Función para eliminar un usuario
@@ -115,44 +116,7 @@ function ModuloUsuarios() {
 
   return (
     <div className="modulo-container">
-      {/* Sidebar Izquierda */}
-      <div className="sidebar">
-        <div className="sidebar-logo">
-          <MdFingerprint className="logo-icon" />
-          <span>AsistControl</span>
-        </div>
-        
-        <div className="sidebar-menu">
-          <div className="sidebar-item">
-            <MdDashboard className="sidebar-icon" />
-            <span>Dashboard</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUsers className="sidebar-icon" />
-            <span>Empleados</span>
-          </div>
-          <div className="sidebar-item active">
-            <FaUserAlt className="sidebar-icon" />
-            <span>Usuarios</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Sucursales</span>
-          </div>
-          <div className="sidebar-item">
-            <FaMapMarkerAlt className="sidebar-icon" />
-            <span>Regiones</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Oficinas</span>
-          </div>
-          <div className="sidebar-item">
-            <FaFileAlt className="sidebar-icon" />
-            <span>Reportes</span>
-          </div>
-        </div>
-      </div>
+     
 
       {/* Contenido principal */}
       <div className="modulo-content">
@@ -327,23 +291,7 @@ function ModuloUsuarios() {
         </div>
       </div>
 
-      {/* Sidebar derecha */}
-      <div className="sidebar right">
-        <div className="user-profile">
-          <div className="avatar">
-            <FaUserAlt />
-          </div>
-          <div className="user-info">
-            <h3>Admin Usuario</h3>
-            <p>Administrador</p>
-          </div>
-        </div>
-
-        <div className="sidebar-item logout">
-          <MdExitToApp className="sidebar-icon" />
-          <span>Cerrar Sesión</span>
-        </div>
-      </div>
+     
     </div>
   );
 }

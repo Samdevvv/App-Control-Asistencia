@@ -3,7 +3,8 @@ import "../estilos/Empleados.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash, FaFingerprint } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
 
-function ModuloEmpleados() {
+
+function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
   // Estado para el formulario
   const [formData, setFormData] = useState({
     nombre: "",
@@ -170,45 +171,7 @@ function ModuloEmpleados() {
 
   return (
     <div className="modulo-container">
-      {/* Sidebar Izquierda */}
-      <div className="sidebar">
-        <div className="sidebar-logo">
-          <MdFingerprint className="logo-icon" />
-          <span>AsistControl</span>
-        </div>
-        
-        <div className="sidebar-menu">
-          <div className="sidebar-item">
-            <MdDashboard className="sidebar-icon" />
-            <span>Dashboard</span>
-          </div>
-          <div className="sidebar-item active">
-            <FaUsers className="sidebar-icon" />
-            <span>Empleados</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUserAlt className="sidebar-icon" />
-            <span>Usuarios</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Sucursales</span>
-          </div>
-          <div className="sidebar-item">
-            <FaMapMarkerAlt className="sidebar-icon" />
-            <span>Regiones</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Oficinas</span>
-          </div>
-          <div className="sidebar-item">
-            <FaFileAlt className="sidebar-icon" />
-            <span>Reportes</span>
-          </div>
-        </div>
-      </div>
-
+     
       {/* Contenido principal */}
       <div className="modulo-content">
         <div className="modulo-header">
@@ -476,23 +439,7 @@ function ModuloEmpleados() {
         </div>
       </div>
 
-      {/* Sidebar derecha */}
-      <div className="sidebar right">
-        <div className="user-profile">
-          <div className="avatar">
-            <FaUserAlt />
-          </div>
-          <div className="user-info">
-            <h3>Admin Usuario</h3>
-            <p>Administrador</p>
-          </div>
-        </div>
-
-        <div className="sidebar-item logout">
-          <MdExitToApp className="sidebar-icon" />
-          <span>Cerrar Sesión</span>
-        </div>
-      </div>
+    
 
       {/* Modal para registro de huella */}
       {showFingerprintModal && (

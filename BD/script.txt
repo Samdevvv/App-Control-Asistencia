@@ -1,137 +1,219 @@
-create database control_asistencia;
-go
-use control_asistencia;
-go
+-- Crear base de datos
+CREATE DATABASE control_asistencia;
+GO
 
-create table regiones (
-    id_region int primary key auto_increment,
-    nombre varchar(100) unique not null,
-    descripcion text
+USE control_asistencia;
+GO
+
+-- Tabla de regiones
+CREATE TABLE regiones (
+    id_region INT PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    descripcion VARCHAR(MAX),
+    cantidad_sucursales INT DEFAULT 0
 );
 
-create table sucursales (
-    id_sucursal int primary key auto_increment,
-    id_region int not null,
-    nombre varchar(100) unique not null,
-    direccion text not null,
-    telefono varchar(15) check (telefono regexp '^[0-9]{10}$'),
-    foreign key (id_region) references regiones(id_region) on delete cascade
+-- Tabla de sucursales
+CREATE TABLE sucursales (
+    id_sucursal INT PRIMARY KEY IDENTITY(1,1),
+    id_region INT NOT NULL,
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    direccion VARCHAR(MAX) NOT NULL,
+    cantidad_oficinas INT DEFAULT 0,
+    telefono VARCHAR(15) CHECK (telefono LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+    FOREIGN KEY (id_region) REFERENCES regiones(id_region) ON DELETE CASCADE
 );
 
-create table oficinas (
-    id_oficina int primary key auto_increment,
-    id_sucursal int not null,
-    nombre varchar(100) not null,
-    foreign key (id_sucursal) references sucursales(id_sucursal) on delete cascade
+-- Tabla de oficinas
+CREATE TABLE oficinas (
+    id_oficina INT PRIMARY KEY IDENTITY(1,1),
+    id_sucursal INT NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_sucursal) REFERENCES sucursales(id_sucursal) ON DELETE CASCADE
 );
 
-create table departamentos (
-    id_departamento int primary key auto_increment,
-    nombre varchar(100) unique not null,
-    descripcion text
+-- Tabla de departamentos
+CREATE TABLE departamentos (
+    id_departamento INT PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    descripcion VARCHAR(MAX)
 );
 
-create table cargos (
-    id_cargo int primary key auto_increment,
-    nombre varchar(100) unique not null,
-    descripcion text
+-- Tabla de cargos
+CREATE TABLE cargos (
+    id_cargo INT PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(100) UNIQUE NOT NULL,
+    descripcion VARCHAR(MAX)
 );
 
-create table empleados (
-    id_empleado int primary key auto_increment,
-    codigo varchar(20) unique not null, 
-    cedula varchar(11) unique not null check (cedula regexp '^[0-9]{11}$'),
-    nombre varchar(100) not null,
-    apellido varchar(100) not null,
-    correo varchar(100) unique not null,
-    telefono varchar(15) check (telefono regexp '^[0-9]{10}$'),
-    fecha_contratacion date not null,
-    id_departamento int,
-    id_oficina int not null,
-    id_cargo int not null,
-    estado enum('activo', 'inactivo') default 'activo',
-    huella_biometrica blob,
-    rostro_biometrico blob,
-    foreign key (id_departamento) references departamentos(id_departamento),
-    foreign key (id_oficina) references oficinas(id_oficina) on delete cascade,
-    foreign key (id_cargo) references cargos(id_cargo) on delete cascade
+-- Tabla de empleados
+CREATE TABLE empleados (
+    id_empleado INT PRIMARY KEY IDENTITY(1,1),
+    codigo VARCHAR(20) UNIQUE NOT NULL, 
+    cedula VARCHAR(11) UNIQUE NOT NULL CHECK (cedula LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) UNIQUE NOT NULL,
+    telefono VARCHAR(15) CHECK (telefono LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+    fecha_contratacion DATE NOT NULL,
+    id_departamento INT,
+    id_oficina INT NOT NULL,
+    id_cargo INT NOT NULL,
+    estado VARCHAR(10) CHECK (estado IN ('activo', 'inactivo')) DEFAULT 'activo',
+    huella_biometrica VARBINARY(MAX),
+    rostro_biometrico VARBINARY(MAX),
+    FOREIGN KEY (id_departamento) REFERENCES departamentos(id_departamento),
+    FOREIGN KEY (id_oficina) REFERENCES oficinas(id_oficina) ON DELETE CASCADE,
+    FOREIGN KEY (id_cargo) REFERENCES cargos(id_cargo) ON DELETE CASCADE
 );
 
-create table turnos (
-    id_turno int primary key auto_increment,
-    nombre varchar(50) not null,
-    hora_entrada time not null,
-    hora_salida time not null,
-    tolerancia_minutos int default 5
+-- Tabla de turnos
+CREATE TABLE turnos (
+    id_turno INT PRIMARY KEY IDENTITY(1,1),
+    nombre VARCHAR(50) NOT NULL,
+    hora_entrada TIME NOT NULL,
+    hora_salida TIME NOT NULL,
+    tolerancia_minutos INT DEFAULT 5
 );
 
-create table empleado_turno (
-    id_empleado int,
-    id_turno int,
-    fecha_inicio date not null,
-    fecha_fin date default null,
-    primary key (id_empleado, id_turno, fecha_inicio),
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade,
-    foreign key (id_turno) references turnos(id_turno) on delete cascade
+-- Relación entre empleados y turnos
+CREATE TABLE empleado_turno (
+    id_empleado INT,
+    id_turno INT,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE DEFAULT NULL,
+    PRIMARY KEY (id_empleado, id_turno, fecha_inicio),
+    FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado) ON DELETE CASCADE,
+    FOREIGN KEY (id_turno) REFERENCES turnos(id_turno) ON DELETE CASCADE
 );
 
-create table asistencias (
-    id_asistencia int primary key auto_increment,
-    id_empleado int not null,
-    fecha date not null,
-    hora_entrada time default null,
-    hora_salida time default null,
-    tipo_registro enum('huella', 'rostro') not null,
-    estado enum('a tiempo', 'tarde', 'ausente') default 'a tiempo',
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+-- Tabla de asistencias
+CREATE TABLE asistencias (
+    id_asistencia INT PRIMARY KEY IDENTITY(1,1),
+    id_empleado INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora_entrada TIME DEFAULT NULL,
+    hora_salida TIME DEFAULT NULL,
+    tipo_registro VARCHAR(10) CHECK (tipo_registro IN ('huella', 'rostro')) NOT NULL,
+    estado VARCHAR(10) CHECK (estado IN ('a tiempo', 'tarde', 'ausente')) DEFAULT 'a tiempo',
+    FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado) ON DELETE CASCADE
 );
 
-create table permisos (
-    id_permiso int primary key auto_increment,
-    id_empleado int not null,
-    fecha_inicio date not null,
-    fecha_fin date not null,
-    motivo text not null,
-    estado enum('pendiente', 'aprobado', 'rechazado') default 'pendiente',
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+-- Tabla de permisos
+CREATE TABLE permisos (
+    id_permiso INT PRIMARY KEY IDENTITY(1,1),
+    id_empleado INT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    motivo VARCHAR(MAX) NOT NULL,
+    estado VARCHAR(15) CHECK (estado IN ('pendiente', 'aprobado', 'rechazado')) DEFAULT 'pendiente',
+    FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado) ON DELETE CASCADE
 );
 
-create table historial_faltas (
-    id_historial int primary key auto_increment,
-    id_empleado int not null,
-    cantidad_faltas int default 0,
-    ultima_falta date default null,
-    motivo_ultima_falta text default null,
-    estado_disciplinario enum('normal', 'advertencia', 'sancionado', 'despido') default 'normal',
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+-- Historial de faltas
+CREATE TABLE historial_faltas (
+    id_historial INT PRIMARY KEY IDENTITY(1,1),
+    id_empleado INT NOT NULL,
+    cantidad_faltas INT DEFAULT 0,
+    ultima_falta DATE DEFAULT NULL,
+    motivo_ultima_falta VARCHAR(MAX),
+    estado_disciplinario VARCHAR(15) CHECK (estado_disciplinario IN ('normal', 'advertencia', 'sancionado', 'despido')) DEFAULT 'normal',
+    FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado) ON DELETE CASCADE
 );
 
-create table usuarios (
-    id_usuario int primary key auto_increment,
-    id_empleado int unique not null,
-    username varchar(50) unique not null,
-    password_hash varchar(255) not null,
-    rol enum('administrador', 'rrhh', 'empleado') not null,
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+-- Tabla de usuarios
+CREATE TABLE usuarios (
+    id_usuario INT PRIMARY KEY IDENTITY(1,1),
+    id_empleado INT UNIQUE NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    rol VARCHAR(20) CHECK (rol IN ('administrador', 'rrhh', 'empleado')) NOT NULL,
+    FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado) ON DELETE CASCADE
 );
 
-create index idx_sucursales_id_region on sucursales(id_region);
+-- Índices
+CREATE INDEX idx_sucursales_id_region ON sucursales(id_region);
+CREATE INDEX idx_oficinas_id_sucursal ON oficinas(id_sucursal);
+CREATE INDEX idx_empleados_id_oficina ON empleados(id_oficina);
+CREATE INDEX idx_empleados_id_departamento ON empleados(id_departamento);
+CREATE INDEX idx_empleados_id_cargo ON empleados(id_cargo);
+CREATE INDEX idx_empleado_turno_id_empleado ON empleado_turno(id_empleado);
+CREATE INDEX idx_empleado_turno_id_turno ON empleado_turno(id_turno);
+CREATE INDEX idx_asistencias_id_empleado ON asistencias(id_empleado);
+CREATE INDEX idx_asistencias_fecha ON asistencias(fecha);
+CREATE INDEX idx_permisos_id_empleado ON permisos(id_empleado);
+CREATE INDEX idx_permisos_fecha_inicio ON permisos(fecha_inicio);
+CREATE INDEX idx_historial_faltas_id_empleado ON historial_faltas(id_empleado);
+CREATE INDEX idx_usuarios_username ON usuarios(username);
+GO
 
-create index idx_oficinas_id_sucursal on oficinas(id_sucursal);
+-- Procedimientos Almacenados
 
-create index idx_empleados_id_oficina on empleados(id_oficina);
-create index idx_empleados_id_departamento on empleados(id_departamento);
-create index idx_empleados_id_cargo on empleados(id_cargo);
+ --Login_Usuario
+/*
+ CREATE PROCEDURE sp_login_usuario
+    @username VARCHAR(50),
+    @password VARCHAR(255)
+AS
+BEGIN
+    SET NOCOUNT ON;
 
-create index idx_empleado_turno_id_empleado on empleado_turno(id_empleado);
-create index idx_empleado_turno_id_turno on empleado_turno(id_turno);
+    IF EXISTS (
+        SELECT 1
+        FROM usuarios
+        WHERE username = @username AND password_hash = @password
+    )
+    BEGIN
+        SELECT 
+            u.id_usuario,
+            u.username,
+            u.rol,
+            e.nombre,
+            e.apellido,
+            e.estado
+        FROM usuarios u
+        INNER JOIN empleados e ON u.id_empleado = e.id_empleado
+        WHERE u.username = @username;
+    END
+    ELSE
+    BEGIN
+        SELECT 'ERROR' AS mensaje, 'Credenciales incorrectas' AS descripcion;
+    END
+END;
+GO
+*/
+ 
+ --Registrar_Usuario
+/*
+CREATE PROCEDURE sp_registrar_usuario
+    @id_empleado INT,
+    @username VARCHAR(50),
+    @password_hash VARCHAR(255),
+    @rol VARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
 
-create index idx_asistencias_id_empleado on asistencias(id_empleado);
-create index idx_asistencias_fecha on asistencias(fecha);
+    -- Validar si el username ya existe
+    IF EXISTS (SELECT 1 FROM usuarios WHERE username = @username)
+    BEGIN
+        SELECT 'ERROR' AS mensaje, 'El nombre de usuario ya está en uso' AS descripcion;
+        RETURN;
+    END
 
-create index idx_permisos_id_empleado on permisos(id_empleado);
-create index idx_permisos_fecha_inicio on permisos(fecha_inicio);
+    -- Validar si el empleado ya tiene un usuario asignado
+    IF EXISTS (SELECT 1 FROM usuarios WHERE id_empleado = @id_empleado)
+    BEGIN
+        SELECT 'ERROR' AS mensaje, 'Este empleado ya tiene un usuario registrado' AS descripcion;
+        RETURN;
+    END
 
-create index idx_historial_faltas_id_empleado on historial_faltas(id_empleado);
+    -- Insertar el nuevo usuario
+    INSERT INTO usuarios (id_empleado, username, password_hash, rol)
+    VALUES (@id_empleado, @username, @password_hash, @rol);
 
-create index idx_usuarios_username on usuarios(username);
+    -- Confirmar registro
+    SELECT 'OK' AS mensaje, 'Usuario registrado exitosamente' AS descripcion;
+END;
+GO
+*/

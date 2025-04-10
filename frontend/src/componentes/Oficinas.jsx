@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "../estilos/Oficinas.css";
-import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash, FaPhoneAlt, FaDesktop } from "react-icons/fa";
-import { MdDashboard, MdFingerprint, MdExitToApp, MdLocationOn } from "react-icons/md";
+import { FaSearch, FaPlusCircle, FaEdit, FaTrash, FaPhoneAlt, FaDesktop, FaBuilding, FaUsers } from "react-icons/fa";
+import { MdLocationOn } from "react-icons/md";
 
-function ModuloOficinas() {
+
+function Oficinas({ onNavigate, onLogout, activeModule }) {
   // Estado para el formulario
   const [formData, setFormData] = useState({
     nombre: "",
@@ -42,6 +43,20 @@ function ModuloOficinas() {
     });
   };
 
+  // Función para editar una oficina
+  const handleEdit = (office) => {
+    setFormData({
+      nombre: office.nombre,
+      codigo: office.codigo,
+      sucursal: office.sucursal,
+      ubicacion: office.ubicacion,
+      capacidad: office.capacidad,
+      estado: office.estado
+    });
+    setIsEditing(true);
+    setCurrentOfficeId(office.id);
+  };
+
   // Manejo de envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -73,20 +88,6 @@ function ModuloOficinas() {
       capacidad: "",
       estado: "Activa"
     });
-  };
-
-  // Función para editar una oficina
-  const handleEdit = (office) => {
-    setFormData({
-      nombre: office.nombre,
-      codigo: office.codigo,
-      sucursal: office.sucursal,
-      ubicacion: office.ubicacion,
-      capacidad: office.capacidad,
-      estado: office.estado
-    });
-    setIsEditing(true);
-    setCurrentOfficeId(office.id);
   };
 
   // Función para eliminar una oficina
@@ -121,43 +122,7 @@ function ModuloOficinas() {
   return (
     <div className="modulo-container">
       {/* Sidebar Izquierda */}
-      <div className="sidebar">
-        <div className="sidebar-logo">
-          <MdFingerprint className="logo-icon" />
-          <span>AsistControl</span>
-        </div>
-        
-        <div className="sidebar-menu">
-          <div className="sidebar-item">
-            <MdDashboard className="sidebar-icon" />
-            <span>Dashboard</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUsers className="sidebar-icon" />
-            <span>Empleados</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUserAlt className="sidebar-icon" />
-            <span>Usuarios</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Sucursales</span>
-          </div>
-          <div className="sidebar-item">
-            <FaMapMarkerAlt className="sidebar-icon" />
-            <span>Regiones</span>
-          </div>
-          <div className="sidebar-item active">
-            <FaBuilding className="sidebar-icon" />
-            <span>Oficinas</span>
-          </div>
-          <div className="sidebar-item">
-            <FaFileAlt className="sidebar-icon" />
-            <span>Reportes</span>
-          </div>
-        </div>
-      </div>
+    
 
       {/* Contenido principal */}
       <div className="modulo-content">
@@ -433,25 +398,9 @@ function ModuloOficinas() {
         </div>
       </div>
 
-      {/* Sidebar derecha */}
-      <div className="sidebar right">
-        <div className="user-profile">
-          <div className="avatar">
-            <FaUserAlt />
-          </div>
-          <div className="user-info">
-            <h3>Admin Usuario</h3>
-            <p>Administrador</p>
-          </div>
-        </div>
-
-        <div className="sidebar-item logout">
-          <MdExitToApp className="sidebar-icon" />
-          <span>Cerrar Sesión</span>
-        </div>
-      </div>
+    
     </div>
   );
 }
 
-export default ModuloOficinas;
+export default Oficinas;

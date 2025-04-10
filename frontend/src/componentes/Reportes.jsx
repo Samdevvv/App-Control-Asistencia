@@ -3,7 +3,8 @@ import "../estilos/Reportes.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaCalendarAlt, FaFilter, FaDownload, FaPrint, FaChartBar, FaChartPie, FaTable } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp, MdDateRange } from "react-icons/md";
 
-function ModuloReportes() {
+
+function ModuloReportes({ onNavigate, onLogout, activeModule }) {
   // Estados para filtros de reportes
   const [reportType, setReportType] = useState("asistencia");
   const [dateRange, setDateRange] = useState("semana");
@@ -82,44 +83,7 @@ function ModuloReportes() {
 
   return (
     <div className="modulo-container">
-      {/* Sidebar Izquierda */}
-      <div className="sidebar">
-        <div className="sidebar-logo">
-          <MdFingerprint className="logo-icon" />
-          <span>AsistControl</span>
-        </div>
-        
-        <div className="sidebar-menu">
-          <div className="sidebar-item">
-            <MdDashboard className="sidebar-icon" />
-            <span>Dashboard</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUsers className="sidebar-icon" />
-            <span>Empleados</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUserAlt className="sidebar-icon" />
-            <span>Usuarios</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Sucursales</span>
-          </div>
-          <div className="sidebar-item">
-            <FaMapMarkerAlt className="sidebar-icon" />
-            <span>Regiones</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Oficinas</span>
-          </div>
-          <div className="sidebar-item active">
-            <FaFileAlt className="sidebar-icon" />
-            <span>Reportes</span>
-          </div>
-        </div>
-      </div>
+     
 
       {/* Contenido principal */}
       <div className="modulo-content">
@@ -470,23 +434,7 @@ function ModuloReportes() {
         </div>
       </div>
 
-      {/* Sidebar derecha */}
-      <div className="sidebar right">
-        <div className="user-profile">
-          <div className="avatar">
-            <FaUserAlt />
-          </div>
-          <div className="user-info">
-            <h3>Admin Usuario</h3>
-            <p>Administrador</p>
-          </div>
-        </div>
-
-        <div className="sidebar-item logout">
-          <MdExitToApp className="sidebar-icon" />
-          <span>Cerrar Sesión</span>
-        </div>
-      </div>
+     
     </div>
   );
 }

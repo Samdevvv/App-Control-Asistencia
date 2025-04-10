@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import "../estilos/Login.css";
 import logo from "../assets/logo.png"; // Asegúrate de tener un logo en esta ruta
 
-function Login() {
+function Login({ onLogin }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,10 +19,15 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí iría la lógica de autenticación
-    console.log("Intentando iniciar sesión con:", formData);
-    // Redirección al dashboard tras autenticación exitosa
-    // window.location.href = "/dashboard";
+    
+    // Validación básica
+    if (!formData.username || !formData.password) {
+      setError("Por favor, complete todos los campos");
+      return;
+    }
+    
+    // Llamar a la función de inicio de sesión del componente padre
+    onLogin(formData);
   };
 
   return (
@@ -33,9 +39,11 @@ function Login() {
           <div className="login-logo">
             <img src={logo} alt="Logo" />
           </div>
-          <h1 className="login-title">Control De Asistencia</h1>
+          <h1 className="login-title">Control de Asistencia</h1>
           
           <form className="login-form" onSubmit={handleSubmit}>
+            {error && <div className="error-message">{error}</div>}
+            
             <div className="form-group">
               <label htmlFor="username">Usuario</label>
               <input
@@ -70,6 +78,12 @@ function Login() {
           <div className="login-footer">
             <p>Sistema de Control de Asistencia</p>
             <p>© 2025 Todos los derechos reservados</p>
+          </div>
+          
+          <div className="login-demo-info">
+            <p>Credenciales de prueba:</p>
+            <p>Usuario: <strong>admin</strong></p>
+            <p>Contraseña: <strong>admin123</strong></p>
           </div>
         </div>
       </div>

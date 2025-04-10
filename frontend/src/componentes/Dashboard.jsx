@@ -3,7 +3,8 @@ import "../estilos/DashBoard.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaChartBar } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
 
-function Dashboard() {
+
+function Dashboard({ onNavigate, onLogout, activeModule }) {
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
   
   // Estado para datos de ejemplo del dashboard
@@ -26,44 +27,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      {/* Sidebar Izquierda */}
-      <div className="sidebar">
-        <div className="sidebar-logo">
-          <MdFingerprint className="logo-icon" />
-          <span>AsistControl</span>
-        </div>
-        
-        <div className="sidebar-menu">
-          <div className="sidebar-item active">
-            <MdDashboard className="sidebar-icon" />
-            <span>Dashboard</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUsers className="sidebar-icon" />
-            <span>Empleados</span>
-          </div>
-          <div className="sidebar-item">
-            <FaUserAlt className="sidebar-icon" />
-            <span>Usuarios</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Sucursales</span>
-          </div>
-          <div className="sidebar-item">
-            <FaMapMarkerAlt className="sidebar-icon" />
-            <span>Regiones</span>
-          </div>
-          <div className="sidebar-item">
-            <FaBuilding className="sidebar-icon" />
-            <span>Oficinas</span>
-          </div>
-          <div className="sidebar-item">
-            <FaFileAlt className="sidebar-icon" />
-            <span>Reportes</span>
-          </div>
-        </div>
-      </div>
+     
 
       {/* Contenido principal */}
       <div className="dashboard-content">
@@ -76,7 +40,7 @@ function Dashboard() {
         <div className="dashboard-summary">
           <div className="summary-card">
             <div className="card-icon employees">
-              <FaUsers />
+              <i className="fas fa-users"></i>
             </div>
             <div className="card-info">
               <h3>Total Empleados</h3>
@@ -86,7 +50,7 @@ function Dashboard() {
 
           <div className="summary-card">
             <div className="card-icon attendance">
-              <MdFingerprint />
+              <i className="fas fa-fingerprint"></i>
             </div>
             <div className="card-info">
               <h3>Asistencias Hoy</h3>
@@ -96,7 +60,7 @@ function Dashboard() {
 
           <div className="summary-card">
             <div className="card-icon absence">
-              <FaUserAlt />
+              <i className="fas fa-user-slash"></i>
             </div>
             <div className="card-info">
               <h3>Ausencias Hoy</h3>
@@ -106,7 +70,7 @@ function Dashboard() {
 
           <div className="summary-card">
             <div className="card-icon delay">
-              <FaChartBar />
+              <i className="fas fa-chart-bar"></i>
             </div>
             <div className="card-info">
               <h3>% Asistencia</h3>
@@ -171,22 +135,7 @@ function Dashboard() {
       </div>
 
       {/* Sidebar derecha */}
-      <div className="sidebar right">
-        <div className="user-profile">
-          <div className="avatar">
-            <FaUserAlt />
-          </div>
-          <div className="user-info">
-            <h3>Admin Usuario</h3>
-            <p>Administrador</p>
-          </div>
-        </div>
-
-        <div className="sidebar-item logout">
-          <MdExitToApp className="sidebar-icon" />
-          <span>Cerrar Sesión</span>
-        </div>
-      </div>
+      
     </div>
   );
 }
