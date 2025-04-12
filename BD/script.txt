@@ -110,6 +110,23 @@ CREATE TABLE permisos (
     FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado) ON DELETE CASCADE
 );
 
+-- Crear tabla de tardanzas
+CREATE TABLE tardanzas (
+    id_tardanza INT PRIMARY KEY IDENTITY(1,1),
+    id_empleado INT NOT NULL,
+    fecha DATE NOT NULL,
+    hora_entrada TIME NOT NULL,
+    hora_esperada TIME NOT NULL,
+    minutos_tarde AS DATEDIFF(MINUTE, hora_esperada, hora_entrada) PERSISTED,
+    motivo VARCHAR(MAX) NULL,
+    justificada BIT DEFAULT 0, -- 0 = No justificada, 1 = Justificada
+    observaciones VARCHAR(MAX) NULL,
+    registrado_por INT NULL, -- ID del usuario que registró la tardanza
+    fecha_registro DATETIME DEFAULT GETDATE(),
+    FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado) ON DELETE CASCADE,
+    FOREIGN KEY (registrado_por) REFERENCES usuarios(id_usuario)
+);
+
 -- Historial de faltas
 CREATE TABLE historial_faltas (
     id_historial INT PRIMARY KEY IDENTITY(1,1),
@@ -130,7 +147,7 @@ CREATE TABLE usuarios (
     rol VARCHAR(20) CHECK (rol IN ('administrador', 'rrhh', 'empleado')) NOT NULL,
     FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado) ON DELETE CASCADE
 );
-
+GO
 -- Índices
 CREATE INDEX idx_sucursales_id_region ON sucursales(id_region);
 CREATE INDEX idx_oficinas_id_sucursal ON oficinas(id_sucursal);
@@ -147,6 +164,42 @@ CREATE INDEX idx_historial_faltas_id_empleado ON historial_faltas(id_empleado);
 CREATE INDEX idx_usuarios_username ON usuarios(username);
 GO
 
+-- INSERTS
+INSERT INTO regiones (nombre, descripcion, cantidad_sucursales)
+VALUES 
+('Distrito Nacional', 'Capital del país, sede del gobierno y principal centro económico.', NULL),
+('Azua', 'Provincia ubicada en el sur del país.', NULL),
+('Bahoruco', 'Conocida por sus zonas agrícolas y su cercanía al Lago Enriquillo.', NULL),
+('Barahona', 'Ubicada en el suroeste, conocida por sus montañas y playas.', NULL),
+('Dajabón', 'Provincia fronteriza con Haití.', NULL),
+('Duarte', 'Incluye la ciudad de San Francisco de Macorís.', NULL),
+('Elías Piña', 'Provincia fronteriza al oeste.', NULL),
+('El Seibo', 'Ubicada en la región este, tradicionalmente agrícola.', NULL),
+('Espaillat', 'Provincia del norte, conocida por su agricultura.', NULL),
+('Hato Mayor', 'Provincia oriental del país.', NULL),
+('Hermanas Mirabal', 'Antes conocida como Salcedo, en honor a las heroínas nacionales.', NULL),
+('Independencia', 'Provincia fronteriza con Haití.', NULL),
+('La Altagracia', 'Incluye Punta Cana y Bávaro, centros turísticos importantes.', NULL),
+('La Romana', 'Importante provincia turística e industrial.', NULL),
+('La Vega', 'Conocida por su carnaval y su agricultura.', NULL),
+('María Trinidad Sánchez', 'Ubicada en el noreste, costera.', NULL),
+('Monseñor Nouel', 'Provincia central, también conocida como Bonao.', NULL),
+('Monte Cristi', 'Provincia fronteriza y costera al noroeste.', NULL),
+('Monte Plata', 'Cercana al Distrito Nacional, zona agrícola.', NULL),
+('Pedernales', 'Ubicada en el extremo suroeste del país.', NULL),
+('Peravia', 'Provincia costera del sur.', NULL),
+('Puerto Plata', 'Importante destino turístico del norte.', NULL),
+('Samaná', 'Famosa por el avistamiento de ballenas y su belleza natural.', NULL),
+('San Cristóbal', 'Cercana a la capital, de importancia histórica.', NULL),
+('San José de Ocoa', 'Provincia montañosa del sur central.', NULL),
+('San Juan', 'Una de las provincias más grandes y agrícolas.', NULL),
+('San Pedro de Macorís', 'Importante provincia industrial y universitaria.', NULL),
+('Sánchez Ramírez', 'Provincia central del país.', NULL),
+('Santiago', 'Segunda ciudad más importante, gran centro económico.', NULL),
+('Santiago Rodríguez', 'Provincia fronteriza del noroeste.', NULL),
+('Santo Domingo', 'La provincia más poblada, rodea al Distrito Nacional.', NULL),
+('Valverde', 'Provincia agrícola del noroeste.', NULL);
+GO
 -- Procedimientos Almacenados
 
  --Login_Usuario

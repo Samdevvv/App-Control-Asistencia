@@ -1,0 +1,1086 @@
+USE control_asistencia;
+GO
+-- Vistas para región 1
+CREATE VIEW vw_asistencias_region_1 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 1;
+
+CREATE VIEW vw_tardanzas_region_1 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 1;
+
+CREATE VIEW vw_historial_faltas_region_1 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 1;
+
+-- Usuario para región 1
+CREATE LOGIN region_1_user WITH PASSWORD = 'TuPasswordSegura1!';
+CREATE USER region_1_user FOR LOGIN region_1_user;
+
+-- Permisos para usuario de región 1
+GRANT SELECT ON vw_asistencias_region_1 TO region_1_user;
+GRANT SELECT ON vw_tardanzas_region_1 TO region_1_user;
+GRANT SELECT ON vw_historial_faltas_region_1 TO region_1_user;
+
+
+-- Vistas para región 2
+CREATE VIEW vw_asistencias_region_2 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 2;
+
+CREATE VIEW vw_tardanzas_region_2 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 2;
+
+CREATE VIEW vw_historial_faltas_region_2 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 2;
+
+-- Usuario para región 2
+CREATE LOGIN region_2_user WITH PASSWORD = 'TuPasswordSegura2!';
+CREATE USER region_2_user FOR LOGIN region_2_user;
+
+-- Permisos para usuario de región 2
+GRANT SELECT ON vw_asistencias_region_2 TO region_2_user;
+GRANT SELECT ON vw_tardanzas_region_2 TO region_2_user;
+GRANT SELECT ON vw_historial_faltas_region_2 TO region_2_user;
+
+
+-- Vistas para región 3
+CREATE VIEW vw_asistencias_region_3 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 3;
+
+CREATE VIEW vw_tardanzas_region_3 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 3;
+
+CREATE VIEW vw_historial_faltas_region_3 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 3;
+
+-- Usuario para región 3
+CREATE LOGIN region_3_user WITH PASSWORD = 'TuPasswordSegura3!';
+CREATE USER region_3_user FOR LOGIN region_3_user;
+
+-- Permisos para usuario de región 3
+GRANT SELECT ON vw_asistencias_region_3 TO region_3_user;
+GRANT SELECT ON vw_tardanzas_region_3 TO region_3_user;
+GRANT SELECT ON vw_historial_faltas_region_3 TO region_3_user;
+
+
+-- Vistas para región 4
+CREATE VIEW vw_asistencias_region_4 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 4;
+
+CREATE VIEW vw_tardanzas_region_4 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 4;
+
+CREATE VIEW vw_historial_faltas_region_4 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 4;
+
+-- Usuario para región 4
+CREATE LOGIN region_4_user WITH PASSWORD = 'TuPasswordSegura4!';
+CREATE USER region_4_user FOR LOGIN region_4_user;
+
+-- Permisos para usuario de región 4
+GRANT SELECT ON vw_asistencias_region_4 TO region_4_user;
+GRANT SELECT ON vw_tardanzas_region_4 TO region_4_user;
+GRANT SELECT ON vw_historial_faltas_region_4 TO region_4_user;
+
+
+-- Vistas para región 5
+CREATE VIEW vw_asistencias_region_5 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 5;
+
+CREATE VIEW vw_tardanzas_region_5 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 5;
+
+CREATE VIEW vw_historial_faltas_region_5 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 5;
+
+-- Usuario para región 5
+CREATE LOGIN region_5_user WITH PASSWORD = 'TuPasswordSegura5!';
+CREATE USER region_5_user FOR LOGIN region_5_user;
+
+-- Permisos para usuario de región 5
+GRANT SELECT ON vw_asistencias_region_5 TO region_5_user;
+GRANT SELECT ON vw_tardanzas_region_5 TO region_5_user;
+GRANT SELECT ON vw_historial_faltas_region_5 TO region_5_user;
+
+
+-- Vistas para región 6
+CREATE VIEW vw_asistencias_region_6 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 6;
+
+CREATE VIEW vw_tardanzas_region_6 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 6;
+
+CREATE VIEW vw_historial_faltas_region_6 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 6;
+
+-- Usuario para región 6
+CREATE LOGIN region_6_user WITH PASSWORD = 'TuPasswordSegura6!';
+CREATE USER region_6_user FOR LOGIN region_6_user;
+
+-- Permisos para usuario de región 6
+GRANT SELECT ON vw_asistencias_region_6 TO region_6_user;
+GRANT SELECT ON vw_tardanzas_region_6 TO region_6_user;
+GRANT SELECT ON vw_historial_faltas_region_6 TO region_6_user;
+
+
+-- Vistas para región 7
+CREATE VIEW vw_asistencias_region_7 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 7;
+
+CREATE VIEW vw_tardanzas_region_7 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 7;
+
+CREATE VIEW vw_historial_faltas_region_7 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 7;
+
+-- Usuario para región 7
+CREATE LOGIN region_7_user WITH PASSWORD = 'TuPasswordSegura7!';
+CREATE USER region_7_user FOR LOGIN region_7_user;
+
+-- Permisos para usuario de región 7
+GRANT SELECT ON vw_asistencias_region_7 TO region_7_user;
+GRANT SELECT ON vw_tardanzas_region_7 TO region_7_user;
+GRANT SELECT ON vw_historial_faltas_region_7 TO region_7_user;
+
+
+-- Vistas para región 8
+CREATE VIEW vw_asistencias_region_8 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 8;
+
+CREATE VIEW vw_tardanzas_region_8 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 8;
+
+CREATE VIEW vw_historial_faltas_region_8 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 8;
+
+-- Usuario para región 8
+CREATE LOGIN region_8_user WITH PASSWORD = 'TuPasswordSegura8!';
+CREATE USER region_8_user FOR LOGIN region_8_user;
+
+-- Permisos para usuario de región 8
+GRANT SELECT ON vw_asistencias_region_8 TO region_8_user;
+GRANT SELECT ON vw_tardanzas_region_8 TO region_8_user;
+GRANT SELECT ON vw_historial_faltas_region_8 TO region_8_user;
+
+
+-- Vistas para región 9
+CREATE VIEW vw_asistencias_region_9 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 9;
+
+CREATE VIEW vw_tardanzas_region_9 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 9;
+
+CREATE VIEW vw_historial_faltas_region_9 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 9;
+
+-- Usuario para región 9
+CREATE LOGIN region_9_user WITH PASSWORD = 'TuPasswordSegura9!';
+CREATE USER region_9_user FOR LOGIN region_9_user;
+
+-- Permisos para usuario de región 9
+GRANT SELECT ON vw_asistencias_region_9 TO region_9_user;
+GRANT SELECT ON vw_tardanzas_region_9 TO region_9_user;
+GRANT SELECT ON vw_historial_faltas_region_9 TO region_9_user;
+
+
+-- Vistas para región 10
+CREATE VIEW vw_asistencias_region_10 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 10;
+
+CREATE VIEW vw_tardanzas_region_10 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 10;
+
+CREATE VIEW vw_historial_faltas_region_10 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 10;
+
+-- Usuario para región 10
+CREATE LOGIN region_10_user WITH PASSWORD = 'TuPasswordSegura10!';
+CREATE USER region_10_user FOR LOGIN region_10_user;
+
+-- Permisos para usuario de región 10
+GRANT SELECT ON vw_asistencias_region_10 TO region_10_user;
+GRANT SELECT ON vw_tardanzas_region_10 TO region_10_user;
+GRANT SELECT ON vw_historial_faltas_region_10 TO region_10_user;
+
+
+-- Vistas para región 11
+CREATE VIEW vw_asistencias_region_11 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 11;
+
+CREATE VIEW vw_tardanzas_region_11 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 11;
+
+CREATE VIEW vw_historial_faltas_region_11 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 11;
+
+-- Usuario para región 11
+CREATE LOGIN region_11_user WITH PASSWORD = 'TuPasswordSegura11!';
+CREATE USER region_11_user FOR LOGIN region_11_user;
+
+-- Permisos para usuario de región 11
+GRANT SELECT ON vw_asistencias_region_11 TO region_11_user;
+GRANT SELECT ON vw_tardanzas_region_11 TO region_11_user;
+GRANT SELECT ON vw_historial_faltas_region_11 TO region_11_user;
+
+
+-- Vistas para región 12
+CREATE VIEW vw_asistencias_region_12 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 12;
+
+CREATE VIEW vw_tardanzas_region_12 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 12;
+
+CREATE VIEW vw_historial_faltas_region_12 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 12;
+
+-- Usuario para región 12
+CREATE LOGIN region_12_user WITH PASSWORD = 'TuPasswordSegura12!';
+CREATE USER region_12_user FOR LOGIN region_12_user;
+
+-- Permisos para usuario de región 12
+GRANT SELECT ON vw_asistencias_region_12 TO region_12_user;
+GRANT SELECT ON vw_tardanzas_region_12 TO region_12_user;
+GRANT SELECT ON vw_historial_faltas_region_12 TO region_12_user;
+
+
+-- Vistas para región 13
+CREATE VIEW vw_asistencias_region_13 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 13;
+
+CREATE VIEW vw_tardanzas_region_13 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 13;
+
+CREATE VIEW vw_historial_faltas_region_13 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 13;
+
+-- Usuario para región 13
+CREATE LOGIN region_13_user WITH PASSWORD = 'TuPasswordSegura13!';
+CREATE USER region_13_user FOR LOGIN region_13_user;
+
+-- Permisos para usuario de región 13
+GRANT SELECT ON vw_asistencias_region_13 TO region_13_user;
+GRANT SELECT ON vw_tardanzas_region_13 TO region_13_user;
+GRANT SELECT ON vw_historial_faltas_region_13 TO region_13_user;
+
+
+-- Vistas para región 14
+CREATE VIEW vw_asistencias_region_14 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 14;
+
+CREATE VIEW vw_tardanzas_region_14 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 14;
+
+CREATE VIEW vw_historial_faltas_region_14 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 14;
+
+-- Usuario para región 14
+CREATE LOGIN region_14_user WITH PASSWORD = 'TuPasswordSegura14!';
+CREATE USER region_14_user FOR LOGIN region_14_user;
+
+-- Permisos para usuario de región 14
+GRANT SELECT ON vw_asistencias_region_14 TO region_14_user;
+GRANT SELECT ON vw_tardanzas_region_14 TO region_14_user;
+GRANT SELECT ON vw_historial_faltas_region_14 TO region_14_user;
+
+
+-- Vistas para región 15
+CREATE VIEW vw_asistencias_region_15 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 15;
+
+CREATE VIEW vw_tardanzas_region_15 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 15;
+
+CREATE VIEW vw_historial_faltas_region_15 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 15;
+
+-- Usuario para región 15
+CREATE LOGIN region_15_user WITH PASSWORD = 'TuPasswordSegura15!';
+CREATE USER region_15_user FOR LOGIN region_15_user;
+
+-- Permisos para usuario de región 15
+GRANT SELECT ON vw_asistencias_region_15 TO region_15_user;
+GRANT SELECT ON vw_tardanzas_region_15 TO region_15_user;
+GRANT SELECT ON vw_historial_faltas_region_15 TO region_15_user;
+
+
+-- Vistas para región 16
+CREATE VIEW vw_asistencias_region_16 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 16;
+
+CREATE VIEW vw_tardanzas_region_16 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 16;
+
+CREATE VIEW vw_historial_faltas_region_16 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 16;
+
+-- Usuario para región 16
+CREATE LOGIN region_16_user WITH PASSWORD = 'TuPasswordSegura16!';
+CREATE USER region_16_user FOR LOGIN region_16_user;
+
+-- Permisos para usuario de región 16
+GRANT SELECT ON vw_asistencias_region_16 TO region_16_user;
+GRANT SELECT ON vw_tardanzas_region_16 TO region_16_user;
+GRANT SELECT ON vw_historial_faltas_region_16 TO region_16_user;
+
+
+-- Vistas para región 17
+CREATE VIEW vw_asistencias_region_17 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 17;
+
+CREATE VIEW vw_tardanzas_region_17 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 17;
+
+CREATE VIEW vw_historial_faltas_region_17 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 17;
+
+-- Usuario para región 17
+CREATE LOGIN region_17_user WITH PASSWORD = 'TuPasswordSegura17!';
+CREATE USER region_17_user FOR LOGIN region_17_user;
+
+-- Permisos para usuario de región 17
+GRANT SELECT ON vw_asistencias_region_17 TO region_17_user;
+GRANT SELECT ON vw_tardanzas_region_17 TO region_17_user;
+GRANT SELECT ON vw_historial_faltas_region_17 TO region_17_user;
+
+
+-- Vistas para región 18
+CREATE VIEW vw_asistencias_region_18 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 18;
+
+CREATE VIEW vw_tardanzas_region_18 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 18;
+
+CREATE VIEW vw_historial_faltas_region_18 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 18;
+
+-- Usuario para región 18
+CREATE LOGIN region_18_user WITH PASSWORD = 'TuPasswordSegura18!';
+CREATE USER region_18_user FOR LOGIN region_18_user;
+
+-- Permisos para usuario de región 18
+GRANT SELECT ON vw_asistencias_region_18 TO region_18_user;
+GRANT SELECT ON vw_tardanzas_region_18 TO region_18_user;
+GRANT SELECT ON vw_historial_faltas_region_18 TO region_18_user;
+
+
+-- Vistas para región 19
+CREATE VIEW vw_asistencias_region_19 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 19;
+
+CREATE VIEW vw_tardanzas_region_19 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 19;
+
+CREATE VIEW vw_historial_faltas_region_19 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 19;
+
+-- Usuario para región 19
+CREATE LOGIN region_19_user WITH PASSWORD = 'TuPasswordSegura19!';
+CREATE USER region_19_user FOR LOGIN region_19_user;
+
+-- Permisos para usuario de región 19
+GRANT SELECT ON vw_asistencias_region_19 TO region_19_user;
+GRANT SELECT ON vw_tardanzas_region_19 TO region_19_user;
+GRANT SELECT ON vw_historial_faltas_region_19 TO region_19_user;
+
+
+-- Vistas para región 20
+CREATE VIEW vw_asistencias_region_20 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 20;
+
+CREATE VIEW vw_tardanzas_region_20 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 20;
+
+CREATE VIEW vw_historial_faltas_region_20 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 20;
+
+-- Usuario para región 20
+CREATE LOGIN region_20_user WITH PASSWORD = 'TuPasswordSegura20!';
+CREATE USER region_20_user FOR LOGIN region_20_user;
+
+-- Permisos para usuario de región 20
+GRANT SELECT ON vw_asistencias_region_20 TO region_20_user;
+GRANT SELECT ON vw_tardanzas_region_20 TO region_20_user;
+GRANT SELECT ON vw_historial_faltas_region_20 TO region_20_user;
+
+
+-- Vistas para región 21
+CREATE VIEW vw_asistencias_region_21 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 21;
+
+CREATE VIEW vw_tardanzas_region_21 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 21;
+
+CREATE VIEW vw_historial_faltas_region_21 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 21;
+
+-- Usuario para región 21
+CREATE LOGIN region_21_user WITH PASSWORD = 'TuPasswordSegura21!';
+CREATE USER region_21_user FOR LOGIN region_21_user;
+
+-- Permisos para usuario de región 21
+GRANT SELECT ON vw_asistencias_region_21 TO region_21_user;
+GRANT SELECT ON vw_tardanzas_region_21 TO region_21_user;
+GRANT SELECT ON vw_historial_faltas_region_21 TO region_21_user;
+
+
+-- Vistas para región 22
+CREATE VIEW vw_asistencias_region_22 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 22;
+
+CREATE VIEW vw_tardanzas_region_22 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 22;
+
+CREATE VIEW vw_historial_faltas_region_22 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 22;
+
+-- Usuario para región 22
+CREATE LOGIN region_22_user WITH PASSWORD = 'TuPasswordSegura22!';
+CREATE USER region_22_user FOR LOGIN region_22_user;
+
+-- Permisos para usuario de región 22
+GRANT SELECT ON vw_asistencias_region_22 TO region_22_user;
+GRANT SELECT ON vw_tardanzas_region_22 TO region_22_user;
+GRANT SELECT ON vw_historial_faltas_region_22 TO region_22_user;
+
+
+-- Vistas para región 23
+CREATE VIEW vw_asistencias_region_23 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 23;
+
+CREATE VIEW vw_tardanzas_region_23 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 23;
+
+CREATE VIEW vw_historial_faltas_region_23 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 23;
+
+-- Usuario para región 23
+CREATE LOGIN region_23_user WITH PASSWORD = 'TuPasswordSegura23!';
+CREATE USER region_23_user FOR LOGIN region_23_user;
+
+-- Permisos para usuario de región 23
+GRANT SELECT ON vw_asistencias_region_23 TO region_23_user;
+GRANT SELECT ON vw_tardanzas_region_23 TO region_23_user;
+GRANT SELECT ON vw_historial_faltas_region_23 TO region_23_user;
+
+
+-- Vistas para región 24
+CREATE VIEW vw_asistencias_region_24 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 24;
+
+CREATE VIEW vw_tardanzas_region_24 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 24;
+
+CREATE VIEW vw_historial_faltas_region_24 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 24;
+
+-- Usuario para región 24
+CREATE LOGIN region_24_user WITH PASSWORD = 'TuPasswordSegura24!';
+CREATE USER region_24_user FOR LOGIN region_24_user;
+
+-- Permisos para usuario de región 24
+GRANT SELECT ON vw_asistencias_region_24 TO region_24_user;
+GRANT SELECT ON vw_tardanzas_region_24 TO region_24_user;
+GRANT SELECT ON vw_historial_faltas_region_24 TO region_24_user;
+
+
+-- Vistas para región 25
+CREATE VIEW vw_asistencias_region_25 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 25;
+
+CREATE VIEW vw_tardanzas_region_25 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 25;
+
+CREATE VIEW vw_historial_faltas_region_25 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 25;
+
+-- Usuario para región 25
+CREATE LOGIN region_25_user WITH PASSWORD = 'TuPasswordSegura25!';
+CREATE USER region_25_user FOR LOGIN region_25_user;
+
+-- Permisos para usuario de región 25
+GRANT SELECT ON vw_asistencias_region_25 TO region_25_user;
+GRANT SELECT ON vw_tardanzas_region_25 TO region_25_user;
+GRANT SELECT ON vw_historial_faltas_region_25 TO region_25_user;
+
+
+-- Vistas para región 26
+CREATE VIEW vw_asistencias_region_26 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 26;
+
+CREATE VIEW vw_tardanzas_region_26 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 26;
+
+CREATE VIEW vw_historial_faltas_region_26 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 26;
+
+-- Usuario para región 26
+CREATE LOGIN region_26_user WITH PASSWORD = 'TuPasswordSegura26!';
+CREATE USER region_26_user FOR LOGIN region_26_user;
+
+-- Permisos para usuario de región 26
+GRANT SELECT ON vw_asistencias_region_26 TO region_26_user;
+GRANT SELECT ON vw_tardanzas_region_26 TO region_26_user;
+GRANT SELECT ON vw_historial_faltas_region_26 TO region_26_user;
+
+
+-- Vistas para región 27
+CREATE VIEW vw_asistencias_region_27 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 27;
+
+CREATE VIEW vw_tardanzas_region_27 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 27;
+
+CREATE VIEW vw_historial_faltas_region_27 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 27;
+
+-- Usuario para región 27
+CREATE LOGIN region_27_user WITH PASSWORD = 'TuPasswordSegura27!';
+CREATE USER region_27_user FOR LOGIN region_27_user;
+
+-- Permisos para usuario de región 27
+GRANT SELECT ON vw_asistencias_region_27 TO region_27_user;
+GRANT SELECT ON vw_tardanzas_region_27 TO region_27_user;
+GRANT SELECT ON vw_historial_faltas_region_27 TO region_27_user;
+
+
+-- Vistas para región 28
+CREATE VIEW vw_asistencias_region_28 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 28;
+
+CREATE VIEW vw_tardanzas_region_28 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 28;
+
+CREATE VIEW vw_historial_faltas_region_28 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 28;
+
+-- Usuario para región 28
+CREATE LOGIN region_28_user WITH PASSWORD = 'TuPasswordSegura28!';
+CREATE USER region_28_user FOR LOGIN region_28_user;
+
+-- Permisos para usuario de región 28
+GRANT SELECT ON vw_asistencias_region_28 TO region_28_user;
+GRANT SELECT ON vw_tardanzas_region_28 TO region_28_user;
+GRANT SELECT ON vw_historial_faltas_region_28 TO region_28_user;
+
+
+-- Vistas para región 29
+CREATE VIEW vw_asistencias_region_29 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 29;
+
+CREATE VIEW vw_tardanzas_region_29 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 29;
+
+CREATE VIEW vw_historial_faltas_region_29 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 29;
+
+-- Usuario para región 29
+CREATE LOGIN region_29_user WITH PASSWORD = 'TuPasswordSegura29!';
+CREATE USER region_29_user FOR LOGIN region_29_user;
+
+-- Permisos para usuario de región 29
+GRANT SELECT ON vw_asistencias_region_29 TO region_29_user;
+GRANT SELECT ON vw_tardanzas_region_29 TO region_29_user;
+GRANT SELECT ON vw_historial_faltas_region_29 TO region_29_user;
+
+
+-- Vistas para región 30
+CREATE VIEW vw_asistencias_region_30 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 30;
+
+CREATE VIEW vw_tardanzas_region_30 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 30;
+
+CREATE VIEW vw_historial_faltas_region_30 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 30;
+
+-- Usuario para región 30
+CREATE LOGIN region_30_user WITH PASSWORD = 'TuPasswordSegura30!';
+CREATE USER region_30_user FOR LOGIN region_30_user;
+
+-- Permisos para usuario de región 30
+GRANT SELECT ON vw_asistencias_region_30 TO region_30_user;
+GRANT SELECT ON vw_tardanzas_region_30 TO region_30_user;
+GRANT SELECT ON vw_historial_faltas_region_30 TO region_30_user;
+
+
+-- Vistas para región 31
+CREATE VIEW vw_asistencias_region_31 AS
+SELECT a.*
+FROM asistencias a
+JOIN empleados e ON a.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 31;
+
+CREATE VIEW vw_tardanzas_region_31 AS
+SELECT t.*
+FROM tardanzas t
+JOIN empleados e ON t.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 31;
+
+CREATE VIEW vw_historial_faltas_region_31 AS
+SELECT h.*
+FROM historial_faltas h
+JOIN empleados e ON h.id_empleado = e.id_empleado
+JOIN oficinas o ON e.id_oficina = o.id_oficina
+JOIN sucursales s ON o.id_sucursal = s.id_sucursal
+WHERE s.id_region = 31;
+
+-- Usuario para región 31
+CREATE LOGIN region_31_user WITH PASSWORD = 'TuPasswordSegura31!';
+CREATE USER region_31_user FOR LOGIN region_31_user;
+
+-- Permisos para usuario de región 31
+GRANT SELECT ON vw_asistencias_region_31 TO region_31_user;
+GRANT SELECT ON vw_tardanzas_region_31 TO region_31_user;
+GRANT SELECT ON vw_historial_faltas_region_31 TO region_31_user;
+
