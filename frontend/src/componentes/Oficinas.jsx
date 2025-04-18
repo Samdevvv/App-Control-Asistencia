@@ -3,7 +3,6 @@ import "../estilos/Oficinas.css";
 import { FaSearch, FaPlusCircle, FaEdit, FaTrash, FaPhoneAlt, FaDesktop, FaBuilding, FaUsers } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 
-
 function Oficinas({ onNavigate, onLogout, activeModule }) {
   // Estado para el formulario
   const [formData, setFormData] = useState({
@@ -15,12 +14,16 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
     estado: "Activa"
   });
 
-  // Estado para controlar el modo de edición
+  // Estado para controlar el modo de edición y modal
   const [isEditing, setIsEditing] = useState(false);
   const [currentOfficeId, setCurrentOfficeId] = useState(null);
+  const [showFormModal, setShowFormModal] = useState(false);
 
   // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState("");
+
+  // Estado para la visualización (tabla o tarjetas)
+  const [viewMode, setViewMode] = useState("tabla");
 
   // Datos de ejemplo para la tabla de oficinas
   const [oficinas, setOficinas] = useState([
@@ -55,6 +58,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(true);
     setCurrentOfficeId(office.id);
+    setShowFormModal(true);
   };
 
   // Manejo de envío del formulario
@@ -79,7 +83,8 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
       };
       setOficinas([...oficinas, newOffice]);
     }
-    // Limpiar formulario
+    // Cerrar modal y limpiar formulario
+    setShowFormModal(false);
     setFormData({
       nombre: "",
       codigo: "",
@@ -95,7 +100,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
     setOficinas(oficinas.filter((office) => office.id !== id));
   };
 
-  // Función para cancelar la edición
+  // Función para cerrar el modal y cancelar
   const handleCancel = () => {
     setFormData({
       nombre: "",
@@ -107,6 +112,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(false);
     setCurrentOfficeId(null);
+    setShowFormModal(false);
   };
 
   // Filtrar oficinas basadas en el término de búsqueda
@@ -121,284 +127,308 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
 
   return (
     <div className="modulo-container">
-      {/* Sidebar Izquierda */}
-    
-
       {/* Contenido principal */}
       <div className="modulo-content">
         <div className="modulo-header">
           <h1>Gestión de Oficinas</h1>
-          <div className="search-container">
-            <FaSearch className="search-icon" />
-            <input
-              type="text"
-              placeholder="Buscar oficina..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-            />
+          <div className="header-actions">
+            <div className="view-toggle">
+              <button 
+                className={`view-btn ${viewMode === "tabla" ? "active" : ""}`}
+                onClick={() => setViewMode("tabla")}
+              >
+                Tabla
+              </button>
+              <button 
+                className={`view-btn ${viewMode === "tarjetas" ? "active" : ""}`}
+                onClick={() => setViewMode("tarjetas")}
+              >
+                Tarjetas
+              </button>
+            </div>
+            <div className="search-container">
+              <FaSearch className="search-icon" />
+              <input
+                type="text"
+                placeholder="Buscar oficina..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+            </div>
           </div>
         </div>
 
-        {/* Formulario */}
-        <div className="modulo-form-container">
-          <div className="form-header">
-            <h2>{isEditing ? "Editar Oficina" : "Nueva Oficina"}</h2>
-            <FaPlusCircle className="add-icon" />
-          </div>
-          
-          <form className="modulo-form" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="nombre">Nombre de la Oficina</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el nombre de la oficina"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="codigo">Código</label>
-                <input
-                  type="text"
-                  id="codigo"
-                  name="codigo"
-                  value={formData.codigo}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ej. OF-A01"
-                />
-              </div>
-            </div>
-            
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="sucursal">Sucursal</label>
-                <select
-                  id="sucursal"
-                  name="sucursal"
-                  value={formData.sucursal}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Seleccione una sucursal</option>
-                  {sucursales.map((sucursal, index) => (
-                    <option key={index} value={sucursal}>
-                      {sucursal}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="ubicacion">Ubicación</label>
-                <input
-                  type="text"
-                  id="ubicacion"
-                  name="ubicacion"
-                  value={formData.ubicacion}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ej. Piso 1, Ala Norte"
-                />
-              </div>
-            </div>
-            
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="capacidad">Capacidad (personas)</label>
-                <input
-                  type="number"
-                  id="capacidad"
-                  name="capacidad"
-                  value={formData.capacidad}
-                  onChange={handleChange}
-                  required
-                  min="1"
-                  placeholder="Ingrese capacidad"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="estado">Estado</label>
-                <select
-                  id="estado"
-                  name="estado"
-                  value={formData.estado}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="Activa">Activa</option>
-                  <option value="Inactiva">Inactiva</option>
-                  <option value="En Mantenimiento">En Mantenimiento</option>
-                </select>
-              </div>
-            </div>
-            
-            <div className="form-buttons">
-              <button type="submit" className="btn-submit">
-                {isEditing ? "Actualizar Oficina" : "Registrar Oficina"}
-              </button>
-              <button type="button" className="btn-cancel" onClick={handleCancel}>
-                Cancelar
-              </button>
-            </div>
-          </form>
-        </div>
-
-        {/* Tabla de oficinas */}
-        <div className="table-container">
+        {/* Botón de Nueva Oficina */}
+        <div className="table-header">
           <h2>Lista de Oficinas</h2>
-          <div className="table-responsive">
-            <table className="data-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Nombre</th>
-                  <th>Código</th>
-                  <th>Sucursal</th>
-                  <th>Ubicación</th>
-                  <th>Capacidad</th>
-                  <th>Empleados</th>
-                  <th>Estado</th>
-                  <th>Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredOffices.length > 0 ? (
-                  filteredOffices.map((office) => (
-                    <tr key={office.id}>
-                      <td>{office.id}</td>
-                      <td>{office.nombre}</td>
-                      <td><span className="codigo-badge">{office.codigo}</span></td>
-                      <td>{office.sucursal}</td>
-                      <td>{office.ubicacion}</td>
-                      <td>{office.capacidad}</td>
-                      <td>
-                        <div className="capacity-indicator">
-                          <div className="capacity-bar">
-                            <div 
-                              className="capacity-fill" 
-                              style={{ 
-                                width: `${Math.min(100, (office.empleados / office.capacidad) * 100)}%`,
-                                backgroundColor: office.empleados > office.capacidad ? '#dc3545' : office.empleados >= office.capacidad * 0.8 ? '#ffc107' : '#198754'
-                              }}
-                            ></div>
-                          </div>
-                          <span>{office.empleados} / {office.capacidad}</span>
-                        </div>
-                      </td>
-                      <td>
-                        <span className={`estado ${office.estado.toLowerCase().replace(/\s+/g, '-')}`}>
-                          {office.estado}
-                        </span>
-                      </td>
-                      <td className="actions">
-                        <button
-                          className="btn-edit"
-                          onClick={() => handleEdit(office)}
-                        >
-                          <FaEdit />
-                        </button>
-                        <button
-                          className="btn-delete"
-                          onClick={() => handleDelete(office.id)}
-                          disabled={office.empleados > 0}
-                          title={office.empleados > 0 ? "No se puede eliminar una oficina con empleados asignados" : ""}
-                        >
-                          <FaTrash />
-                        </button>
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td colSpan="9">No se encontraron oficinas</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
+          <button className="btn-add" onClick={() => setShowFormModal(true)}>
+            <FaPlusCircle className="add-icon" />
+            Nueva Oficina
+          </button>
         </div>
-        
-        {/* Cards de oficinas */}
-        <div className="office-cards">
-          {filteredOffices.length > 0 ? (
-            filteredOffices.map((office) => (
-              <div key={office.id} className="office-card">
-                <div className={`office-card-header ${office.estado.toLowerCase().replace(/\s+/g, '-')}`}>
-                  <div className="office-title">
-                    <h3>{office.nombre}</h3>
-                    <span className="codigo-badge">{office.codigo}</span>
+
+        {/* Visualización: Tabla o Tarjetas */}
+        {viewMode === "tabla" ? (
+          <div className="table-container">
+            <div className="table-responsive">
+              <table className="data-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Código</th>
+                    <th>Sucursal</th>
+                    <th>Ubicación</th>
+                    <th>Capacidad</th>
+                    <th>Empleados</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredOffices.length > 0 ? (
+                    filteredOffices.map((office) => (
+                      <tr key={office.id}>
+                        <td>{office.id}</td>
+                        <td>{office.nombre}</td>
+                        <td><span className="codigo-badge">{office.codigo}</span></td>
+                        <td>{office.sucursal}</td>
+                        <td>{office.ubicacion}</td>
+                        <td>{office.capacidad}</td>
+                        <td>
+                          <div className="capacity-indicator">
+                            <div className="capacity-bar">
+                              <div 
+                                className="capacity-fill" 
+                                style={{ 
+                                  width: `${Math.min(100, (office.empleados / office.capacidad) * 100)}%`,
+                                  backgroundColor: office.empleados > office.capacidad ? '#dc3545' : office.empleados >= office.capacidad * 0.8 ? '#ffc107' : '#198754'
+                                }}
+                              ></div>
+                            </div>
+                            <span>{office.empleados} / {office.capacidad}</span>
+                          </div>
+                        </td>
+                        <td>
+                          <span className={`estado ${office.estado.toLowerCase().replace(/\s+/g, '-')}`}>
+                            {office.estado}
+                          </span>
+                        </td>
+                        <td className="actions">
+                          <button
+                            className="btn-edit"
+                            onClick={() => handleEdit(office)}
+                          >
+                            <FaEdit />
+                          </button>
+                          <button
+                            className="btn-delete"
+                            onClick={() => handleDelete(office.id)}
+                            disabled={office.empleados > 0}
+                            title={office.empleados > 0 ? "No se puede eliminar una oficina con empleados asignados" : ""}
+                          >
+                            <FaTrash />
+                          </button>
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan="9">No se encontraron oficinas</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ) : (
+          <div className="office-cards">
+            {filteredOffices.length > 0 ? (
+              filteredOffices.map((office) => (
+                <div key={office.id} className="office-card">
+                  <div className={`office-card-header ${office.estado.toLowerCase().replace(/\s+/g, '-')}`}>
+                    <div className="office-title">
+                      <h3>{office.nombre}</h3>
+                      <span className="codigo-badge">{office.codigo}</span>
+                    </div>
+                    <span className="estado-badge">
+                      {office.estado}
+                    </span>
                   </div>
-                  <span className="estado-badge">
-                    {office.estado}
-                  </span>
-                </div>
-                
-                <div className="office-card-content">
-                  <div className="office-info">
-                    <div className="info-item">
-                      <FaBuilding className="info-icon" />
-                      <span>{office.sucursal}</span>
+                  
+                  <div className="office-card-content">
+                    <div className="office-info">
+                      <div className="info-item">
+                        <FaBuilding className="info-icon" />
+                        <span>{office.sucursal}</span>
+                      </div>
+                      <div className="info-item">
+                        <MdLocationOn className="info-icon" />
+                        <span>{office.ubicacion}</span>
+                      </div>
+                      <div className="info-item">
+                        <FaUsers className="info-icon" />
+                        <span>{office.empleados} empleados</span>
+                      </div>
+                      <div className="info-item">
+                        <FaDesktop className="info-icon" />
+                        <span>{office.equipos} equipos</span>
+                      </div>
                     </div>
-                    <div className="info-item">
-                      <MdLocationOn className="info-icon" />
-                      <span>{office.ubicacion}</span>
-                    </div>
-                    <div className="info-item">
-                      <FaUsers className="info-icon" />
-                      <span>{office.empleados} empleados</span>
-                    </div>
-                    <div className="info-item">
-                      <FaDesktop className="info-icon" />
-                      <span>{office.equipos} equipos</span>
+                    
+                    <div className="capacity-box">
+                      <div className="capacity-header">
+                        <span>Capacidad</span>
+                        <span>{office.empleados} / {office.capacidad}</span>
+                      </div>
+                      <div className="capacity-progress">
+                        <div 
+                          className="capacity-progress-bar" 
+                          style={{ 
+                            width: `${Math.min(100, (office.empleados / office.capacidad) * 100)}%`,
+                            backgroundColor: office.empleados > office.capacidad ? '#dc3545' : office.empleados >= office.capacidad * 0.8 ? '#ffc107' : '#198754'
+                          }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
                   
-                  <div className="capacity-box">
-                    <div className="capacity-header">
-                      <span>Capacidad</span>
-                      <span>{office.empleados} / {office.capacidad}</span>
-                    </div>
-                    <div className="capacity-progress">
-                      <div 
-                        className="capacity-progress-bar" 
-                        style={{ 
-                          width: `${Math.min(100, (office.empleados / office.capacidad) * 100)}%`,
-                          backgroundColor: office.empleados > office.capacidad ? '#dc3545' : office.empleados >= office.capacidad * 0.8 ? '#ffc107' : '#198754'
-                        }}
-                      ></div>
-                    </div>
+                  <div className="office-card-actions">
+                    <button className="btn-card-edit" onClick={() => handleEdit(office)}>
+                      <FaEdit /> Editar
+                    </button>
+                    <button 
+                      className="btn-card-delete" 
+                      onClick={() => handleDelete(office.id)}
+                      disabled={office.empleados > 0}
+                    >
+                      <FaTrash /> Eliminar
+                    </button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="no-results">No se encontraron oficinas</div>
+            )}
+          </div>
+        )}
+
+        {/* Modal para formulario de oficina */}
+        {showFormModal && (
+          <div className="modal-overlay">
+            <div className="form-modal">
+              <div className="form-header">
+                <h2>{isEditing ? "Editar Oficina" : "Nueva Oficina"}</h2>
+                <FaPlusCircle className="add-icon" />
+              </div>
+              
+              <form className="modulo-form" onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="nombre">Nombre de la Oficina</label>
+                    <input
+                      type="text"
+                      id="nombre"
+                      name="nombre"
+                      value={formData.nombre}
+                      onChange={handleChange}
+                      required
+                      placeholder="Ingrese el nombre de la oficina"
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="codigo">Código</label>
+                    <input
+                      type="text"
+                      id="codigo"
+                      name="codigo"
+                      value={formData.codigo}
+                      onChange={handleChange}
+                      required
+                      placeholder="Ej. OF-A01"
+                    />
                   </div>
                 </div>
                 
-                <div className="office-card-actions">
-                  <button className="btn-card-edit" onClick={() => handleEdit(office)}>
-                    <FaEdit /> Editar
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="sucursal">Sucursal</label>
+                    <select
+                      id="sucursal"
+                      name="sucursal"
+                      value={formData.sucursal}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="">Seleccione una sucursal</option>
+                      {sucursales.map((sucursal, index) => (
+                        <option key={index} value={sucursal}>
+                          {sucursal}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="ubicacion">Ubicación</label>
+                    <input
+                      type="text"
+                      id="ubicacion"
+                      name="ubicacion"
+                      value={formData.ubicacion}
+                      onChange={handleChange}
+                      required
+                      placeholder="Ej. Piso 1, Ala Norte"
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="capacidad">Capacidad (personas)</label>
+                    <input
+                      type="number"
+                      id="capacidad"
+                      name="capacidad"
+                      value={formData.capacidad}
+                      onChange={handleChange}
+                      required
+                      min="1"
+                      placeholder="Ingrese capacidad"
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="estado">Estado</label>
+                    <select
+                      id="estado"
+                      name="estado"
+                      value={formData.estado}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="Activa">Activa</option>
+                      <option value="Inactiva">Inactiva</option>
+                      <option value="En Mantenimiento">En Mantenimiento</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="form-buttons">
+                  <button type="submit" className="btn-submit">
+                    {isEditing ? "Actualizar Oficina" : "Registrar Oficina"}
                   </button>
-                  <button 
-                    className="btn-card-delete" 
-                    onClick={() => handleDelete(office.id)}
-                    disabled={office.empleados > 0}
-                  >
-                    <FaTrash /> Eliminar
+                  <button type="button" className="btn-cancel" onClick={handleCancel}>
+                    Cancelar
                   </button>
                 </div>
-              </div>
-            ))
-          ) : (
-            <div className="no-results">No se encontraron oficinas</div>
-          )}
-        </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
-
-    
     </div>
   );
 }

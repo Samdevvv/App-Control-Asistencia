@@ -3,7 +3,6 @@ import "../estilos/ModuloUsuarios.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
 
-
 function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
   // Estado para el formulario
   const [formData, setFormData] = useState({
@@ -15,9 +14,10 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
     perfil: "",
   });
 
-  // Estado para controlar el modo de edición
+  // Estado para controlar el modo de edición y modal
   const [isEditing, setIsEditing] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(null);
+  const [showFormModal, setShowFormModal] = useState(false);
 
   // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,6 +52,7 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(true);
     setCurrentUserId(user.id);
+    setShowFormModal(true);
   };
 
   // Manejo de envío del formulario
@@ -74,7 +75,8 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
       };
       setUsuarios([...usuarios, newUser]);
     }
-    // Limpiar formulario
+    // Cerrar modal y limpiar formulario
+    setShowFormModal(false);
     setFormData({
       nombre: "",
       apellido: "",
@@ -90,7 +92,7 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
     setUsuarios(usuarios.filter((user) => user.id !== id));
   };
 
-  // Función para cancelar la edición
+  // Función para cerrar el modal y cancelar
   const handleCancel = () => {
     setFormData({
       nombre: "",
@@ -102,6 +104,7 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(false);
     setCurrentUserId(null);
+    setShowFormModal(false);
   };
 
   // Filtrar usuarios basados en el término de búsqueda
@@ -116,8 +119,6 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
 
   return (
     <div className="modulo-container">
-     
-
       {/* Contenido principal */}
       <div className="modulo-content">
         <div className="modulo-header">
@@ -134,115 +135,17 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
           </div>
         </div>
 
-        {/* Formulario */}
-        <div className="modulo-form-container">
-          <div className="form-header">
-            <h2>{isEditing ? "Editar Usuario" : "Nuevo Usuario"}</h2>
+        {/* Botón de Nuevo Usuario y Tabla */}
+        <div className="table-header">
+          <h2>Lista de Usuarios</h2>
+          <button className="btn-add" onClick={() => setShowFormModal(true)}>
             <FaPlusCircle className="add-icon" />
-          </div>
-          
-          <form className="modulo-form" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="nombre">Nombre</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el nombre"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="apellido">Apellido</label>
-                <input
-                  type="text"
-                  id="apellido"
-                  name="apellido"
-                  value={formData.apellido}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el apellido"
-                />
-              </div>
-            </div>
-            
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="email">Correo Electrónico</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="ejemplo@correo.com"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="usuario">Nombre de Usuario</label>
-                <input
-                  type="text"
-                  id="usuario"
-                  name="usuario"
-                  value={formData.usuario}
-                  onChange={handleChange}
-                  required
-                  placeholder="Nombre de usuario"
-                />
-              </div>
-            </div>
-            
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="password">Contraseña</label>
-                <input
-                  type="password"
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  placeholder={isEditing ? "Deje en blanco para mantener" : "Ingrese contraseña"}
-                  required={!isEditing}
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="perfil">Perfil de Usuario</label>
-                <select
-                  id="perfil"
-                  name="perfil"
-                  value={formData.perfil}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Seleccione un perfil</option>
-                  <option value="Administrador">Administrador</option>
-                  <option value="Supervisor">Supervisor</option>
-                  <option value="Operador">Operador</option>
-                </select>
-              </div>
-            </div>
-            
-            <div className="form-buttons">
-              <button type="submit" className="btn-submit">
-                {isEditing ? "Actualizar Usuario" : "Crear Usuario"}
-              </button>
-              <button type="button" className="btn-cancel" onClick={handleCancel}>
-                Cancelar
-              </button>
-            </div>
-          </form>
+            Nuevo Usuario
+          </button>
         </div>
 
         {/* Tabla de usuarios */}
         <div className="table-container">
-          <h2>Lista de Usuarios</h2>
           <table className="data-table">
             <thead>
               <tr>
@@ -291,7 +194,115 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
         </div>
       </div>
 
-     
+      {/* Modal para formulario de usuario */}
+      {showFormModal && (
+        <div className="modal-overlay">
+          <div className="form-modal">
+            <div className="form-header">
+              <h2>{isEditing ? "Editar Usuario" : "Nuevo Usuario"}</h2>
+              <FaPlusCircle className="add-icon" />
+            </div>
+            
+            <form className="modulo-form" onSubmit={handleSubmit}>
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="nombre">Nombre</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    required
+                    placeholder="Ingrese el nombre"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="apellido">Apellido</label>
+                  <input
+                    type="text"
+                    id="apellido"
+                    name="apellido"
+                    value={formData.apellido}
+                    onChange={handleChange}
+                    required
+                    placeholder="Ingrese el apellido"
+                  />
+                </div>
+              </div>
+              
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="email">Correo Electrónico</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="ejemplo@correo.com"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="usuario">Nombre de Usuario</label>
+                  <input
+                    type="text"
+                    id="usuario"
+                    name="usuario"
+                    value={formData.usuario}
+                    onChange={handleChange}
+                    required
+                    placeholder="Nombre de usuario"
+                  />
+                </div>
+              </div>
+              
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="password">Contraseña</label>
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    placeholder={isEditing ? "Deje en blanco para mantener" : "Ingrese contraseña"}
+                    required={!isEditing}
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="perfil">Perfil de Usuario</label>
+                  <select
+                    id="perfil"
+                    name="perfil"
+                    value={formData.perfil}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Seleccione un perfil</option>
+                    <option value="Administrador">Administrador</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Operador">Operador</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div className="form-buttons">
+                <button type="submit" className="btn-submit">
+                  {isEditing ? "Actualizar Usuario" : "Crear Usuario"}
+                </button>
+                <button type="button" className="btn-cancel" onClick={handleCancel}>
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

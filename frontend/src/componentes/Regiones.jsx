@@ -3,8 +3,6 @@ import "../estilos/Regiones.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash, FaGlobeAmericas } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
 
-
-
 function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
   // Estado para el formulario
   const [formData, setFormData] = useState({
@@ -14,9 +12,10 @@ function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
     estado: "Activa"
   });
 
-  // Estado para controlar el modo de edición
+  // Estado para controlar el modo de edición y modal
   const [isEditing, setIsEditing] = useState(false);
   const [currentRegionId, setCurrentRegionId] = useState(null);
+  const [showFormModal, setShowFormModal] = useState(false);
 
   // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState("");
@@ -63,7 +62,8 @@ function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
       };
       setRegiones([...regiones, newRegion]);
     }
-    // Limpiar formulario
+    // Cerrar modal y limpiar formulario
+    setShowFormModal(false);
     setFormData({
       nombre: "",
       codigo: "",
@@ -82,6 +82,7 @@ function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(true);
     setCurrentRegionId(region.id);
+    setShowFormModal(true);
   };
 
   // Función para eliminar una región
@@ -89,7 +90,7 @@ function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
     setRegiones(regiones.filter((region) => region.id !== id));
   };
 
-  // Función para cancelar la edición
+  // Función para cerrar el modal y cancelar
   const handleCancel = () => {
     setFormData({
       nombre: "",
@@ -99,6 +100,7 @@ function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(false);
     setCurrentRegionId(null);
+    setShowFormModal(false);
   };
 
   // Filtrar regiones basadas en el término de búsqueda
@@ -112,8 +114,6 @@ function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
 
   return (
     <div className="modulo-container">
-     
-
       {/* Contenido principal */}
       <div className="modulo-content">
         <div className="modulo-header">
@@ -146,85 +146,18 @@ function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
           </div>
         </div>
 
-        {/* Formulario */}
-        <div className="modulo-form-container">
-          <div className="form-header">
-            <h2>{isEditing ? "Editar Región" : "Nueva Región"}</h2>
+        {/* Botón de Nueva Región */}
+        <div className="table-header">
+          <h2>Lista de Regiones</h2>
+          <button className="btn-add" onClick={() => setShowFormModal(true)}>
             <FaPlusCircle className="add-icon" />
-          </div>
-          
-          <form className="modulo-form" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="nombre">Nombre de la Región</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el nombre de la región"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="codigo">Código</label>
-                <input
-                  type="text"
-                  id="codigo"
-                  name="codigo"
-                  value={formData.codigo}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ej. REG-CTR"
-                />
-              </div>
-            </div>
-            
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="descripcion">Descripción</label>
-                <textarea
-                  id="descripcion"
-                  name="descripcion"
-                  value={formData.descripcion}
-                  onChange={handleChange}
-                  rows="3"
-                  placeholder="Descripción breve de la región"
-                ></textarea>
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="estado">Estado</label>
-                <select
-                  id="estado"
-                  name="estado"
-                  value={formData.estado}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="Activa">Activa</option>
-                  <option value="Inactiva">Inactiva</option>
-                </select>
-              </div>
-            </div>
-            
-            <div className="form-buttons">
-              <button type="submit" className="btn-submit">
-                {isEditing ? "Actualizar Región" : "Registrar Región"}
-              </button>
-              <button type="button" className="btn-cancel" onClick={handleCancel}>
-                Cancelar
-              </button>
-            </div>
-          </form>
+            Nueva Región
+          </button>
         </div>
 
         {/* Visualización: Tabla o Tarjetas */}
         {viewMode === "tabla" ? (
           <div className="table-container">
-            <h2>Lista de Regiones</h2>
             <div className="table-responsive">
               <table className="data-table">
                 <thead>
@@ -323,9 +256,86 @@ function ModuloRegiones({ onNavigate, onLogout, activeModule }) {
             )}
           </div>
         )}
-      </div>
 
-    
+        {/* Modal para formulario de región */}
+        {showFormModal && (
+          <div className="modal-overlay">
+            <div className="form-modal">
+              <div className="form-header">
+                <h2>{isEditing ? "Editar Región" : "Nueva Región"}</h2>
+                <FaPlusCircle className="add-icon" />
+              </div>
+              
+              <form className="modulo-form" onSubmit={handleSubmit}>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="nombre">Nombre de la Región</label>
+                    <input
+                      type="text"
+                      id="nombre"
+                      name="nombre"
+                      value={formData.nombre}
+                      onChange={handleChange}
+                      required
+                      placeholder="Ingrese el nombre de la región"
+                    />
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="codigo">Código</label>
+                    <input
+                      type="text"
+                      id="codigo"
+                      name="codigo"
+                      value={formData.codigo}
+                      onChange={handleChange}
+                      required
+                      placeholder="Ej. REG-CTR"
+                    />
+                  </div>
+                </div>
+                
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="descripcion">Descripción</label>
+                    <textarea
+                      id="descripcion"
+                      name="descripcion"
+                      value={formData.descripcion}
+                      onChange={handleChange}
+                      rows="3"
+                      placeholder="Descripción breve de la región"
+                    ></textarea>
+                  </div>
+                  
+                  <div className="form-group">
+                    <label htmlFor="estado">Estado</label>
+                    <select
+                      id="estado"
+                      name="estado"
+                      value={formData.estado}
+                      onChange={handleChange}
+                      required
+                    >
+                      <option value="Activa">Activa</option>
+                      <option value="Inactiva">Inactiva</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div className="form-buttons">
+                  <button type="submit" className="btn-submit">
+                    {isEditing ? "Actualizar Región" : "Registrar Región"}
+                  </button>
+                  <button type="button" className="btn-cancel" onClick={handleCancel}>
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

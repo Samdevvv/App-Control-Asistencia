@@ -3,8 +3,6 @@ import "../estilos/Sucursales.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt as FaLocation } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
 
-
-
 function ModuloSucursales({ onNavigate, onLogout, activeModule }) {
   // Estado para el formulario
   const [formData, setFormData] = useState({
@@ -17,9 +15,10 @@ function ModuloSucursales({ onNavigate, onLogout, activeModule }) {
     estado: "Activa"
   });
 
-  // Estado para controlar el modo de edición
+  // Estado para controlar el modo de edición y modal
   const [isEditing, setIsEditing] = useState(false);
   const [currentBranchId, setCurrentBranchId] = useState(null);
+  const [showFormModal, setShowFormModal] = useState(false);
 
   // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState("");
@@ -67,7 +66,8 @@ function ModuloSucursales({ onNavigate, onLogout, activeModule }) {
       };
       setSucursales([...sucursales, newBranch]);
     }
-    // Limpiar formulario
+    // Cerrar modal y limpiar formulario
+    setShowFormModal(false);
     setFormData({
       nombre: "",
       direccion: "",
@@ -92,6 +92,7 @@ function ModuloSucursales({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(true);
     setCurrentBranchId(branch.id);
+    setShowFormModal(true);
   };
 
   // Función para eliminar una sucursal
@@ -99,7 +100,7 @@ function ModuloSucursales({ onNavigate, onLogout, activeModule }) {
     setSucursales(sucursales.filter((branch) => branch.id !== id));
   };
 
-  // Función para cancelar la edición
+  // Función para cerrar el modal y cancelar
   const handleCancel = () => {
     setFormData({
       nombre: "",
@@ -112,6 +113,7 @@ function ModuloSucursales({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(false);
     setCurrentBranchId(null);
+    setShowFormModal(false);
   };
 
   // Filtrar sucursales basadas en el término de búsqueda
@@ -127,157 +129,36 @@ function ModuloSucursales({ onNavigate, onLogout, activeModule }) {
 
   return (
     <div className="modulo-container">
-      {/* Sidebar Izquierda */}
-     
-
       {/* Contenido principal */}
       <div className="modulo-content">
         <div className="modulo-header">
-          <h1>Gestión de Sucursales</h1>
-          <div className="search-container">
-            <FaSearch className="search-icon" />
-            <input
-              type="text"
-              placeholder="Buscar sucursal..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="search-input"
-            />
-          </div>
+        
+          <div className="modulo-header">
+  <h1>Gestión de Sucursales</h1>
+  <div className="search-container">
+    <FaSearch className="search-icon" />
+    <input
+      type="text"
+      placeholder="Buscar sucursal..."
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      className="search-input"
+    />
+  </div>
+</div>
         </div>
 
-        {/* Formulario */}
-        <div className="modulo-form-container">
-          <div className="form-header">
-            <h2>{isEditing ? "Editar Sucursal" : "Nueva Sucursal"}</h2>
+        {/* Botón de Nueva Sucursal y Tabla */}
+        <div className="table-header">
+          <h2>Lista de Sucursales</h2>
+          <button className="btn-add" onClick={() => setShowFormModal(true)}>
             <FaPlusCircle className="add-icon" />
-          </div>
-          
-          <form className="modulo-form" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="nombre">Nombre de la Sucursal</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el nombre de la sucursal"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="email">Correo Electrónico</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="correo@ejemplo.com"
-                />
-              </div>
-            </div>
-            
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="direccion">Dirección</label>
-                <input
-                  type="text"
-                  id="direccion"
-                  name="direccion"
-                  value={formData.direccion}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese la dirección completa"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="telefono">Teléfono</label>
-                <input
-                  type="tel"
-                  id="telefono"
-                  name="telefono"
-                  value={formData.telefono}
-                  onChange={handleChange}
-                  required
-                  placeholder="0212-1234567"
-                />
-              </div>
-            </div>
-            
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="region">Región</label>
-                <select
-                  id="region"
-                  name="region"
-                  value={formData.region}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Seleccione una región</option>
-                  {regiones.map((region, index) => (
-                    <option key={index} value={region}>
-                      {region}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="oficina">Oficina</label>
-                <select
-                  id="oficina"
-                  name="oficina"
-                  value={formData.oficina}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Seleccione una oficina</option>
-                  {oficinas.map((oficina, index) => (
-                    <option key={index} value={oficina}>
-                      {oficina}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="estado">Estado</label>
-                <select
-                  id="estado"
-                  name="estado"
-                  value={formData.estado}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="Activa">Activa</option>
-                  <option value="Inactiva">Inactiva</option>
-                </select>
-              </div>
-            </div>
-            
-            <div className="form-buttons">
-              <button type="submit" className="btn-submit">
-                {isEditing ? "Actualizar Sucursal" : "Registrar Sucursal"}
-              </button>
-              <button type="button" className="btn-cancel" onClick={handleCancel}>
-                Cancelar
-              </button>
-            </div>
-          </form>
+            Nueva Sucursal
+          </button>
         </div>
 
         {/* Tabla de sucursales */}
         <div className="table-container">
-          <h2>Lista de Sucursales</h2>
           <div className="table-responsive">
             <table className="data-table">
               <thead>
@@ -386,7 +267,138 @@ function ModuloSucursales({ onNavigate, onLogout, activeModule }) {
         </div>
       </div>
 
-     
+      {/* Modal para formulario de sucursal */}
+      {showFormModal && (
+        <div className="modal-overlay">
+          <div className="form-modal">
+            <div className="form-header">
+              <h2>{isEditing ? "Editar Sucursal" : "Nueva Sucursal"}</h2>
+              <FaPlusCircle className="add-icon" />
+            </div>
+            
+            <form className="modulo-form" onSubmit={handleSubmit}>
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="nombre">Nombre de la Sucursal</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    required
+                    placeholder="Ingrese el nombre de la sucursal"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="email">Correo Electrónico</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="correo@ejemplo.com"
+                  />
+                </div>
+              </div>
+              
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="direccion">Dirección</label>
+                  <input
+                    type="text"
+                    id="direccion"
+                    name="direccion"
+                    value={formData.direccion}
+                    onChange={handleChange}
+                    required
+                    placeholder="Ingrese la dirección completa"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="telefono">Teléfono</label>
+                  <input
+                    type="tel"
+                    id="telefono"
+                    name="telefono"
+                    value={formData.telefono}
+                    onChange={handleChange}
+                    required
+                    placeholder="0212-1234567"
+                  />
+                </div>
+              </div>
+              
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="region">Región</label>
+                  <select
+                    id="region"
+                    name="region"
+                    value={formData.region}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Seleccione una región</option>
+                    {regiones.map((region, index) => (
+                      <option key={index} value={region}>
+                        {region}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="oficina">Oficina</label>
+                  <select
+                    id="oficina"
+                    name="oficina"
+                    value={formData.oficina}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Seleccione una oficina</option>
+                    {oficinas.map((oficina, index) => (
+                      <option key={index} value={oficina}>
+                        {oficina}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+              
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="estado">Estado</label>
+                  <select
+                    id="estado"
+                    name="estado"
+                    value={formData.estado}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="Activa">Activa</option>
+                    <option value="Inactiva">Inactiva</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div className="form-buttons">
+                <button type="submit" className="btn-submit">
+                  {isEditing ? "Actualizar Sucursal" : "Registrar Sucursal"}
+                </button>
+                <button type="button" className="btn-cancel" onClick={handleCancel}>
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

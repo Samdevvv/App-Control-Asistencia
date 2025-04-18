@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import "../estilos/Empleados.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash, FaFingerprint } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
@@ -20,9 +20,10 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
     huella: false
   });
 
-  // Estado para controlar el modo de edición
+  // Estado para controlar el modo de edición y modal
   const [isEditing, setIsEditing] = useState(false);
   const [currentEmployeeId, setCurrentEmployeeId] = useState(null);
+  const [showFormModal, setShowFormModal] = useState(false);
 
   // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,7 +40,7 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
     { id: 5, nombre: "Roberto", apellido: "Gómez", cedula: "V-56789012", telefono: "0412-5678901", email: "roberto@ejemplo.com", sucursal: "Sucursal C", departamento: "Ventas", cargo: "Vendedor", fechaIngreso: "2023-02-18", estado: "Activo", huella: false },
   ]);
 
-  // Lista de sucursales (simulando datos que vendrían de una API)
+  // Lista de sucursales
   const sucursales = ["Principal", "Sucursal A", "Sucursal B", "Sucursal C"];
   
   // Lista de departamentos
@@ -74,7 +75,8 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
       };
       setEmpleados([...empleados, newEmployee]);
     }
-    // Limpiar formulario
+    // Cerrar modal y limpiar formulario
+    setShowFormModal(false);
     setFormData({
       nombre: "",
       apellido: "",
@@ -90,7 +92,7 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
     });
   };
 
-  // Función para editar un empleado
+  // Función para abrir modal de edición
   const handleEdit = (employee) => {
     setFormData({
       nombre: employee.nombre,
@@ -107,6 +109,7 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(true);
     setCurrentEmployeeId(employee.id);
+    setShowFormModal(true);
   };
 
   // Función para eliminar un empleado
@@ -114,7 +117,7 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
     setEmpleados(empleados.filter((emp) => emp.id !== id));
   };
 
-  // Función para cancelar la edición
+  // Función para cerrar el modal
   const handleCancel = () => {
     setFormData({
       nombre: "",
@@ -131,6 +134,7 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
     });
     setIsEditing(false);
     setCurrentEmployeeId(null);
+    setShowFormModal(false);
   };
 
   // Función para mostrar modal de huella
@@ -147,7 +151,6 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
 
   // Función para registrar huella
   const handleRegisterFingerprint = () => {
-    // Aquí iría la lógica para conectar con el lector de huella
     setEmpleados(
       empleados.map((emp) =>
         emp.id === currentEmployeeId ? { ...emp, huella: true } : emp
@@ -168,10 +171,30 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
       emp.cargo.toLowerCase().includes(searchTerm.toLowerCase()) ||
       emp.estado.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
+  useEffect(() => {
+    // Función para verificar si hay scroll horizontal y añadir clase indicadora
+    const checkTableScroll = () => {
+      const tableContainer = document.querySelector('.table-responsive');
+      if (tableContainer) {
+        if (tableContainer.scrollWidth > tableContainer.clientWidth) {
+          tableContainer.classList.add('has-scroll');
+        } else {
+          tableContainer.classList.remove('has-scroll');
+        }
+      }
+    };
+  
+    // Ejecutar al cargar y cuando la ventana cambie de tamaño
+    checkTableScroll();
+    window.addEventListener('resize', checkTableScroll);
+  
+    // Limpiar listener al desmontar
+    return () => {
+      window.removeEventListener('resize', checkTableScroll);
+    };
+  }, []);
   return (
     <div className="modulo-container">
-     
       {/* Contenido principal */}
       <div className="modulo-content">
         <div className="modulo-header">
@@ -188,184 +211,16 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
           </div>
         </div>
 
-        {/* Formulario */}
-        <div className="modulo-form-container">
-          <div className="form-header">
-            <h2>{isEditing ? "Editar Empleado" : "Nuevo Empleado"}</h2>
+        {/* Botón de Nuevo Empleado y Tabla */}
+        <div className="table-header">
+          <h2>Lista de Empleados</h2>
+          <button className="btn-add" onClick={() => setShowFormModal(true)}>
             <FaPlusCircle className="add-icon" />
-          </div>
-          
-          <form className="modulo-form" onSubmit={handleSubmit}>
-            <div className="form-grid">
-              <div className="form-group">
-                <label htmlFor="nombre">Nombre</label>
-                <input
-                  type="text"
-                  id="nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el nombre"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="apellido">Apellido</label>
-                <input
-                  type="text"
-                  id="apellido"
-                  name="apellido"
-                  value={formData.apellido}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el apellido"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="cedula">Cédula</label>
-                <input
-                  type="text"
-                  id="cedula"
-                  name="cedula"
-                  value={formData.cedula}
-                  onChange={handleChange}
-                  required
-                  placeholder="V-12345678"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="telefono">Teléfono</label>
-                <input
-                  type="tel"
-                  id="telefono"
-                  name="telefono"
-                  value={formData.telefono}
-                  onChange={handleChange}
-                  required
-                  placeholder="0412-1234567"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="email">Correo Electrónico</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  placeholder="ejemplo@correo.com"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="sucursal">Sucursal</label>
-                <select
-                  id="sucursal"
-                  name="sucursal"
-                  value={formData.sucursal}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Seleccione una sucursal</option>
-                  {sucursales.map((sucursal, index) => (
-                    <option key={index} value={sucursal}>
-                      {sucursal}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="departamento">Departamento</label>
-                <select
-                  id="departamento"
-                  name="departamento"
-                  value={formData.departamento}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="">Seleccione un departamento</option>
-                  {departamentos.map((depto, index) => (
-                    <option key={index} value={depto}>
-                      {depto}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="cargo">Cargo</label>
-                <input
-                  type="text"
-                  id="cargo"
-                  name="cargo"
-                  value={formData.cargo}
-                  onChange={handleChange}
-                  required
-                  placeholder="Ingrese el cargo"
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="fechaIngreso">Fecha de Ingreso</label>
-                <input
-                  type="date"
-                  id="fechaIngreso"
-                  name="fechaIngreso"
-                  value={formData.fechaIngreso}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              
-              <div className="form-group">
-                <label htmlFor="estado">Estado</label>
-                <select
-                  id="estado"
-                  name="estado"
-                  value={formData.estado}
-                  onChange={handleChange}
-                  required
-                >
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo">Inactivo</option>
-                  <option value="Suspendido">Suspendido</option>
-                </select>
-              </div>
-              
-              <div className="form-group checkbox-group">
-                <label htmlFor="huella">
-                  <input
-                    type="checkbox"
-                    id="huella"
-                    name="huella"
-                    checked={formData.huella}
-                    onChange={handleChange}
-                  />
-                  <span>Huella Registrada</span>
-                </label>
-              </div>
-            </div>
-            
-            <div className="form-buttons">
-              <button type="submit" className="btn-submit">
-                {isEditing ? "Actualizar Empleado" : "Registrar Empleado"}
-              </button>
-              <button type="button" className="btn-cancel" onClick={handleCancel}>
-                Cancelar
-              </button>
-            </div>
-          </form>
+            Nuevo Empleado
+          </button>
         </div>
 
-        {/* Tabla de empleados */}
         <div className="table-container">
-          <h2>Lista de Empleados</h2>
           <div className="table-responsive">
             <table className="data-table">
               <thead>
@@ -439,7 +294,184 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule }) {
         </div>
       </div>
 
-    
+      {/* Modal para formulario de empleado */}
+      {showFormModal && (
+        <div className="modal-overlay">
+          <div className="form-modal">
+            <div className="form-header">
+              <h2>{isEditing ? "Editar Empleado" : "Nuevo Empleado"}</h2>
+              <FaPlusCircle className="add-icon" />
+            </div>
+            
+            <form className="modulo-form" onSubmit={handleSubmit}>
+              <div className="form-grid">
+                <div className="form-group">
+                  <label htmlFor="nombre">Nombre</label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    required
+                    placeholder="Ingrese el nombre"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="apellido">Apellido</label>
+                  <input
+                    type="text"
+                    id="apellido"
+                    name="apellido"
+                    value={formData.apellido}
+                    onChange={handleChange}
+                    required
+                    placeholder="Ingrese el apellido"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="cedula">Cédula</label>
+                  <input
+                    type="text"
+                    id="cedula"
+                    name="cedula"
+                    value={formData.cedula}
+                    onChange={handleChange}
+                    required
+                    placeholder="V-12345678"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="telefono">Teléfono</label>
+                  <input
+                    type="tel"
+                    id="telefono"
+                    name="telefono"
+                    value={formData.telefono}
+                    onChange={handleChange}
+                    required
+                    placeholder="0412-1234567"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="email">Correo Electrónico</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    placeholder="ejemplo@correo.com"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="sucursal">Sucursal</label>
+                  <select
+                    id="sucursal"
+                    name="sucursal"
+                    value={formData.sucursal}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Seleccione una sucursal</option>
+                    {sucursales.map((sucursal, index) => (
+                      <option key={index} value={sucursal}>
+                        {sucursal}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="departamento">Departamento</label>
+                  <select
+                    id="departamento"
+                    name="departamento"
+                    value={formData.departamento}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Seleccione un departamento</option>
+                    {departamentos.map((depto, index) => (
+                      <option key={index} value={depto}>
+                        {depto}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="cargo">Cargo</label>
+                  <input
+                    type="text"
+                    id="cargo"
+                    name="cargo"
+                    value={formData.cargo}
+                    onChange={handleChange}
+                    required
+                    placeholder="Ingrese el cargo"
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="fechaIngreso">Fecha de Ingreso</label>
+                  <input
+                    type="date"
+                    id="fechaIngreso"
+                    name="fechaIngreso"
+                    value={formData.fechaIngreso}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                
+                <div className="form-group">
+                  <label htmlFor="estado">Estado</label>
+                  <select
+                    id="estado"
+                    name="estado"
+                    value={formData.estado}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                    <option value="Suspendido">Suspendido</option>
+                  </select>
+                </div>
+                
+                <div className="form-group checkbox-group">
+                  <label htmlFor="huella">
+                    <input
+                      type="checkbox"
+                      id="huella"
+                      name="huella"
+                      checked={formData.huella}
+                      onChange={handleChange}
+                    />
+                    <span>Huella Registrada</span>
+                  </label>
+                </div>
+              </div>
+              
+              <div className="form-buttons">
+                <button type="submit" className="btn-submit">
+                  {isEditing ? "Actualizar Empleado" : "Registrar Empleado"}
+                </button>
+                <button type="button" className="btn-cancel" onClick={handleCancel}>
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Modal para registro de huella */}
       {showFingerprintModal && (

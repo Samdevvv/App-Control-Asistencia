@@ -57,21 +57,23 @@ function Sidebar({ activeModule, onNavigate, onLogout, userInfo }) {
         </div>
       </div>
 
+      {/* Logout Button */}
+      <div className="logout-container">
+        <button className="logout-btn" onClick={onLogout}>
+          <MdExitToApp className="logout-icon" />
+          {!isCollapsed && <span>Cerrar Sesión</span>}
+        </button>
+      </div>
+
       <div className="sidebar-bottom">
         <div className="user-profile">
           <div className="avatar">
             <FaUserAlt />
           </div>
-          {!isCollapsed && (
-            <div className="user-info">
-              <h3>{userInfo?.name || "Admin Usuario"}</h3>
-              <p>{userInfo?.role || "Administrador"}</p>
-            </div>
-          )}
-        </div>
-        <div className="sidebar-item logout" onClick={onLogout}>
-          <MdExitToApp className="sidebar-icon" />
-          {!isCollapsed && <span>Cerrar Sesión</span>}
+          <div className="user-info">
+            {!isCollapsed && <h3>{userInfo?.name || "Admin Usuario"}</h3>}
+            <p>{userInfo?.role || "Administrador"}</p>
+          </div>
         </div>
       </div>
     </div>

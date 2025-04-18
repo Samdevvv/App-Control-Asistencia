@@ -1,141 +1,398 @@
 import React, { useState } from "react";
 import "../estilos/DashBoard.css";
-import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaChartBar } from "react-icons/fa";
-import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
-
+import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaChartBar, FaArrowUp, FaArrowDown, FaSignInAlt, FaSignOutAlt, FaFilter, FaClock } from "react-icons/fa";
+import { MdDashboard, MdFingerprint, MdExitToApp, MdCalendarToday } from "react-icons/md";
 
 function Dashboard({ onNavigate, onLogout, activeModule }) {
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
-  
-  // Estado para datos de ejemplo del dashboard
+  const [filters, setFilters] = useState({
+    dateRange: "today",
+    branch: "all",
+    office: "all",
+    employeeType: "all",
+    activityType: "all"
+  });
   const [dashboardData, setDashboardData] = useState({
     totalEmpleados: 145,
+    totalOffices: 12,
+    totalBranches: 5,
     asistenciasHoy: 126,
     ausenciasHoy: 19,
     retrasosHoy: 8,
+    onTimeArrivals: 110,
+    overtimeHours: 45,
     porcentajeAsistencia: 87,
+    trends: {
+      totalEmpleados: 2,
+      asistenciasHoy: -3,
+      ausenciasHoy: 1,
+      retrasosHoy: 0,
+      onTimeArrivals: 5,
+      overtimeHours: -10
+    }
   });
 
-  // Datos de ejemplo para la gráfica
-  const attendanceData = [
-    { día: "Lunes", asistencia: 95 },
-    { día: "Martes", asistencia: 88 },
-    { día: "Miércoles", asistencia: 90 },
-    { día: "Jueves", asistencia: 87 },
-    { día: "Viernes", asistencia: 85 },
+  const [activityPage, setActivityPage] = useState(1);
+  const activitiesPerPage = 5;
+
+  // Datos de ejemplo para gráficos
+  const weeklyAttendanceData = [
+    { day: "Lun", onTime: 95, late: 5, absent: 2 },
+    { day: "Mar", onTime: 88, late: 8, absent: 4 },
+    { day: "Mié", onTime: 90, late: 6, absent: 3 },
+    { day: "Jue", onTime: 87, late: 7, absent: 5 },
+    { day: "Vie", onTime: 85, late: 9, absent: 6 },
   ];
+
+  const employeeStatusData = [
+    { name: "Presentes", value: 126, color: "#198754" },
+    { name: "Ausentes", value: 19, color: "#dc3545" },
+    { name: "Tardíos", value: 8, color: "#ffc107" },
+    { name: "De Licencia", value: 5, color: "#6c757d" },
+  ];
+
+  const monthlyAttendanceData = Array.from({ length: 30 }, (_, i) => ({
+    day: i + 1,
+    attendance: Math.floor(Math.random() * (95 - 75 + 1)) + 75,
+  }));
+
+  const recentActivities = [
+    { time: "09:15", user: "Juan Pérez", action: "entrada" },
+    { time: "09:05", user: "María López", action: "entrada" },
+    { time: "09:00", user: "Carlos Rodríguez", action: "entrada" },
+    { time: "08:55", user: "Ana Martínez", action: "salida" },
+    { time: "08:45", user: "Roberto Gómez", action: "entrada" },
+    { time: "08:30", user: "Lucía Fernández", action: "entrada" },
+    { time: "08:15", user: "Pedro Sánchez", action: "salida" },
+    { time: "08:00", user: "Sofía Morales", action: "entrada" },
+    { time: "07:45", user: "Diego Torres", action: "entrada" },
+    { time: "07:30", user: "Laura Ramírez", action: "salida" },
+  ];
+
+  const topPerformers = [
+    { name: "Juan Pérez", attendanceRate: 98 },
+    { name: "María López", attendanceRate: 97 },
+    { name: "Carlos Rodríguez", attendanceRate: 96 },
+  ];
+
+  const keyMetrics = {
+    avgAttendanceRate: 87,
+    mostPunctualBranch: "Sucursal Principal",
+    highestAbsenteeismOffice: "Oficina Ventas",
+  };
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({ ...filters, [name]: value });
+  };
+
+  const clearFilters = () => {
+    setFilters({
+      dateRange: "today",
+      branch: "all",
+      office: "all",
+      employeeType: "all",
+      activityType: "all"
+    });
+  };
+
+  const filteredActivities = recentActivities
+    .filter(activity => filters.activityType === "all" || activity.action === filters.activityType)
+    .slice(0, activityPage * activitiesPerPage);
+
+  const TrendIndicator = ({ value }) => (
+    <span className={`trend ${value >= 0 ? "positive" : "negative"}`}>
+      {value >= 0 ? <FaArrowUp /> : <FaArrowDown />} {Math.abs(value)}%
+    </span>
+  );
 
   return (
     <div className="dashboard-container">
-     
-
       {/* Contenido principal */}
       <div className="dashboard-content">
         <div className="dashboard-header">
-          <h1>Dashboard</h1>
-          <div className="current-date">{currentDate}</div>
+          <h1>Dashboard de Control de Asistencia</h1>
+          <div className="current-date">
+            <MdCalendarToday className="date-icon" /> {currentDate}
+          </div>
+        </div>
+
+        {/* Filtros */}
+        <div className="filter-bar">
+          <div className="filter-group">
+            <label>Rango de Fecha:</label>
+            <select name="dateRange" value={filters.dateRange} onChange={handleFilterChange}>
+              <option value="today">Hoy</option>
+              <option value="week">Esta Semana</option>
+              <option value="month">Este Mes</option>
+            </select>
+          </div>
+          <div className="filter-group">
+            <label>Sucursal:</label>
+            <select name="branch" value={filters.branch} onChange={handleFilterChange}>
+              <option value="all">Todas</option>
+              <option value="principal">Sucursal Principal</option>
+              <option value="este">Sucursal Este</option>
+              <option value="oeste">Sucursal Oeste</option>
+            </select>
+          </div>
+          <div className="filter-group">
+            <label>Oficina:</label>
+            <select name="office" value={filters.office} onChange={handleFilterChange}>
+              <option value="all">Todas</option>
+              <option value="principal">Oficina Principal</option>
+              <option value="desarrollo">Oficina Desarrollo</option>
+              <option value="ventas">Oficina Ventas</option>
+            </select>
+          </div>
+          <div className="filter-group">
+            <label>Tipo de Empleado:</label>
+            <select name="employeeType" value={filters.employeeType} onChange={handleFilterChange}>
+              <option value="all">Todos</option>
+              <option value="full-time">Tiempo Completo</option>
+              <option value="part-time">Medio Tiempo</option>
+            </select>
+          </div>
+          <button className="clear-filters-btn" onClick={clearFilters}>
+            <FaFilter /> Limpiar Filtros
+          </button>
         </div>
 
         {/* Cards de resumen */}
         <div className="dashboard-summary">
-          <div className="summary-card">
+          <div className="summary-card" onClick={() => onNavigate("empleados")}>
             <div className="card-icon employees">
-              <i className="fas fa-users"></i>
+              <FaUsers />
             </div>
             <div className="card-info">
               <h3>Total Empleados</h3>
               <p>{dashboardData.totalEmpleados}</p>
+              <TrendIndicator value={dashboardData.trends.totalEmpleados} />
+              <div className="sparkline">
+                <div className="sparkline-bar" style={{ width: "70%" }}></div>
+              </div>
             </div>
           </div>
-
+          <div className="summary-card">
+            <div className="card-icon offices">
+              <FaBuilding />
+            </div>
+            <div className="card-info">
+              <h3>Total Oficinas</h3>
+              <p>{dashboardData.totalOffices}</p>
+              <div className="sparkline">
+                <div className="sparkline-bar" style={{ width: "60%" }}></div>
+              </div>
+            </div>
+          </div>
+          <div className="summary-card">
+            <div className="card-icon branches">
+              <FaMapMarkerAlt />
+            </div>
+            <div className="card-info">
+              <h3>Total Sucursales</h3>
+              <p>{dashboardData.totalBranches}</p>
+              <div className="sparkline">
+                <div className="sparkline-bar" style={{ width: "50%" }}></div>
+              </div>
+            </div>
+          </div>
           <div className="summary-card">
             <div className="card-icon attendance">
-              <i className="fas fa-fingerprint"></i>
+              <MdFingerprint />
             </div>
             <div className="card-info">
               <h3>Asistencias Hoy</h3>
               <p>{dashboardData.asistenciasHoy}</p>
+              <TrendIndicator value={dashboardData.trends.asistenciasHoy} />
+              <div className="sparkline">
+                <div className="sparkline-bar" style={{ width: "80%" }}></div>
+              </div>
             </div>
           </div>
-
           <div className="summary-card">
             <div className="card-icon absence">
-              <i className="fas fa-user-slash"></i>
+              <FaUserAlt />
             </div>
             <div className="card-info">
               <h3>Ausencias Hoy</h3>
               <p>{dashboardData.ausenciasHoy}</p>
+              <TrendIndicator value={dashboardData.trends.ausenciasHoy} />
+              <div className="sparkline">
+                <div className="sparkline-bar" style={{ width: "40%" }}></div>
+              </div>
             </div>
           </div>
-
           <div className="summary-card">
             <div className="card-icon delay">
-              <i className="fas fa-chart-bar"></i>
+              <FaClock />
             </div>
             <div className="card-info">
-              <h3>% Asistencia</h3>
-              <p>{dashboardData.porcentajeAsistencia}%</p>
+              <h3>Retrasos Hoy</h3>
+              <p>{dashboardData.retrasosHoy}</p>
+              <TrendIndicator value={dashboardData.trends.retrasosHoy} />
+              <div className="sparkline">
+                <div className="sparkline-bar" style={{ width: "30%" }}></div>
+              </div>
+            </div>
+          </div>
+          <div className="summary-card">
+            <div className="card-icon on-time">
+              <FaChartBar />
+            </div>
+            <div className="card-info">
+              <h3>Llegadas a Tiempo</h3>
+              <p>{dashboardData.onTimeArrivals}</p>
+              <TrendIndicator value={dashboardData.trends.onTimeArrivals} />
+              <div className="sparkline">
+                <div className="sparkline-bar" style={{ width: "85%" }}></div>
+              </div>
+            </div>
+          </div>
+          <div className="summary-card">
+            <div className="card-icon overtime">
+              <FaClock />
+            </div>
+            <div className="card-info">
+              <h3>Horas Extras</h3>
+              <p>{dashboardData.overtimeHours}</p>
+              <TrendIndicator value={dashboardData.trends.overtimeHours} />
+              <div className="sparkline">
+                <div className="sparkline-bar" style={{ width: "65%" }}></div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Gráficos y tablas */}
+        {/* Key Metrics */}
+        <div className="key-metrics">
+          <h2>Métricas Clave</h2>
+          <div className="metrics-grid">
+            <div className="metric-card">
+              <h3>Tasa Promedio de Asistencia</h3>
+              <p>{keyMetrics.avgAttendanceRate}%</p>
+            </div>
+            <div className="metric-card">
+              <h3>Sucursal Más Puntual</h3>
+              <p>{keyMetrics.mostPunctualBranch}</p>
+            </div>
+            <div className="metric-card">
+              <h3>Oficina con Mayor Ausentismo</h3>
+              <p>{keyMetrics.highestAbsenteeismOffice}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Gráficos */}
         <div className="dashboard-charts">
           <div className="chart-container">
             <h2>Registro de Asistencia Semanal</h2>
             <div className="chart-placeholder">
-              {/* Aquí se integraría una gráfica real con library como recharts */}
               <div className="chart-bar-container">
-                {attendanceData.map((item, index) => (
+                {weeklyAttendanceData.map((item, index) => (
                   <div key={index} className="chart-bar-item">
-                    <div className="chart-bar" style={{ height: `${item.asistencia}%` }}></div>
-                    <div className="chart-bar-label">{item.día}</div>
+                    <div className="chart-bar-stack">
+                      <div
+                        className="chart-bar absent"
+                        style={{
+                          height: `${(item.absent / 100) * 240}px`,
+                          backgroundColor: "#dc3545",
+                        }}
+                        title={`Ausentes: ${item.absent}`}
+                      ></div>
+                      <div
+                        className="chart-bar late"
+                        style={{
+                          height: `${(item.late / 100) * 240}px`,
+                          backgroundColor: "#ffc107",
+                        }}
+                        title={`Tardíos: ${item.late}`}
+                      ></div>
+                      <div
+                        className="chart-bar on-time"
+                        style={{
+                          height: `${(item.onTime / 100) * 240}px`,
+                          backgroundColor: "#198754",
+                        }}
+                        title={`A Tiempo: ${item.onTime}`}
+                      ></div>
+                    </div>
+                    <div className="chart-bar-label">{item.day}</div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
+          <div className="chart-container pie-chart">
+            <h2>Distribución de Estados</h2>
+            <div className="chart-placeholder">
+              <div className="pie-chart-container">
+                {employeeStatusData.map((item, index) => (
+                  <div
+                    key={index}
+                    className="pie-slice"
+                    style={{
+                      background: `conic-gradient(${item.color} 0% ${item.value / employeeStatusData.reduce((sum, d) => sum + d.value, 0) * 100}%, transparent ${item.value / employeeStatusData.reduce((sum, d) => sum + d.value, 0) * 100}% 100%)`,
+                      transform: `rotate(${(employeeStatusData.slice(0, index).reduce((sum, d) => sum + d.value, 0) / employeeStatusData.reduce((sum, d) => sum + d.value, 0)) * 360}deg)`
+                    }}
+                  ></div>
+                ))}
+              </div>
+              <div className="pie-legend">
+                {employeeStatusData.map((item, index) => (
+                  <div key={index} className="legend-item">
+                    <span className="legend-color" style={{ backgroundColor: item.color }}></span>
+                    {item.name}: {item.value}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          
+        </div>
 
+        {/* Actividad Reciente y Top Performers */}
+        <div className="dashboard-bottom">
           <div className="recent-activity">
-            <h2>Actividad Reciente</h2>
+            <div className="activity-header">
+              <h2>Actividad Reciente</h2>
+              <select name="activityType" value={filters.activityType} onChange={handleFilterChange}>
+                <option value="all">Todas</option>
+                <option value="entrada">Entradas</option>
+                <option value="salida">Salidas</option>
+              </select>
+            </div>
             <div className="activity-list">
-              <div className="activity-item">
-                <div className="activity-time">09:15</div>
-                <div className="activity-details">
-                  <span className="activity-user">Juan Pérez</span> registró entrada
+              {filteredActivities.map((activity, index) => (
+                <div key={index} className="activity-item">
+                  <div className="activity-time">{activity.time}</div>
+                  <div className="activity-details">
+                    {activity.action === "entrada" ? <FaSignInAlt className="activity-icon entry" /> : <FaSignOutAlt className="activity-icon exit" />}
+                    <span className="activity-user">{activity.user}</span> registró {activity.action}
+                  </div>
                 </div>
-              </div>
-              <div className="activity-item">
-                <div className="activity-time">09:05</div>
-                <div className="activity-details">
-                  <span className="activity-user">María López</span> registró entrada
+              ))}
+            </div>
+            {filteredActivities.length < recentActivities.length && (
+              <button className="load-more-btn" onClick={() => setActivityPage(page => page + 1)}>
+                Cargar Más
+              </button>
+            )}
+          </div>
+          <div className="top-performers">
+            <h2>Mejores Asistencias</h2>
+            <div className="performers-list">
+              {topPerformers.map((performer, index) => (
+                <div key={index} className="performer-item">
+                  <span className="performer-rank">{index + 1}.</span>
+                  <span className="performer-name">{performer.name}</span>
+                  <span className="performer-rate">{performer.attendanceRate}%</span>
                 </div>
-              </div>
-              <div className="activity-item">
-                <div className="activity-time">08:59</div>
-                <div className="activity-details">
-                  <span className="activity-user">Carlos Rodríguez</span> registró entrada
-                </div>
-              </div>
-              <div className="activity-item">
-                <div className="activity-time">08:45</div>
-                <div className="activity-details">
-                  <span className="activity-user">Ana Martínez</span> registró entrada
-                </div>
-              </div>
-              <div className="activity-item">
-                <div className="activity-time">08:30</div>
-                <div className="activity-details">
-                  <span className="activity-user">Roberto Gómez</span> registró entrada
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-
-      {/* Sidebar derecha */}
-      
     </div>
   );
 }
