@@ -1,125 +1,180 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../estilos/ModuloUsuarios.css";
-import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash } from "react-icons/fa";
-import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
+import {
+  FaSearch,
+  FaPlusCircle,
+  FaEdit,
+  FaTrash,
+  FaUserAlt,
+} from "react-icons/fa";
+import { ModalContext } from "./ModalManager"; // Replace ../contexts/ModalContext
 
-function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
-  // Estado para el formulario
+function ModuloUsuarios({ onNavigate, onLogout, activeModule, userInfo }) {
+  const { showModal } = useContext(ModalContext);
   const [formData, setFormData] = useState({
     nombre: "",
-    apellido: "",
-    email: "",
     usuario: "",
+    email: "",
     password: "",
-    perfil: "",
+    role: "Operator",
+    region: "",
+    sucursal: "",
+    estado: "Activo",
   });
-
-  // Estado para controlar el modo de edición y modal
   const [isEditing, setIsEditing] = useState(false);
   const [currentUserId, setCurrentUserId] = useState(null);
   const [showFormModal, setShowFormModal] = useState(false);
-
-  // Estado para la búsqueda
   const [searchTerm, setSearchTerm] = useState("");
-
-  // Datos de ejemplo para la tabla de usuarios
   const [usuarios, setUsuarios] = useState([
-    { id: 1, nombre: "Juan", apellido: "Pérez", email: "juan@ejemplo.com", usuario: "jperez", perfil: "Administrador" },
-    { id: 2, nombre: "María", apellido: "González", email: "maria@ejemplo.com", usuario: "mgonzalez", perfil: "Supervisor" },
-    { id: 3, nombre: "Carlos", apellido: "Rodríguez", email: "carlos@ejemplo.com", usuario: "crodriguez", perfil: "Operador" },
-    { id: 4, nombre: "Ana", apellido: "Martínez", email: "ana@ejemplo.com", usuario: "amartinez", perfil: "Supervisor" },
-    { id: 5, nombre: "Roberto", apellido: "Gómez", email: "roberto@ejemplo.com", usuario: "rgomez", perfil: "Operador" },
+    {
+      id: 1,
+      nombre: "Admin User",
+      usuario: "admin",
+      email: "admin@ejemplo.com",
+      role: "Admin",
+      region: "All",
+      sucursal: "All",
+      estado: "Activo",
+    },
+    {
+      id: 2,
+      nombre: "Supervisor User",
+      usuario: "supervisor",
+      email: "supervisor@ejemplo.com",
+      role: "Supervisor",
+      region: "Region A",
+      sucursal: "All",
+      estado: "Activo",
+    },
+    {
+      id: 3,
+      nombre: "Operator User",
+      usuario: "operator",
+      email: "operator@ejemplo.com",
+      role: "Operator",
+      region: "Region A",
+      sucursal: "Principal",
+      estado: "Activo",
+    },
   ]);
+  const roles = ["Admin", "Supervisor", "Operator"];
+  const regiones = ["Region A", "Region B", "Region C"];
+  const sucursales = ["Principal", "Sucursal A", "Sucursal B", "Sucursal C"];
 
-  // Manejo de cambios en el formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
+      ...(name === "role" && value === "Admin"
+        ? { region: "All", sucursal: "All" }
+        : name === "role" && value === "Supervisor"
+        ? { sucursal: "All" }
+        : {}),
     });
   };
 
-  // Función para editar un usuario
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isEditing) {
+      setUsuarios(
+        usuarios.map((user) =>
+          user.id === currentUserId ? { ...formData, id: currentUserId } : user
+        )
+      );
+      showModal("success", "User updated successfully!");
+    } else {
+      const newUser = {
+        id: usuarios.length + 1,
+        ...formData,
+      };
+      setUsuarios([...usuarios, newUser]);
+      showModal("success", "User added successfully!");
+    }
+    setShowFormModal(false);
+    setFormData({
+      nombre: "",
+      usuario: "",
+      email: "",
+      password: "",
+      role: "Operator",
+      region: "",
+      sucursal: "",
+      estado: "Activo",
+    });
+    setIsEditing(false);
+    setCurrentUserId(null);
+  };
+
   const handleEdit = (user) => {
     setFormData({
       nombre: user.nombre,
-      apellido: user.apellido,
-      email: user.email,
       usuario: user.usuario,
-      password: "", // No mostramos la contraseña por seguridad
-      perfil: user.perfil,
+      email: user.email,
+      password: "",
+      role: user.role,
+      region: user.region,
+      sucursal: user.sucursal,
+      estado: user.estado,
     });
     setIsEditing(true);
     setCurrentUserId(user.id);
     setShowFormModal(true);
   };
 
-  // Manejo de envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (isEditing) {
-      // Actualizar usuario existente
-      setUsuarios(
-        usuarios.map((user) =>
-          user.id === currentUserId ? { ...formData, id: currentUserId } : user
-        )
-      );
-      setIsEditing(false);
-      setCurrentUserId(null);
-    } else {
-      // Crear nuevo usuario
-      const newUser = {
-        id: usuarios.length + 1,
-        ...formData,
-      };
-      setUsuarios([...usuarios, newUser]);
-    }
-    // Cerrar modal y limpiar formulario
-    setShowFormModal(false);
-    setFormData({
-      nombre: "",
-      apellido: "",
-      email: "",
-      usuario: "",
-      password: "",
-      perfil: "",
+  const handleDelete = (id) => {
+    showModal("confirmation", "Are you sure you want to delete this user?", () => {
+      setUsuarios(usuarios.filter((user) => user.id !== id));
+      showModal("success", "User deleted successfully!");
     });
   };
 
-  // Función para eliminar un usuario
-  const handleDelete = (id) => {
-    setUsuarios(usuarios.filter((user) => user.id !== id));
-  };
-
-  // Función para cerrar el modal y cancelar
   const handleCancel = () => {
     setFormData({
       nombre: "",
-      apellido: "",
-      email: "",
       usuario: "",
+      email: "",
       password: "",
-      perfil: "",
+      role: "Operator",
+      region: "",
+      sucursal: "",
+      estado: "Activo",
     });
     setIsEditing(false);
     setCurrentUserId(null);
     setShowFormModal(false);
   };
 
-  // Filtrar usuarios basados en el término de búsqueda
-  const filteredUsers = usuarios.filter(
+  const filteredUsuarios = usuarios.filter(
     (user) =>
-      user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.apellido.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.usuario.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      user.perfil.toLowerCase().includes(searchTerm.toLowerCase())
+      userInfo.role === "Admin" &&
+      (user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.usuario.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.role.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.estado.toLowerCase().includes(searchTerm.toLowerCase()))
   );
+
+  useEffect(() => {
+    const checkTableScroll = () => {
+      const tableContainer = document.querySelector(".table-responsive");
+      if (tableContainer) {
+        if (tableContainer.scrollWidth > tableContainer.clientWidth) {
+          tableContainer.classList.add("has-scroll");
+        } else {
+          tableContainer.classList.remove("has-scroll");
+        }
+      }
+    };
+    checkTableScroll();
+    window.addEventListener("resize", checkTableScroll);
+    return () => {
+      window.removeEventListener("resize", checkTableScroll);
+    };
+  }, []);
 
   return (
     <div className="modulo-container">
-      {/* Contenido principal */}
       <div className="modulo-content">
         <div className="modulo-header">
           <h1>Gestión de Usuarios</h1>
@@ -135,7 +190,6 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
           </div>
         </div>
 
-        {/* Botón de Nuevo Usuario y Tabla */}
         <div className="table-header">
           <h2>Lista de Usuarios</h2>
           <button className="btn-add" onClick={() => setShowFormModal(true)}>
@@ -144,57 +198,65 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
           </button>
         </div>
 
-        {/* Tabla de usuarios */}
         <div className="table-container">
-          <table className="data-table">
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Usuario</th>
-                <th>Perfil</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredUsers.length > 0 ? (
-                filteredUsers.map((user) => (
-                  <tr key={user.id}>
-                    <td>{user.id}</td>
-                    <td>{user.nombre}</td>
-                    <td>{user.apellido}</td>
-                    <td>{user.email}</td>
-                    <td>{user.usuario}</td>
-                    <td>{user.perfil}</td>
-                    <td className="actions">
-                      <button
-                        className="btn-edit"
-                        onClick={() => handleEdit(user)}
-                      >
-                        <FaEdit />
-                      </button>
-                      <button
-                        className="btn-delete"
-                        onClick={() => handleDelete(user.id)}
-                      >
-                        <FaTrash />
-                      </button>
-                    </td>
-                  </tr>
-                ))
-              ) : (
+          <div className="table-responsive">
+            <table className="data-table">
+              <thead>
                 <tr>
-                  <td colSpan="7">No se encontraron usuarios</td>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Usuario</th>
+                  <th>Email</th>
+                  <th>Rol</th>
+                  <th>Región</th>
+                  <th>Sucursal</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {filteredUsuarios.length > 0 ? (
+                  filteredUsuarios.map((user) => (
+                    <tr key={user.id}>
+                      <td>{user.id}</td>
+                      <td>{user.nombre}</td>
+                      <td>{user.usuario}</td>
+                      <td>{user.email}</td>
+                      <td>{user.role}</td>
+                      <td>{user.region}</td>
+                      <td>{user.sucursal}</td>
+                      <td>
+                        <span className={`estado ${user.estado.toLowerCase()}`}>
+                          {user.estado}
+                        </span>
+                      </td>
+                      <td className="actions">
+                        <button
+                          className="btn-edit"
+                          onClick={() => handleEdit(user)}
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          className="btn-delete"
+                          onClick={() => handleDelete(user.id)}
+                        >
+                          <FaTrash />
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="9">No se encontraron usuarios</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
-      {/* Modal para formulario de usuario */}
       {showFormModal && (
         <div className="modal-overlay">
           <div className="form-modal">
@@ -202,7 +264,6 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
               <h2>{isEditing ? "Editar Usuario" : "Nuevo Usuario"}</h2>
               <FaPlusCircle className="add-icon" />
             </div>
-            
             <form className="modulo-form" onSubmit={handleSubmit}>
               <div className="form-row">
                 <div className="form-group">
@@ -217,21 +278,19 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
                     placeholder="Ingrese el nombre"
                   />
                 </div>
-                
                 <div className="form-group">
-                  <label htmlFor="apellido">Apellido</label>
+                  <label htmlFor="usuario">Usuario</label>
                   <input
                     type="text"
-                    id="apellido"
-                    name="apellido"
-                    value={formData.apellido}
+                    id="usuario"
+                    name="usuario"
+                    value={formData.usuario}
                     onChange={handleChange}
                     required
-                    placeholder="Ingrese el apellido"
+                    placeholder="Ingrese el usuario"
                   />
                 </div>
               </div>
-              
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="email">Correo Electrónico</label>
@@ -245,22 +304,6 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
                     placeholder="ejemplo@correo.com"
                   />
                 </div>
-                
-                <div className="form-group">
-                  <label htmlFor="usuario">Nombre de Usuario</label>
-                  <input
-                    type="text"
-                    id="usuario"
-                    name="usuario"
-                    value={formData.usuario}
-                    onChange={handleChange}
-                    required
-                    placeholder="Nombre de usuario"
-                  />
-                </div>
-              </div>
-              
-              <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="password">Contraseña</label>
                   <input
@@ -269,33 +312,93 @@ function ModuloUsuarios({ onNavigate, onLogout, activeModule }) {
                     name="password"
                     value={formData.password}
                     onChange={handleChange}
-                    placeholder={isEditing ? "Deje en blanco para mantener" : "Ingrese contraseña"}
+                    placeholder={isEditing ? "Dejar en blanco para no cambiar" : "Ingrese la contraseña"}
                     required={!isEditing}
                   />
                 </div>
-                
+              </div>
+              <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="perfil">Perfil de Usuario</label>
+                  <label htmlFor="role">Rol</label>
                   <select
-                    id="perfil"
-                    name="perfil"
-                    value={formData.perfil}
+                    id="role"
+                    name="role"
+                    value={formData.role}
                     onChange={handleChange}
                     required
                   >
-                    <option value="">Seleccione un perfil</option>
-                    <option value="Administrador">Administrador</option>
-                    <option value="Supervisor">Supervisor</option>
-                    <option value="Operador">Operador</option>
+                    {roles.map((role) => (
+                      <option key={role} value={role}>
+                        {role}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                {formData.role !== "Admin" && (
+                  <div className="form-group">
+                    <label htmlFor="region">Región</label>
+                    <select
+                      id="region"
+                      name="region"
+                      value={formData.region}
+                      onChange={handleChange}
+                      required={formData.role !== "Admin"}
+                    >
+                      <option value="">Seleccione una región</option>
+                      {regiones.map((region) => (
+                        <option key={region} value={region}>
+                          {region}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </div>
+              {formData.role === "Operator" && (
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="sucursal">Sucursal</label>
+                    <select
+                      id="sucursal"
+                      name="sucursal"
+                      value={formData.sucursal}
+                      onChange={handleChange}
+                      required={formData.role === "Operator"}
+                    >
+                      <option value="">Seleccione una sucursal</option>
+                      {sucursales.map((sucursal) => (
+                        <option key={sucursal} value={sucursal}>
+                          {sucursal}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              )}
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="estado">Estado</label>
+                  <select
+                    id="estado"
+                    name="estado"
+                    value={formData.estado}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
                   </select>
                 </div>
               </div>
-              
               <div className="form-buttons">
                 <button type="submit" className="btn-submit">
-                  {isEditing ? "Actualizar Usuario" : "Crear Usuario"}
+                  {isEditing ? "Actualizar Usuario" : "Agregar Usuario"}
                 </button>
-                <button type="button" className="btn-cancel" onClick={handleCancel}>
+                <button
+                  type="button"
+                  className="btn-cancel"
+                  onClick={handleCancel}
+                >
                   Cancelar
                 </button>
               </div>

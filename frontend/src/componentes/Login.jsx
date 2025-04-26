@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../estilos/Login.css";
-import logo from "../assets/logo.png"; // Asegúrate de tener un logo en esta ruta
+import logo from "../assets/logo.png";
+import { ModalContext } from "./ModalManager"; // Replace ../contexts/ModalContext
 
 function Login({ onLogin }) {
+  const { showModal } = useContext(ModalContext);
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -19,31 +21,26 @@ function Login({ onLogin }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Validación básica
     if (!formData.username || !formData.password) {
       setError("Por favor, complete todos los campos");
+      showModal("error", "Please fill in all fields");
       return;
     }
-    
-    // Llamar a la función de inicio de sesión del componente padre
     onLogin(formData);
+    showModal("welcome", `Welcome, ${formData.username}!`);
   };
 
   return (
     <div className="login-container">
       <div className="login-sidebar left"></div>
-      
       <div className="login-content">
         <div className="login-box">
           <div className="login-logo">
             <img src={logo} alt="Logo" />
           </div>
           <h1 className="login-title">Control de Asistencia</h1>
-          
           <form className="login-form" onSubmit={handleSubmit}>
             {error && <div className="error-message">{error}</div>}
-            
             <div className="form-group">
               <label htmlFor="username">Usuario</label>
               <input
@@ -56,7 +53,6 @@ function Login({ onLogin }) {
                 placeholder="Ingrese su usuario"
               />
             </div>
-            
             <div className="form-group">
               <label htmlFor="password">Contraseña</label>
               <input
@@ -69,17 +65,14 @@ function Login({ onLogin }) {
                 placeholder="Ingrese su contraseña"
               />
             </div>
-            
             <button type="submit" className="btn-login">
               Iniciar Sesión
             </button>
           </form>
-          
           <div className="login-footer">
             <p>Sistema de Control de Asistencia</p>
             <p>© 2025 Todos los derechos reservados</p>
           </div>
-          
           <div className="login-demo-info">
             <p>Credenciales de prueba:</p>
             <p>Usuario: <strong>admin</strong></p>
@@ -87,7 +80,6 @@ function Login({ onLogin }) {
           </div>
         </div>
       </div>
-      
       <div className="login-sidebar right"></div>
     </div>
   );

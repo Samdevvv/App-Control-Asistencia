@@ -1,1 +1,0 @@
-Primero ejecutar el archivo "script" despues ejecutar el archivo "script_users" para que este bien poner todo en un mismo archivo parecia excesivo y de esa manera se organiza mejor

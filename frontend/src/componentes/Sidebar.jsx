@@ -9,12 +9,24 @@ import {
   FaChevronLeft,
   FaChevronRight,
 } from "react-icons/fa";
-import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
+import { MdDashboard, MdFingerprint, MdExitToApp, MdSchedule } from "react-icons/md";
 
 function Sidebar({ activeModule, onNavigate, onLogout, userInfo }) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const toggleSidebar = () => setIsCollapsed(!isCollapsed);
   const isActive = (moduleName) => activeModule === moduleName;
+
+  const menuItems = [
+    { name: "dashboard", icon: <MdDashboard />, label: "Dashboard", roles: ["Admin", "Supervisor", "Operator"] },
+    { name: "empleados", icon: <FaUsers />, label: "Empleados", roles: ["Admin", "Supervisor", "Operator"] },
+    { name: "usuarios", icon: <FaUserAlt />, label: "Usuarios", roles: ["Admin"] },
+    { name: "sucursales", icon: <FaBuilding />, label: "Sucursales", roles: ["Admin", "Supervisor"] },
+    { name: "regiones", icon: <FaMapMarkerAlt />, label: "Regiones", roles: ["Admin"] },
+    { name: "oficinas", icon: <FaBuilding />, label: "Oficinas", roles: ["Admin", "Supervisor"] },
+    { name: "reportes", icon: <FaFileAlt />, label: "Reportes", roles: ["Admin", "Supervisor", "Operator"] },
+    { name: "schedules", icon: <MdSchedule />, label: "Schedules", roles: ["Admin", "Supervisor"] },
+    { name: "attendance", icon: <MdFingerprint />, label: "Attendance", roles: ["Admin", "Supervisor", "Operator"] },
+  ];
 
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
@@ -27,37 +39,20 @@ function Sidebar({ activeModule, onNavigate, onLogout, userInfo }) {
       </div>
 
       <div className="sidebar-menu">
-        <div className={`sidebar-item ${isActive("dashboard") ? "active" : ""}`} onClick={() => onNavigate("dashboard")}>
-          <MdDashboard className="sidebar-icon" />
-          {!isCollapsed && <span>Dashboard</span>}
-        </div>
-        <div className={`sidebar-item ${isActive("empleados") ? "active" : ""}`} onClick={() => onNavigate("empleados")}>
-          <FaUsers className="sidebar-icon" />
-          {!isCollapsed && <span>Empleados</span>}
-        </div>
-        <div className={`sidebar-item ${isActive("usuarios") ? "active" : ""}`} onClick={() => onNavigate("usuarios")}>
-          <FaUserAlt className="sidebar-icon" />
-          {!isCollapsed && <span>Usuarios</span>}
-        </div>
-        <div className={`sidebar-item ${isActive("sucursales") ? "active" : ""}`} onClick={() => onNavigate("sucursales")}>
-          <FaBuilding className="sidebar-icon" />
-          {!isCollapsed && <span>Sucursales</span>}
-        </div>
-        <div className={`sidebar-item ${isActive("regiones") ? "active" : ""}`} onClick={() => onNavigate("regiones")}>
-          <FaMapMarkerAlt className="sidebar-icon" />
-          {!isCollapsed && <span>Regiones</span>}
-        </div>
-        <div className={`sidebar-item ${isActive("oficinas") ? "active" : ""}`} onClick={() => onNavigate("oficinas")}>
-          <FaBuilding className="sidebar-icon" />
-          {!isCollapsed && <span>Oficinas</span>}
-        </div>
-        <div className={`sidebar-item ${isActive("reportes") ? "active" : ""}`} onClick={() => onNavigate("reportes")}>
-          <FaFileAlt className="sidebar-icon" />
-          {!isCollapsed && <span>Reportes</span>}
-        </div>
+        {menuItems
+          .filter((item) => item.roles.includes(userInfo.role))
+          .map((item) => (
+            <div
+              key={item.name}
+              className={`sidebar-item ${isActive(item.name) ? "active" : ""}`}
+              onClick={() => onNavigate(item.name)}
+            >
+              {item.icon}
+              {!isCollapsed && <span>{item.label}</span>}
+            </div>
+          ))}
       </div>
 
-      {/* Logout Button */}
       <div className="logout-container">
         <button className="logout-btn" onClick={onLogout}>
           <MdExitToApp className="logout-icon" />

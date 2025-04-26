@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "../estilos/DashBoard.css";
 import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaChartBar, FaArrowUp, FaArrowDown, FaSignInAlt, FaSignOutAlt, FaFilter, FaClock } from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp, MdCalendarToday } from "react-icons/md";
+import { ModalContext } from "./ModalManager"; // Replace ../contexts/ModalContext
 
-function Dashboard({ onNavigate, onLogout, activeModule }) {
+function Dashboard({ onNavigate, onLogout, activeModule, userInfo }) {
+  const { showModal } = useContext(ModalContext);
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
   const [filters, setFilters] = useState({
     dateRange: "today",
@@ -13,15 +15,15 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
     activityType: "all"
   });
   const [dashboardData, setDashboardData] = useState({
-    totalEmpleados: 145,
-    totalOffices: 12,
-    totalBranches: 5,
-    asistenciasHoy: 126,
-    ausenciasHoy: 19,
-    retrasosHoy: 8,
-    onTimeArrivals: 110,
-    overtimeHours: 45,
-    porcentajeAsistencia: 87,
+    totalEmpleados: userInfo.role === "Operator" ? 50 : 145,
+    totalOffices: userInfo.role === "Operator" ? 1 : 12,
+    totalBranches: userInfo.role === "Operator" ? 1 : 5,
+    asistenciasHoy: userInfo.role === "Operator" ? 45 : 126,
+    ausenciasHoy: userInfo.role === "Operator" ? 5 : 19,
+    retrasosHoy: userInfo.role === "Operator" ? 2 : 8,
+    onTimeArrivals: userInfo.role === "Operator" ? 40 : 110,
+    overtimeHours: userInfo.role === "Operator" ? 10 : 45,
+    porcentajeAsistencia: userInfo.role === "Operator" ? 90 : 87,
     trends: {
       totalEmpleados: 2,
       asistenciasHoy: -3,
@@ -35,26 +37,20 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
   const [activityPage, setActivityPage] = useState(1);
   const activitiesPerPage = 5;
 
-  // Datos de ejemplo para gráficos
   const weeklyAttendanceData = [
     { day: "Lun", onTime: 95, late: 5, absent: 2 },
     { day: "Mar", onTime: 88, late: 8, absent: 4 },
     { day: "Mié", onTime: 90, late: 6, absent: 3 },
     { day: "Jue", onTime: 87, late: 7, absent: 5 },
     { day: "Vie", onTime: 85, late: 9, absent: 6 },
-  ];
+  ].map(item => userInfo.role === "Operator" ? { ...item, onTime: Math.round(item.onTime * 0.3), late: Math.round(item.late * 0.3), absent: Math.round(item.absent * 0.3) } : item);
 
   const employeeStatusData = [
-    { name: "Presentes", value: 126, color: "#198754" },
-    { name: "Ausentes", value: 19, color: "#dc3545" },
-    { name: "Tardíos", value: 8, color: "#ffc107" },
-    { name: "De Licencia", value: 5, color: "#6c757d" },
+    { name: "Presentes", value: userInfo.role === "Operator" ? 45 : 126, color: "#198754" },
+    { name: "Ausentes", value: userInfo.role === "Operator" ? 5 : 19, color: "#dc3545" },
+    { name: "Tardíos", value: userInfo.role === "Operator" ? 2 : 8, color: "#ffc107" },
+    { name: "De Licencia", value: userInfo.role === "Operator" ? 2 : 5, color: "#6c757d" },
   ];
-
-  const monthlyAttendanceData = Array.from({ length: 30 }, (_, i) => ({
-    day: i + 1,
-    attendance: Math.floor(Math.random() * (95 - 75 + 1)) + 75,
-  }));
 
   const recentActivities = [
     { time: "09:15", user: "Juan Pérez", action: "entrada" },
@@ -62,23 +58,18 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
     { time: "09:00", user: "Carlos Rodríguez", action: "entrada" },
     { time: "08:55", user: "Ana Martínez", action: "salida" },
     { time: "08:45", user: "Roberto Gómez", action: "entrada" },
-    { time: "08:30", user: "Lucía Fernández", action: "entrada" },
-    { time: "08:15", user: "Pedro Sánchez", action: "salida" },
-    { time: "08:00", user: "Sofía Morales", action: "entrada" },
-    { time: "07:45", user: "Diego Torres", action: "entrada" },
-    { time: "07:30", user: "Laura Ramírez", action: "salida" },
-  ];
+  ].filter(activity => userInfo.role !== "Operator" || activity.user.includes("Pérez")); // Example filter
 
   const topPerformers = [
     { name: "Juan Pérez", attendanceRate: 98 },
     { name: "María López", attendanceRate: 97 },
     { name: "Carlos Rodríguez", attendanceRate: 96 },
-  ];
+  ].filter(performer => userInfo.role !== "Operator" || performer.name.includes("Pérez"));
 
   const keyMetrics = {
-    avgAttendanceRate: 87,
-    mostPunctualBranch: "Sucursal Principal",
-    highestAbsenteeismOffice: "Oficina Ventas",
+    avgAttendanceRate: userInfo.role === "Operator" ? 90 : 87,
+    mostPunctualBranch: userInfo.role === "Operator" ? userInfo.sucursal : "Sucursal Principal",
+    highestAbsenteeismOffice: userInfo.role === "Operator" ? "Oficina Principal" : "Oficina Ventas",
   };
 
   const handleFilterChange = (e) => {
@@ -94,6 +85,7 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
       employeeType: "all",
       activityType: "all"
     });
+    showModal("success", "Filters cleared!");
   };
 
   const filteredActivities = recentActivities
@@ -108,7 +100,6 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
 
   return (
     <div className="dashboard-container">
-      {/* Contenido principal */}
       <div className="dashboard-content">
         <div className="dashboard-header">
           <h1>Dashboard de Control de Asistencia</h1>
@@ -117,7 +108,6 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
           </div>
         </div>
 
-        {/* Filtros */}
         <div className="filter-bar">
           <div className="filter-group">
             <label>Rango de Fecha:</label>
@@ -127,24 +117,28 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
               <option value="month">Este Mes</option>
             </select>
           </div>
-          <div className="filter-group">
-            <label>Sucursal:</label>
-            <select name="branch" value={filters.branch} onChange={handleFilterChange}>
-              <option value="all">Todas</option>
-              <option value="principal">Sucursal Principal</option>
-              <option value="este">Sucursal Este</option>
-              <option value="oeste">Sucursal Oeste</option>
-            </select>
-          </div>
-          <div className="filter-group">
-            <label>Oficina:</label>
-            <select name="office" value={filters.office} onChange={handleFilterChange}>
-              <option value="all">Todas</option>
-              <option value="principal">Oficina Principal</option>
-              <option value="desarrollo">Oficina Desarrollo</option>
-              <option value="ventas">Oficina Ventas</option>
-            </select>
-          </div>
+          {userInfo.role !== "Operator" && (
+            <>
+              <div className="filter-group">
+                <label>Sucursal:</label>
+                <select name="branch" value={filters.branch} onChange={handleFilterChange}>
+                  <option value="all">Todas</option>
+                  <option value="principal">Sucursal Principal</option>
+                  <option value="este">Sucursal Este</option>
+                  <option value="oeste">Sucursal Oeste</option>
+                </select>
+              </div>
+              <div className="filter-group">
+                <label>Oficina:</label>
+                <select name="office" value={filters.office} onChange={handleFilterChange}>
+                  <option value="all">Todas</option>
+                  <option value="principal">Oficina Principal</option>
+                  <option value="desarrollo">Oficina Desarrollo</option>
+                  <option value="ventas">Oficina Ventas</option>
+                </select>
+              </div>
+            </>
+          )}
           <div className="filter-group">
             <label>Tipo de Empleado:</label>
             <select name="employeeType" value={filters.employeeType} onChange={handleFilterChange}>
@@ -158,7 +152,6 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
           </button>
         </div>
 
-        {/* Cards de resumen */}
         <div className="dashboard-summary">
           <div className="summary-card" onClick={() => onNavigate("empleados")}>
             <div className="card-icon employees">
@@ -264,7 +257,6 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
           </div>
         </div>
 
-        {/* Key Metrics */}
         <div className="key-metrics">
           <h2>Métricas Clave</h2>
           <div className="metrics-grid">
@@ -283,7 +275,6 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
           </div>
         </div>
 
-        {/* Gráficos */}
         <div className="dashboard-charts">
           <div className="chart-container">
             <h2>Registro de Asistencia Semanal</h2>
@@ -348,10 +339,8 @@ function Dashboard({ onNavigate, onLogout, activeModule }) {
               </div>
             </div>
           </div>
-          
         </div>
 
-        {/* Actividad Reciente y Top Performers */}
         <div className="dashboard-bottom">
           <div className="recent-activity">
             <div className="activity-header">
