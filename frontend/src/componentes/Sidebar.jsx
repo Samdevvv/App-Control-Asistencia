@@ -24,15 +24,15 @@ function Sidebar({ activeModule, onNavigate, onLogout, userInfo }) {
     { name: "regiones", icon: <FaMapMarkerAlt />, label: "Regiones", roles: ["Admin"] },
     { name: "oficinas", icon: <FaBuilding />, label: "Oficinas", roles: ["Admin", "Supervisor"] },
     { name: "reportes", icon: <FaFileAlt />, label: "Reportes", roles: ["Admin", "Supervisor", "Operator"] },
-    { name: "schedules", icon: <MdSchedule />, label: "Schedules", roles: ["Admin", "Supervisor"] },
-    { name: "attendance", icon: <MdFingerprint />, label: "Attendance", roles: ["Admin", "Supervisor", "Operator"] },
+    { name: "schedules", icon: <MdSchedule />, label: "Horarios", roles: ["Admin", "Supervisor"] },
+    { name: "attendance", icon: <MdFingerprint />, label: "Registro De Entrada", roles: ["Admin", "Supervisor", "Operator"] },
   ];
 
   return (
     <div className={`sidebar ${isCollapsed ? "collapsed" : ""}`}>
       <div className="sidebar-logo">
         <MdFingerprint className="logo-icon" />
-        {!isCollapsed && <span>AsistControl</span>}
+        {!isCollapsed && <span>Menu</span>}
         <button className="collapse-btn" onClick={toggleSidebar}>
           {isCollapsed ? <FaChevronRight /> : <FaChevronLeft />}
         </button>

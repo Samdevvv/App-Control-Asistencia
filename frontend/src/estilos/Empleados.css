@@ -220,6 +220,19 @@
 }
 
 /* --- FORMULARIO MODAL --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
 .form-modal {
   background-color: #fff;
   border-radius: 16px;
@@ -245,7 +258,7 @@
   margin: 0;
 }
 
-.add-icon {
+.user-icon {
   font-size: 24px;
   color: #0046b8;
 }
@@ -335,6 +348,11 @@
 
 .btn-submit:hover {
   background-color: #003694;
+}
+
+.btn-submit:disabled {
+  background-color: #a0b1d6;
+  cursor: not-allowed;
 }
 
 .btn-cancel {
@@ -429,7 +447,7 @@
 .data-table th:nth-child(10),
 .data-table td:nth-child(10) { /* Acciones */
   width: 12%;
-  min-width: 80px; /* Ensure buttons are visible */
+  min-width: 120px; /* Ensure buttons are visible */
 }
 
 .data-table th {
@@ -467,7 +485,8 @@
   color: #dc3545;
 }
 
-.estado.suspendido {
+.estado.suspendido,
+.estado.de.licencia {
   background-color: rgba(255, 193, 7, 0.15);
   color: #ffc107;
 }
@@ -476,25 +495,15 @@
 .huella-registrada {
   display: flex;
   justify-content: center;
-  color: #0046b8;
+  color: #198754;
   font-size: 20px;
 }
 
-.btn-fingerprint {
-  background-color: #e6f0ff;
-  color: #0046b8;
-  border: 1px solid #b6d4fe;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-}
-
-.btn-fingerprint:hover {
-  background-color: #0046b8;
-  color: white;
+.huella-no-registrada {
+  display: flex;
+  justify-content: center;
+  color: #dc3545;
+  font-size: 20px;
 }
 
 /* Acciones */
@@ -505,10 +514,11 @@
 }
 
 .btn-edit,
-.btn-delete {
+.btn-delete,
+.btn-toggle {
   border: none;
   border-radius: 8px;
-  padding: 6px;
+  padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -519,132 +529,216 @@
 .btn-edit {
   background-color: rgba(13, 110, 253, 0.15);
   color: #0d6efd;
+  font-size: 16px;
 }
 
 .btn-edit:hover {
   background-color: rgba(13, 110, 253, 0.25);
+  transform: translateY(-2px);
+}
+
+.btn-toggle {
+  background-color: rgba(25, 135, 84, 0.15);
+  color: #198754;
+  font-size: 16px;
+}
+
+.btn-toggle:hover {
+  background-color: rgba(25, 135, 84, 0.25);
+  transform: translateY(-2px);
 }
 
 .btn-delete {
   background-color: rgba(220, 53, 69, 0.15);
   color: #dc3545;
+  font-size: 16px;
 }
 
 .btn-delete:hover {
   background-color: rgba(220, 53, 69, 0.25);
+  transform: translateY(-2px);
 }
 
-/* --- Modal de Huella Digital --- */
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+.btn-delete:disabled {
+  background-color: rgba(108, 117, 125, 0.15);
+  color: #6c757d;
+  cursor: not-allowed;
 }
 
-.fingerprint-modal {
-  background-color: white;
-  border-radius: 16px;
-  padding: 30px;
-  width: 450px;
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+.btn-delete:disabled:hover {
+  transform: none;
 }
 
-.fingerprint-modal h2 {
-  margin: 0 0 20px;
-  color: #1a1a1a;
-  font-size: 22px;
-  text-align: center;
-}
-
-.fingerprint-modal p {
-  margin: 12px 0;
-  font-size: 16px;
-  color: #333;
-}
-
-.fingerprint-container {
-  margin: 30px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.fingerprint-scanner {
-  width: 130px;
-  height: 130px;
-  border: 2px solid #0046b8;
+/* Fingerprint Section Styles */
+.fingerprint-section {
+  background-color: #f8f9fa;
   border-radius: 12px;
+  padding: 25px;
+  margin-top: 15px;
+  animation: fadeIn 0.5s ease;
+}
+
+.fingerprint-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.fingerprint-icon {
-  font-size: 65px;
-  color: #0046b8;
-  animation: pulse 1.5s infinite;
+.fingerprint-header h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #1a1a1a;
 }
 
-.scanner-instruction {
-  text-align: center;
-  color: #666;
-  font-size: 15px;
-}
-
-.modal-buttons {
-  display: flex;
-  gap: 20px;
-  margin-top: 25px;
-}
-
-.btn-fingerprint-confirm,
-.btn-fingerprint-cancel {
-  flex: 1;
-  padding: 14px;
-  border-radius: 10px;
+.fingerprint-status {
+  font-size: 14px;
   font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.fingerprint-status.registered {
+  background-color: rgba(25, 135, 84, 0.15);
+  color: #198754;
+}
+
+.fingerprint-status.not-registered {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
+}
+
+.btn-fingerprint {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px;
+  background-color: #0046b8;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
   font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
-.btn-fingerprint-confirm {
-  background-color: #0046b8;
-  color: white;
-  border: none;
-}
-
-.btn-fingerprint-confirm:hover {
+.btn-fingerprint:hover {
   background-color: #003694;
+  transform: translateY(-2px);
 }
 
-.btn-fingerprint-cancel {
-  background-color: #f5f5f5;
-  color: #333;
-  border: 1px solid #e0e0e0;
+.btn-fingerprint.registered {
+  background-color: #198754;
+  cursor: default;
 }
 
-.btn-fingerprint-cancel:hover {
-  background-color: #e0e0e0;
+.btn-fingerprint:disabled {
+  background-color: #198754;
+  cursor: default;
+}
+
+.fingerprint-btn-icon {
+  font-size: 20px;
+}
+
+.fingerprint-capturing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.fingerprint-animation {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 25px;
+}
+
+.fingerprint-icon-large {
+  font-size: 120px;
+  color: #0046b8;
+}
+
+.fingerprint-icon-large.pulse {
+  animation: pulse 1.5s infinite;
 }
 
 @keyframes pulse {
   0% {
-    opacity: 0.5;
+    opacity: 0.6;
+    transform: scale(0.9);
   }
   50% {
     opacity: 1;
+    transform: scale(1);
   }
   100% {
-    opacity: 0.5;
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+}
+
+.scanning-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: rgba(0, 70, 184, 0.6);
+  border-radius: 2px;
+  animation: scanning 2s infinite;
+}
+
+@keyframes scanning {
+  0% {
+    top: 0;
+    opacity: 0.8;
+  }
+  50% {
+    top: 100%;
+    opacity: 0.4;
+  }
+  100% {
+    top: 0;
+    opacity: 0.8;
+  }
+}
+
+.fingerprint-capturing p {
+  color: #555;
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.loading-spinner {
+  font-size: 24px;
+  color: #0046b8;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -712,7 +806,7 @@
   .data-table th:nth-child(10),
   .data-table td:nth-child(10) { /* Acciones */
     width: 10%;
-    min-width: 70px;
+    min-width: 110px;
   }
 }
 
@@ -746,7 +840,7 @@
 
   .data-table th:nth-child(10),
   .data-table td:nth-child(10) { /* Acciones */
-    min-width: 60px;
+    min-width: 100px;
   }
 }
 
@@ -828,14 +922,26 @@
 
   .data-table th:nth-child(10),
   .data-table td:nth-child(10) { /* Acciones */
-    min-width: 50px;
+    min-width: 90px;
   }
 
   .btn-edit,
-  .btn-delete {
-    padding: 4px;
+  .btn-delete,
+  .btn-toggle {
+    padding: 6px;
   }
-}/* --- MODIFICACIONES GENERALES DEL CONTENEDOR --- */
+  
+  .fingerprint-animation {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .fingerprint-icon-large {
+    font-size: 80px;
+  }
+}
+
+/* --- MODIFICACIONES GENERALES DEL CONTENEDOR --- */
 .modulo-container {
   display: flex;
   height: 100vh;
@@ -973,7 +1079,7 @@
 .data-table th:nth-child(10),
 .data-table td:nth-child(10) { /* Acciones */
   width: 10%;
-  min-width: 100px;
+  min-width: 120px;
 }
 
 /* Indicador visual de scroll */
@@ -1020,4 +1126,118 @@
   .data-table {
     min-width: 950px; /* Ajuste para pantallas más pequeñas */
   }
+}/* Nuevos estilos para la sección de huella dactilar */
+
+.required {
+  color: #dc3545;
+  margin-left: 4px;
+}
+
+.fingerprint-instructions {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.fingerprint-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.huella-verified {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.fingerprint-verified {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 15px;
+}
+
+.fingerprint-icon-large.registered {
+  color: #198754;
+  opacity: 0.8;
+}
+
+.check-icon {
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  font-size: 30px;
+  color: #fff;
+  background-color: #198754;
+  border-radius: 50%;
+  padding: 5px;
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Mejoras en la tabla para estado de huella */
+.data-table td:nth-child(9) {
+  text-align: center;
+}
+
+/* Mejoras en el formulario */
+.fingerprint-section {
+  background-color: #f8f9fa;
+  border-radius: 12px;
+  padding: 25px;
+  margin-top: 15px;
+  animation: fadeIn 0.5s ease;
+  border: 1px solid #e9ecef;
+}
+
+.fingerprint-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 15px;
+}
+
+.fingerprint-header h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #1a1a1a;
+  display: flex;
+  align-items: center;
+}
+
+.fingerprint-status {
+  font-size: 14px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.fingerprint-status.registered {
+  background-color: rgba(25, 135, 84, 0.15);
+  color: #198754;
+}
+
+.fingerprint-status.not-registered {
+  background-color: rgba(220, 53, 69, 0.15);
+  color: #dc3545;
 }

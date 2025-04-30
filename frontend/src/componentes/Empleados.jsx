@@ -1,6 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../estilos/Empleados.css";
-import { FaUserAlt, FaBuilding, FaMapMarkerAlt, FaUsers, FaFileAlt, FaSearch, FaPlusCircle, FaEdit, FaTrash, FaFingerprint, FaCalendarAlt } from "react-icons/fa";
+import { 
+  FaUserAlt, 
+  FaBuilding, 
+  FaMapMarkerAlt, 
+  FaUsers, 
+  FaFileAlt, 
+  FaSearch, 
+  FaPlusCircle, 
+  FaEdit, 
+  FaTrash, 
+  FaFingerprint, 
+  FaCalendarAlt,
+  FaToggleOn,
+  FaToggleOff,
+  FaSpinner,
+  FaCheck
+} from "react-icons/fa";
 import { MdDashboard, MdFingerprint, MdExitToApp } from "react-icons/md";
 import { ModalContext } from "./ModalManager"; // Replace ../contexts/ModalContext
 
@@ -23,11 +39,12 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
   const [currentEmployeeId, setCurrentEmployeeId] = useState(null);
   const [showFormModal, setShowFormModal] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showFingerprintModal, setShowFingerprintModal] = useState(false);
+  const [capturingFingerprint, setCapturingFingerprint] = useState(false);
   const [empleados, setEmpleados] = useState([
+    // Aseguramos que todos los empleados iniciales tengan huella registrada
     { id: 1, nombre: "Juan", apellido: "Pérez", cedula: "V-12345678", telefono: "0412-1234567", email: "juan@ejemplo.com", sucursal: "Principal", departamento: "TI", cargo: "Desarrollador", fechaIngreso: "2023-01-15", estado: "Activo", huella: true },
     { id: 2, nombre: "María", apellido: "González", cedula: "V-23456789", telefono: "0414-2345678", email: "maria@ejemplo.com", sucursal: "Sucursal A", departamento: "RRHH", cargo: "Analista", fechaIngreso: "2022-05-20", estado: "Activo", huella: true },
-    { id: 3, nombre: "Carlos", apellido: "Rodríguez", cedula: "V-34567890", telefono: "0424-3456789", email: "carlos@ejemplo.com", sucursal: "Sucursal B", departamento: "Finanzas", cargo: "Contador", fechaIngreso: "2023-03-10", estado: "Activo", huella: false },
+    { id: 3, nombre: "Carlos", apellido: "Rodríguez", cedula: "V-34567890", telefono: "0424-3456789", email: "carlos@ejemplo.com", sucursal: "Sucursal B", departamento: "Finanzas", cargo: "Contador", fechaIngreso: "2023-03-10", estado: "Activo", huella: true }
   ]);
   const sucursales = userInfo.role === "Operator" ? [userInfo.sucursal] : ["Principal", "Sucursal A", "Sucursal B", "Sucursal C"];
   const departamentos = ["TI", "RRHH", "Finanzas", "Marketing", "Ventas", "Operaciones"];
@@ -42,20 +59,27 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Verificación obligatoria de huella dactilar
+    if (!formData.huella) {
+      showModal("error", "Debe registrar la huella dactilar del empleado antes de guardar");
+      return;
+    }
+    
     if (isEditing) {
       setEmpleados(
         empleados.map((emp) =>
           emp.id === currentEmployeeId ? { ...formData, id: currentEmployeeId } : emp
         )
       );
-      showModal("success", "Employee updated successfully!");
+      showModal("success", "Empleado actualizado exitosamente!");
     } else {
       const newEmployee = {
         id: empleados.length + 1,
         ...formData,
       };
       setEmpleados([...empleados, newEmployee]);
-      showModal("success", "Employee added successfully!");
+      showModal("success", "Empleado agregado exitosamente!");
     }
     setShowFormModal(false);
     setFormData({
@@ -76,6 +100,12 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
   };
 
   const handleEdit = (employee) => {
+    // Asegurar que el empleado tenga huella registrada
+    if (!employee.huella) {
+      showModal("error", "Error: Se ha detectado un empleado sin huella registrada. Contacte al administrador del sistema.");
+      return;
+    }
+    
     setFormData({
       nombre: employee.nombre,
       apellido: employee.apellido,
@@ -87,17 +117,28 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
       cargo: employee.cargo,
       fechaIngreso: employee.fechaIngreso,
       estado: employee.estado,
-      huella: employee.huella
+      huella: employee.huella // Siempre será true
     });
     setIsEditing(true);
     setCurrentEmployeeId(employee.id);
     setShowFormModal(true);
   };
 
+  const handleToggleStatus = (id) => {
+    setEmpleados(
+      empleados.map((emp) =>
+        emp.id === id
+          ? { ...emp, estado: emp.estado === "Activo" ? "Inactivo" : "Activo" }
+          : emp
+      )
+    );
+    showModal("success", "Estado del empleado actualizado exitosamente!");
+  };
+
   const handleDelete = (id) => {
-    showModal("confirmation", "Are you sure you want to delete this employee?", () => {
+    showModal("confirmation", "¿Está seguro que desea eliminar este empleado?", () => {
       setEmpleados(empleados.filter((emp) => emp.id !== id));
-      showModal("success", "Employee deleted successfully!");
+      showModal("success", "Empleado eliminado exitosamente!");
     });
   };
 
@@ -118,27 +159,21 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
     setIsEditing(false);
     setCurrentEmployeeId(null);
     setShowFormModal(false);
+    setCapturingFingerprint(false);
   };
 
-  const handleFingerprintModal = (employee) => {
-    setFormData({
-      ...formData,
-      nombre: employee.nombre,
-      apellido: employee.apellido,
-      cedula: employee.cedula,
-    });
-    setCurrentEmployeeId(employee.id);
-    setShowFingerprintModal(true);
-  };
-
-  const handleRegisterFingerprint = () => {
-    setEmpleados(
-      empleados.map((emp) =>
-        emp.id === currentEmployeeId ? { ...emp, huella: true } : emp
-      )
-    );
-    setShowFingerprintModal(false);
-    showModal("success", "Fingerprint registered successfully!");
+  const startFingerprintCapture = () => {
+    setCapturingFingerprint(true);
+    
+    // Simular el registro de huella después de 3 segundos
+    setTimeout(() => {
+      setFormData({
+        ...formData,
+        huella: true
+      });
+      setCapturingFingerprint(false);
+      showModal("success", "¡Huella dactilar registrada exitosamente!");
+    }, 3000);
   };
 
   const filteredEmployees = empleados.filter(
@@ -155,6 +190,16 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
        emp.cargo.toLowerCase().includes(searchTerm.toLowerCase()) ||
        emp.estado.toLowerCase().includes(searchTerm.toLowerCase()))
   );
+
+  // Verificación de integridad de datos - asegurar que todos los empleados tengan huella
+  useEffect(() => {
+    // Verificar si hay empleados sin huella y advertir al administrador
+    const empleadosSinHuella = empleados.filter(emp => !emp.huella);
+    
+    if (empleadosSinHuella.length > 0 && userInfo.role === "Admin") {
+      showModal("warning", `Se han detectado ${empleadosSinHuella.length} empleado(s) sin huella registrada. Esto puede indicar un problema en la base de datos.`);
+    }
+  }, []);
 
   useEffect(() => {
     const checkTableScroll = () => {
@@ -233,44 +278,33 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
                         </span>
                       </td>
                       <td>
-                        {employee.huella ? (
-                          <span className="huella-registrada">
-                            <FaFingerprint />
-                          </span>
-                        ) : (
-                          <button
-                            className="btn-fingerprint"
-                            onClick={() => handleFingerprintModal(employee)}
-                          >
-                            Registrar
-                          </button>
-                        )}
+                        {/* Siempre mostramos huella como registrada ya que es obligatorio */}
+                        <span className="huella-registrada">
+                          <FaFingerprint />
+                        </span>
                       </td>
                       <td className="actions">
                         <button
                           className="btn-edit"
                           onClick={() => handleEdit(employee)}
+                          title="Editar empleado"
                         >
                           <FaEdit />
+                        </button>
+                        <button
+                          className="btn-toggle"
+                          onClick={() => handleToggleStatus(employee.id)}
+                          title={employee.estado === "Activo" ? "Desactivar empleado" : "Activar empleado"}
+                        >
+                          {employee.estado === "Activo" ? <FaToggleOn /> : <FaToggleOff />}
                         </button>
                         <button
                           className="btn-delete"
                           onClick={() => handleDelete(employee.id)}
                           disabled={userInfo.role !== "Admin"}
+                          title="Eliminar empleado"
                         >
                           <FaTrash />
-                        </button>
-                        <button
-                          className="btn-schedule"
-                          onClick={() => onNavigate("schedules", { employeeId: employee.id })}
-                        >
-                          <FaCalendarAlt />
-                        </button>
-                        <button
-                          className="btn-attendance"
-                          onClick={() => onNavigate("attendance", { employeeId: employee.id })}
-                        >
-                          <FaFingerprint />
                         </button>
                       </td>
                     </tr>
@@ -291,7 +325,7 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
           <div className="form-modal">
             <div className="form-header">
               <h2>{isEditing ? "Editar Empleado" : "Nuevo Empleado"}</h2>
-              <FaPlusCircle className="add-icon" />
+              <FaUserAlt className="user-icon" />
             </div>
             <form className="modulo-form" onSubmit={handleSubmit}>
               <div className="form-grid">
@@ -366,20 +400,128 @@ function ModuloEmpleados({ onNavigate, onLogout, activeModule, userInfo }) {
                   >
                     <option value="">Seleccione una sucursal</option>
                     {sucursales.map((sucursal) => (
+                      <option key={sucursal} value={sucursal}>{sucursal}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="departamento">Departamento</label>
+                  <select
+                    id="departamento"
+                    name="departamento"
+                    value={formData.departamento}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="">Seleccione un departamento</option>
+                    {departamentos.map((dep) => (
+                      <option key={dep} value={dep}>{dep}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="cargo">Cargo</label>
+                  <input
+                    type="text"
+                    id="cargo"
+                    name="cargo"
+                    value={formData.cargo}
+                    onChange={handleChange}
+                    required
+                    placeholder="Ingrese el cargo"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="fechaIngreso">Fecha de Ingreso</label>
+                  <input
+                    type="date"
+                    id="fechaIngreso"
+                    name="fechaIngreso"
+                    value={formData.fechaIngreso}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="estado">Estado</label>
+                  <select
+                    id="estado"
+                    name="estado"
+                    value={formData.estado}
+                    onChange={handleChange}
+                    required
+                  >
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                    <option value="De Licencia">De Licencia</option>
+                  </select>
+                </div>
+              </div>
 
-                    <option key={sucursal} value={sucursal}> {sucursal} </option> ))} </select> </div>
-                     <div className="form-group"> 
-                      <label htmlFor="departamento">Departamento</label>
-                       <select id="departamento" name="departamento" 
-                       value={formData.departamento} onChange={handleChange} 
-                       required > <option value="">Seleccione un departamento</option>
-                        {departamentos.map((dep) => ( <option key={dep} value={dep}> {dep}
-                       </option> ))} </select> </div> <div className="form-group"> <label htmlFor="cargo">Cargo</label> 
-                       <input type="text" id="cargo" name="cargo" value={formData.cargo} 
-                       onChange={handleChange} required placeholder="Ingrese el cargo" />
-                       </div> <div className="form-group"> <label htmlFor="fechaIngreso">Fecha de Ingreso</label>
-                        <input type="date" id="fechaIngreso" name="fechaIngreso" value={formData.fechaIngreso} onChange={handleChange} required /> </div> <div className="form-group"> <label htmlFor="estado">Estado</label> <select id="estado" name="estado" value={formData.estado} onChange={handleChange} required > <option value="Activo">Activo</option> <option value="Inactivo">Inactivo</option> <option value="De Licencia">De Licencia</option> </select> </div> <div className="form-group checkbox"> <label htmlFor="huella"> <input type="checkbox" id="huella" name="huella" checked={formData.huella} onChange={handleChange} /> Huella Registrada </label> </div> </div> <div className="form-buttons"> <button type="submit" className="btn-submit"> {isEditing ? "Actualizar Empleado" : "Agregar Empleado"} </button> <button type="button" className="btn-cancel" onClick={handleCancel} > Cancelar </button> </div> </form> </div> </div> )}
-                     {showFingerprintModal && (
-                    <div className="modal-overlay"> <div className="form-modal"> <div className="form-header"> <h2>Registrar Huella</h2> <FaFingerprint className="add-icon" /> </div> <div className="fingerprint-modal-content"> <p> Registrar huella para {formData.nombre} {formData.apellido} ( {formData.cedula}) </p> <div className="fingerprint-placeholder"> <FaFingerprint className="fingerprint-icon" /> <p>Escaneando huella...</p> </div> <div className="form-buttons"> <button className="btn-submit" onClick={handleRegisterFingerprint} > Confirmar Registro </button> <button className="btn-cancel" onClick={() => setShowFingerprintModal(false)} > Cancelar </button> </div> </div> </div> </div> )} </div> ); }
+              {/* Sección de registro de huella dactilar - siempre requerido */}
+              <div className="fingerprint-section">
+                <div className="fingerprint-header">
+                  <h3>Registro de Huella Dactilar <span className="required">*</span></h3>
+                  <span className={`fingerprint-status ${formData.huella ? 'registered' : 'not-registered'}`}>
+                    {formData.huella ? 'Registrada' : 'No Registrada'}
+                  </span>
+                </div>
+                
+                {isEditing && formData.huella ? (
+                  <div className="huella-verified">
+                    <div className="fingerprint-verified">
+                      <FaFingerprint className="fingerprint-icon-large registered" />
+                      <FaCheck className="check-icon" />
+                    </div>
+                    <p>Huella dactilar registrada correctamente</p>
+                  </div>
+                ) : capturingFingerprint ? (
+                  <div className="fingerprint-capturing">
+                    <div className="fingerprint-animation">
+                      <FaFingerprint className="fingerprint-icon-large pulse" />
+                      <div className="scanning-line"></div>
+                    </div>
+                    <p>Coloque su dedo en el lector de huella...</p>
+                    <FaSpinner className="loading-spinner" />
+                  </div>
+                ) : (
+                  <div className="fingerprint-container">
+                    <p className="fingerprint-instructions">El registro de huella dactilar es obligatorio para todos los empleados</p>
+                    <button 
+                      type="button" 
+                      className={`btn-fingerprint ${formData.huella ? 'registered' : ''}`}
+                      onClick={startFingerprintCapture}
+                      disabled={formData.huella}
+                    >
+                      <FaFingerprint className="fingerprint-btn-icon" />
+                      {formData.huella ? 'Huella Registrada' : 'Registrar Huella'}
+                    </button>
+                  </div>
+                )}
+              </div>
+              
+              <div className="form-buttons">
+                <button 
+                  type="submit" 
+                  className="btn-submit"
+                  disabled={!formData.huella}
+                >
+                  {isEditing ? "Actualizar Empleado" : "Agregar Empleado"}
+                </button>
+                <button
+                  type="button"
+                  className="btn-cancel"
+                  onClick={handleCancel}
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
-                    export default ModuloEmpleados;
+export default ModuloEmpleados;

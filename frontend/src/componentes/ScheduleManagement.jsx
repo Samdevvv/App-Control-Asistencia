@@ -87,12 +87,12 @@ function ScheduleManagement({ onNavigate, onLogout, activeModule, userInfo }) {
     <div className="modulo-container">
       <div className="modulo-content">
         <div className="modulo-header">
-          <h1>Schedule Management</h1>
+          <h1>Administracion De Horarios</h1>
           <div className="search-container">
             <FaSearch className="search-icon" />
             <input
               type="text"
-              placeholder="Search schedules..."
+              placeholder="Buscar Horarios..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="search-input"
@@ -101,10 +101,10 @@ function ScheduleManagement({ onNavigate, onLogout, activeModule, userInfo }) {
         </div>
 
         <div className="table-header">
-          <h2>Schedule List</h2>
+          <h2>Lista De Horarios</h2>
           <button className="btn-add" onClick={() => setShowFormModal(true)}>
             <FaPlusCircle className="add-icon" />
-            Add Schedule
+            Agregar Un Horario
           </button>
         </div>
 
@@ -146,7 +146,7 @@ function ScheduleManagement({ onNavigate, onLogout, activeModule, userInfo }) {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan="6">No schedules found</td>
+                    <td colSpan="6">No Se Encuentra Horarios</td>
                   </tr>
                 )}
               </tbody>

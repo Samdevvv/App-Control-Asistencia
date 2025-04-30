@@ -3,7 +3,7 @@ import "../estilos/AttendanceLog.css";
 import { FaFingerprint, FaSearch } from "react-icons/fa";
 import { ModalContext } from "./ModalManager"; // Updated import path
 
-function AttendanceLog({ onNavigate, onLogout, activeModule, userInfo }) {
+function RegistroDeEntrada({ onNavigate, onLogout, activeModule, userInfo }) {
   const { showModal } = useContext(ModalContext);
   const [searchTerm, setSearchTerm] = useState("");
   const [attendanceLogs, setAttendanceLogs] = useState([
@@ -48,7 +48,7 @@ function AttendanceLog({ onNavigate, onLogout, activeModule, userInfo }) {
     <div className="modulo-container">
       <div className="modulo-content">
         <div className="modulo-header">
-          <h1>Attendance Logs</h1>
+          <h1>Registro De Entrada</h1>
           <div className="search-container">
             <FaSearch className="search-icon" />
             <input
@@ -119,4 +119,4 @@ function AttendanceLog({ onNavigate, onLogout, activeModule, userInfo }) {
   );
 }
 
-export default AttendanceLog;
+export default RegistroDeEntrada;
