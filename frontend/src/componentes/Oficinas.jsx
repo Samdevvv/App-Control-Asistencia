@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../estilos/Oficinas.css";
-import { FaSearch, FaPlusCircle, FaEdit, FaTrash, FaPhoneAlt, FaDesktop, FaBuilding, FaUsers } from "react-icons/fa";
+import { FaSearch, FaPlusCircle, FaEdit, FaTrash, FaBuilding } from "react-icons/fa";
 import { MdLocationOn } from "react-icons/md";
 
 function Oficinas({ onNavigate, onLogout, activeModule }) {
@@ -10,7 +10,6 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
     codigo: "",
     sucursal: "",
     ubicacion: "",
-    capacidad: "",
     estado: "Activa"
   });
 
@@ -24,14 +23,19 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
 
   // Estado para la visualización (tabla o tarjetas)
   const [viewMode, setViewMode] = useState("tabla");
+  
+  // Estado para animaciones
+  const [animatedItemId, setAnimatedItemId] = useState(null);
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [animationType, setAnimationType] = useState(""); // "add", "edit", "delete"
 
   // Datos de ejemplo para la tabla de oficinas
   const [oficinas, setOficinas] = useState([
-    { id: 1, nombre: "Oficina Principal", codigo: "OF-A01", sucursal: "Sucursal Principal", ubicacion: "Piso 1", capacidad: 20, estado: "Activa", equipos: 15, empleados: 18 },
-    { id: 2, nombre: "Oficina Desarrollo", codigo: "OF-B02", sucursal: "Sucursal Este", ubicacion: "Piso 2", capacidad: 15, estado: "Activa", equipos: 12, empleados: 10 },
-    { id: 3, nombre: "Oficina Ventas", codigo: "OF-C03", sucursal: "Sucursal Oeste", ubicacion: "Piso 3", capacidad: 10, estado: "Inactiva", equipos: 5, empleados: 0 },
-    { id: 4, nombre: "Oficina RRHH", codigo: "OF-D04", sucursal: "Sucursal Norte", ubicacion: "Piso 1", capacidad: 8, estado: "Activa", equipos: 6, empleados: 5 },
-    { id: 5, nombre: "Oficina Finanzas", codigo: "OF-E05", sucursal: "Sucursal Principal", ubicacion: "Piso 4", capacidad: 12, estado: "Activa", equipos: 10, empleados: 8 }
+    { id: 1, nombre: "Oficina Principal", codigo: "OF-A01", sucursal: "Sucursal Principal", ubicacion: "Piso 1", estado: "Activa" },
+    { id: 2, nombre: "Oficina Desarrollo", codigo: "OF-B02", sucursal: "Sucursal Este", ubicacion: "Piso 2", estado: "Activa" },
+    { id: 3, nombre: "Oficina Ventas", codigo: "OF-C03", sucursal: "Sucursal Oeste", ubicacion: "Piso 3", estado: "Inactiva" },
+    { id: 4, nombre: "Oficina RRHH", codigo: "OF-D04", sucursal: "Sucursal Norte", ubicacion: "Piso 1", estado: "Activa" },
+    { id: 5, nombre: "Oficina Finanzas", codigo: "OF-E05", sucursal: "Sucursal Principal", ubicacion: "Piso 4", estado: "Activa" }
   ]);
 
   // Lista de sucursales (simulando datos que vendrían de una API)
@@ -53,7 +57,6 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
       codigo: office.codigo,
       sucursal: office.sucursal,
       ubicacion: office.ubicacion,
-      capacidad: office.capacidad,
       estado: office.estado
     });
     setIsEditing(true);
@@ -61,28 +64,37 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
     setShowFormModal(true);
   };
 
-  // Manejo de envío del formulario
+  // Manejo de envío del formulario con animación
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isEditing) {
       // Actualizar oficina existente
       setOficinas(
         oficinas.map((office) =>
-          office.id === currentOfficeId ? { ...formData, id: currentOfficeId, equipos: office.equipos, empleados: office.empleados } : office
+          office.id === currentOfficeId ? { ...formData, id: currentOfficeId } : office
         )
       );
       setIsEditing(false);
       setCurrentOfficeId(null);
+      
+      // Mostrar animación de edición
+      setAnimatedItemId(currentOfficeId);
+      setAnimationType("edit");
+      setShowAnimation(true);
     } else {
       // Crear nueva oficina
       const newOffice = {
         id: oficinas.length + 1,
-        ...formData,
-        equipos: 0,
-        empleados: 0
+        ...formData
       };
       setOficinas([...oficinas, newOffice]);
+      
+      // Mostrar animación de adición
+      setAnimatedItemId(newOffice.id);
+      setAnimationType("add");
+      setShowAnimation(true);
     }
+    
     // Cerrar modal y limpiar formulario
     setShowFormModal(false);
     setFormData({
@@ -90,14 +102,31 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
       codigo: "",
       sucursal: "",
       ubicacion: "",
-      capacidad: "",
       estado: "Activa"
     });
+    
+    // Desactivar la animación después de un tiempo
+    setTimeout(() => {
+      setShowAnimation(false);
+      setAnimatedItemId(null);
+      setAnimationType("");
+    }, 1500);
   };
 
-  // Función para eliminar una oficina
+  // Función para eliminar una oficina con animación
   const handleDelete = (id) => {
-    setOficinas(oficinas.filter((office) => office.id !== id));
+    // Primero marcar para animación de eliminación
+    setAnimatedItemId(id);
+    setAnimationType("delete");
+    setShowAnimation(true);
+    
+    // Después de la animación, eliminar el elemento
+    setTimeout(() => {
+      setOficinas(oficinas.filter((office) => office.id !== id));
+      setShowAnimation(false);
+      setAnimatedItemId(null);
+      setAnimationType("");
+    }, 500);
   };
 
   // Función para cerrar el modal y cancelar
@@ -107,7 +136,6 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
       codigo: "",
       sucursal: "",
       ubicacion: "",
-      capacidad: "",
       estado: "Activa"
     });
     setIsEditing(false);
@@ -125,14 +153,24 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
       office.estado.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Aplicar clase de animación según tipo
+  const getAnimationClass = (id) => {
+    if (animatedItemId === id && showAnimation) {
+      if (animationType === "add") return "add-animation";
+      if (animationType === "edit") return "edit-animation";
+      if (animationType === "delete") return "delete-animation";
+    }
+    return "";
+  };
+
   return (
     <div className="modulo-container">
       {/* Contenido principal */}
       <div className="modulo-content">
-        <div className="modulo-header">
+        <div className="modulo-header animated-fade-in">
           <h1>Gestión de Oficinas</h1>
           <div className="header-actions">
-            <div className="view-toggle">
+            <div className="view-toggle animated-slide-in">
               <button 
                 className={`view-btn ${viewMode === "tabla" ? "active" : ""}`}
                 onClick={() => setViewMode("tabla")}
@@ -146,7 +184,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                 Tarjetas
               </button>
             </div>
-            <div className="search-container">
+            <div className="search-container animated-slide-in">
               <FaSearch className="search-icon" />
               <input
                 type="text"
@@ -160,9 +198,9 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
         </div>
 
         {/* Botón de Nueva Oficina */}
-        <div className="table-header">
+        <div className="table-header animated-zoom-in">
           <h2>Lista de Oficinas</h2>
-          <button className="btn-add" onClick={() => setShowFormModal(true)}>
+          <button className="btn-add pulse-animation" onClick={() => setShowFormModal(true)}>
             <FaPlusCircle className="add-icon" />
             Nueva Oficina
           </button>
@@ -170,7 +208,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
 
         {/* Visualización: Tabla o Tarjetas */}
         {viewMode === "tabla" ? (
-          <div className="table-container">
+          <div className="table-container animated-zoom-in">
             <div className="table-responsive">
               <table className="data-table">
                 <thead>
@@ -180,8 +218,6 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                     <th>Código</th>
                     <th>Sucursal</th>
                     <th>Ubicación</th>
-                    <th>Capacidad</th>
-                    <th>Empleados</th>
                     <th>Estado</th>
                     <th>Acciones</th>
                   </tr>
@@ -189,27 +225,16 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                 <tbody>
                   {filteredOffices.length > 0 ? (
                     filteredOffices.map((office) => (
-                      <tr key={office.id}>
+                      <tr 
+                        key={office.id} 
+                        data-id={office.id}
+                        className={getAnimationClass(office.id)}
+                      >
                         <td>{office.id}</td>
                         <td>{office.nombre}</td>
                         <td><span className="codigo-badge">{office.codigo}</span></td>
                         <td>{office.sucursal}</td>
                         <td>{office.ubicacion}</td>
-                        <td>{office.capacidad}</td>
-                        <td>
-                          <div className="capacity-indicator">
-                            <div className="capacity-bar">
-                              <div 
-                                className="capacity-fill" 
-                                style={{ 
-                                  width: `${Math.min(100, (office.empleados / office.capacidad) * 100)}%`,
-                                  backgroundColor: office.empleados > office.capacidad ? '#dc3545' : office.empleados >= office.capacidad * 0.8 ? '#ffc107' : '#198754'
-                                }}
-                              ></div>
-                            </div>
-                            <span>{office.empleados} / {office.capacidad}</span>
-                          </div>
-                        </td>
                         <td>
                           <span className={`estado ${office.estado.toLowerCase().replace(/\s+/g, '-')}`}>
                             {office.estado}
@@ -217,16 +242,14 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                         </td>
                         <td className="actions">
                           <button
-                            className="btn-edit"
+                            className="btn-edit btn-hover-effect"
                             onClick={() => handleEdit(office)}
                           >
                             <FaEdit />
                           </button>
                           <button
-                            className="btn-delete"
+                            className="btn-delete btn-hover-effect"
                             onClick={() => handleDelete(office.id)}
-                            disabled={office.empleados > 0}
-                            title={office.empleados > 0 ? "No se puede eliminar una oficina con empleados asignados" : ""}
                           >
                             <FaTrash />
                           </button>
@@ -235,7 +258,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                     ))
                   ) : (
                     <tr>
-                      <td colSpan="9">No se encontraron oficinas</td>
+                      <td colSpan="7">No se encontraron oficinas</td>
                     </tr>
                   )}
                 </tbody>
@@ -243,10 +266,14 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
             </div>
           </div>
         ) : (
-          <div className="office-cards">
+          <div className="office-cards animated-stagger">
             {filteredOffices.length > 0 ? (
-              filteredOffices.map((office) => (
-                <div key={office.id} className="office-card">
+              filteredOffices.map((office, index) => (
+                <div 
+                  key={office.id} 
+                  data-id={office.id}
+                  className={`office-card card-stagger-${index % 3} ${getAnimationClass(office.id)}`}
+                >
                   <div className={`office-card-header ${office.estado.toLowerCase().replace(/\s+/g, '-')}`}>
                     <div className="office-title">
                       <h3>{office.nombre}</h3>
@@ -259,49 +286,24 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                   
                   <div className="office-card-content">
                     <div className="office-info">
-                      <div className="info-item">
+                      <div className="info-item animated-item">
                         <FaBuilding className="info-icon" />
                         <span>{office.sucursal}</span>
                       </div>
-                      <div className="info-item">
+                      <div className="info-item animated-item">
                         <MdLocationOn className="info-icon" />
                         <span>{office.ubicacion}</span>
-                      </div>
-                      <div className="info-item">
-                        <FaUsers className="info-icon" />
-                        <span>{office.empleados} empleados</span>
-                      </div>
-                      <div className="info-item">
-                        <FaDesktop className="info-icon" />
-                        <span>{office.equipos} equipos</span>
-                      </div>
-                    </div>
-                    
-                    <div className="capacity-box">
-                      <div className="capacity-header">
-                        <span>Capacidad</span>
-                        <span>{office.empleados} / {office.capacidad}</span>
-                      </div>
-                      <div className="capacity-progress">
-                        <div 
-                          className="capacity-progress-bar" 
-                          style={{ 
-                            width: `${Math.min(100, (office.empleados / office.capacidad) * 100)}%`,
-                            backgroundColor: office.empleados > office.capacidad ? '#dc3545' : office.empleados >= office.capacidad * 0.8 ? '#ffc107' : '#198754'
-                          }}
-                        ></div>
                       </div>
                     </div>
                   </div>
                   
                   <div className="office-card-actions">
-                    <button className="btn-card-edit" onClick={() => handleEdit(office)}>
+                    <button className="btn-card-edit btn-hover-scale" onClick={() => handleEdit(office)}>
                       <FaEdit /> Editar
                     </button>
                     <button 
-                      className="btn-card-delete" 
+                      className="btn-card-delete btn-hover-scale" 
                       onClick={() => handleDelete(office.id)}
-                      disabled={office.empleados > 0}
                     >
                       <FaTrash /> Eliminar
                     </button>
@@ -316,11 +318,11 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
 
         {/* Modal para formulario de oficina */}
         {showFormModal && (
-          <div className="modal-overlay">
-            <div className="form-modal">
+          <div className="modal-overlay animated-fade-in">
+            <div className="form-modal animated-pop-in">
               <div className="form-header">
                 <h2>{isEditing ? "Editar Oficina" : "Nueva Oficina"}</h2>
-                <FaPlusCircle className="add-icon" />
+                <FaPlusCircle className="add-icon rotating-icon" />
               </div>
               
               <form className="modulo-form" onSubmit={handleSubmit}>
@@ -335,6 +337,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                       onChange={handleChange}
                       required
                       placeholder="Ingrese el nombre de la oficina"
+                      className="input-animation"
                     />
                   </div>
                   
@@ -348,6 +351,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                       onChange={handleChange}
                       required
                       placeholder="Ej. OF-A01"
+                      className="input-animation"
                     />
                   </div>
                 </div>
@@ -361,6 +365,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                       value={formData.sucursal}
                       onChange={handleChange}
                       required
+                      className="select-animation"
                     >
                       <option value="">Seleccione una sucursal</option>
                       {sucursales.map((sucursal, index) => (
@@ -381,25 +386,12 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                       onChange={handleChange}
                       required
                       placeholder="Ej. Piso 1, Ala Norte"
+                      className="input-animation"
                     />
                   </div>
                 </div>
                 
                 <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="capacidad">Capacidad (personas)</label>
-                    <input
-                      type="number"
-                      id="capacidad"
-                      name="capacidad"
-                      value={formData.capacidad}
-                      onChange={handleChange}
-                      required
-                      min="1"
-                      placeholder="Ingrese capacidad"
-                    />
-                  </div>
-                  
                   <div className="form-group">
                     <label htmlFor="estado">Estado</label>
                     <select
@@ -408,6 +400,7 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                       value={formData.estado}
                       onChange={handleChange}
                       required
+                      className="select-animation"
                     >
                       <option value="Activa">Activa</option>
                       <option value="Inactiva">Inactiva</option>
@@ -417,10 +410,10 @@ function Oficinas({ onNavigate, onLogout, activeModule }) {
                 </div>
                 
                 <div className="form-buttons">
-                  <button type="submit" className="btn-submit">
+                  <button type="submit" className="btn-submit btn-hover-scale">
                     {isEditing ? "Actualizar Oficina" : "Registrar Oficina"}
                   </button>
-                  <button type="button" className="btn-cancel" onClick={handleCancel}>
+                  <button type="button" className="btn-cancel btn-hover-scale" onClick={handleCancel}>
                     Cancelar
                   </button>
                 </div>
