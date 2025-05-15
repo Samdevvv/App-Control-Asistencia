@@ -9,7 +9,9 @@ GO
 CREATE TABLE Regiones (
     RegionID INT IDENTITY(1,1) PRIMARY KEY,
     Nombre VARCHAR(50) NOT NULL,
+    CodigoRegion VARCHAR(25) NOT NULL,
     Descripcion VARCHAR(255),
+    CantidadSucursales INT NOT NULL,
     FechaCreacion DATETIME DEFAULT GETDATE(),
     Estado BIT DEFAULT 1
 );
@@ -25,6 +27,19 @@ CREATE TABLE Sucursales (
     FechaCreacion DATETIME DEFAULT GETDATE(),
     Estado BIT DEFAULT 1,
     CONSTRAINT FK_Sucursales_Regiones FOREIGN KEY (RegionID) REFERENCES Regiones(RegionID)
+);
+GO
+
+-- Tabla de Oficinas
+CREATE TABLE Oficinas (
+    OficinaID INT IDENTITY(1,1) PRIMARY KEY,
+    SucursalID INT NOT NULL,
+    Nombre VARCHAR(100) NOT NULL,
+    CodigoOficina VARCHAR(100) NOT NULL,
+    Direccion VARCHAR(255) NOT NULL,
+    FechaCreacion DATETIME DEFAULT GETDATE(),
+    Estado BIT DEFAULT 1,
+    CONSTRAINT FK_Oficinas_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID)
 );
 GO
 
@@ -66,12 +81,14 @@ CREATE TABLE Usuarios (
     Contrasena VARCHAR(100) NOT NULL,
     Email VARCHAR(100) UNIQUE,
     RolID INT NOT NULL,
+    RegionID INT NOT NULL,
     SucursalID INT NOT NULL,
     FechaCreacion DATETIME DEFAULT GETDATE(),
     UltimoAcceso DATETIME,
     Estado BIT DEFAULT 1,
     CONSTRAINT FK_Usuarios_Roles FOREIGN KEY (RolID) REFERENCES Roles(RolID),
-    CONSTRAINT FK_Usuarios_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID)
+    CONSTRAINT FK_Usuarios_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID),
+    CONSTRAINT FK_Usuarios_Regiones FOREIGN KEY (RegionID) REFERENCES Regiones(RegionID)
 );
 GO
 
@@ -101,12 +118,14 @@ CREATE TABLE Empleados (
     FechaIngreso DATE NOT NULL,
     CargoID INT NOT NULL,
     SucursalID INT NOT NULL,
+    DepartamentoID INT NOT NULL,
     HuellaDigital VARBINARY(MAX), -- Aquí se almacenaría la huella digital (simulada)
     FechaCreacion DATETIME DEFAULT GETDATE(),
     UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
     Estado BIT DEFAULT 1,
     CONSTRAINT FK_Empleados_Cargos FOREIGN KEY (CargoID) REFERENCES Cargos(CargoID),
-    CONSTRAINT FK_Empleados_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID)
+    CONSTRAINT FK_Empleados_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID),
+    CONSTRAINT FK_Empleados_Departamentos FOREIGN KEY (DepartamentoID) REFERENCES Departamentos(DepartamentoID)
 );
 GO
 
