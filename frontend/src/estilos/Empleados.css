@@ -1009,7 +1009,6 @@
   border-collapse: collapse;
   table-layout: fixed; /* Crucial para controlar anchos de columnas */
 }
-
 .data-table th,
 .data-table td {
   padding: 10px 8px; /* Reducir padding horizontal */
@@ -1240,4 +1239,17 @@
 .fingerprint-status.not-registered {
   background-color: rgba(220, 53, 69, 0.15);
   color: #dc3545;
+}
+
+/*ajustes responsive*/
+@media(max-width: 1366px){
+  .modulo-content{
+    padding: 15px 20px;
+    width: 100vw;
+  }
+  .data-table th,
+  .data-table td{
+    padding: 8px 6px;
+    font-size: 13px;
+  }
 }
