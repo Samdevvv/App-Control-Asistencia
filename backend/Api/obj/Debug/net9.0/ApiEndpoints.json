@@ -1,0 +1,1242 @@
+[
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DashboardController",
+    "Method": "AsistenciaDiaria",
+    "RelativePath": "api/Dashboard/asistencia-diaria",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaInicio",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DashboardController",
+    "Method": "EstadisticasDashboard",
+    "RelativePath": "api/Dashboard/estadisticas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaInicio",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DashboardController",
+    "Method": "GraficoAsistenciaDepartamento",
+    "RelativePath": "api/Dashboard/grafico-asistencia-departamento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaInicio",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DepartamentoController",
+    "Method": "CrearDepartamento",
+    "RelativePath": "api/Departamento",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departamento",
+        "Type": "AttendanceControlSystem.Models.Departamento",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DepartamentoController",
+    "Method": "ObtenerDepartamentos",
+    "RelativePath": "api/Departamento",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DepartamentoController",
+    "Method": "ObtenerDepartamento",
+    "RelativePath": "api/Departamento/{departamentoID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departamentoID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DepartamentoController",
+    "Method": "ActualizarDepartamento",
+    "RelativePath": "api/Departamento/{departamentoID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departamentoID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "departamento",
+        "Type": "AttendanceControlSystem.Models.Departamento",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DepartamentoController",
+    "Method": "CambiarEstadoDepartamento",
+    "RelativePath": "api/Departamento/{departamentoID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departamentoID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DiasNoLaborablesController",
+    "Method": "CrearDiaNoLaborable",
+    "RelativePath": "api/DiasNoLaborables",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "diaNoLaborable",
+        "Type": "AttendanceControlSystem.Models.DiasNoLaborables",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DiasNoLaborablesController",
+    "Method": "ObtenerDiasNoLaborables",
+    "RelativePath": "api/DiasNoLaborables",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaInicio",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.Nullable\u00601[[System.DateTime, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DiasNoLaborablesController",
+    "Method": "ObtenerDiaNoLaborable",
+    "RelativePath": "api/DiasNoLaborables/{diaNoLaborableID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "diaNoLaborableID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DiasNoLaborablesController",
+    "Method": "ActualizarDiaNoLaborable",
+    "RelativePath": "api/DiasNoLaborables/{diaNoLaborableID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "diaNoLaborableID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "diaNoLaborable",
+        "Type": "AttendanceControlSystem.Models.DiasNoLaborables",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.DiasNoLaborablesController",
+    "Method": "CambiarEstadoDiaNoLaborable",
+    "RelativePath": "api/DiasNoLaborables/{diaNoLaborableID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "diaNoLaborableID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.EmpleadoController",
+    "Method": "CrearEmpleado",
+    "RelativePath": "api/Empleado",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empleado",
+        "Type": "AttendanceControlSystem.Models.Empleado",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.EmpleadoController",
+    "Method": "ObtenerEmpleados",
+    "RelativePath": "api/Empleado",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departamentoID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.EmpleadoController",
+    "Method": "ObtenerEmpleado",
+    "RelativePath": "api/Empleado/{empleadoID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empleadoID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.EmpleadoController",
+    "Method": "ActualizarEmpleado",
+    "RelativePath": "api/Empleado/{empleadoID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empleadoID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "empleado",
+        "Type": "AttendanceControlSystem.Models.Empleado",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.EmpleadoController",
+    "Method": "CambiarEstadoEmpleado",
+    "RelativePath": "api/Empleado/{empleadoID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empleadoID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.EmpleadoHorarioController",
+    "Method": "AsignarHorarioEmpleado",
+    "RelativePath": "api/EmpleadoHorario",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empleadoHorario",
+        "Type": "AttendanceControlSystem.Models.EmpleadoHorario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.EmpleadoHorarioController",
+    "Method": "FinalizarHorarioEmpleado",
+    "RelativePath": "api/EmpleadoHorario/{empleadoHorarioID}/finalizar",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empleadoHorarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.DateTime",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.EmpleadoHorarioController",
+    "Method": "ObtenerHorariosEmpleado",
+    "RelativePath": "api/EmpleadoHorario/empleado/{empleadoID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empleadoID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "soloVigentes",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      },
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.HorarioLaboralController",
+    "Method": "CrearHorarioLaboral",
+    "RelativePath": "api/HorarioLaboral",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "horario",
+        "Type": "AttendanceControlSystem.Models.HorarioLaboral",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.HorarioLaboralController",
+    "Method": "ObtenerHorariosLaborales",
+    "RelativePath": "api/HorarioLaboral",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.HorarioLaboralController",
+    "Method": "ObtenerHorarioLaboral",
+    "RelativePath": "api/HorarioLaboral/{horarioID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "horarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.HorarioLaboralController",
+    "Method": "ActualizarHorarioLaboral",
+    "RelativePath": "api/HorarioLaboral/{horarioID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "horarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "horario",
+        "Type": "AttendanceControlSystem.Models.HorarioLaboral",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.HorarioLaboralController",
+    "Method": "CambiarEstadoHorarioLaboral",
+    "RelativePath": "api/HorarioLaboral/{horarioID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "horarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.JustificacionController",
+    "Method": "CrearJustificacion",
+    "RelativePath": "api/Justificacion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "justificacion",
+        "Type": "AttendanceControlSystem.Models.Justificacion",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.JustificacionController",
+    "Method": "ProcesarJustificacion",
+    "RelativePath": "api/Justificacion/{justificacionID}/procesar",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "justificacionID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "AttendanceControlSystem.Controllers.ProcesarJustificacionRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RegionController",
+    "Method": "CrearRegion",
+    "RelativePath": "api/Region",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "region",
+        "Type": "AttendanceControlSystem.Models.Region",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RegionController",
+    "Method": "ObtenerRegiones",
+    "RelativePath": "api/Region",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RegionController",
+    "Method": "ObtenerRegion",
+    "RelativePath": "api/Region/{regionID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regionID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RegionController",
+    "Method": "ActualizarRegion",
+    "RelativePath": "api/Region/{regionID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regionID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "region",
+        "Type": "AttendanceControlSystem.Models.Region",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RegionController",
+    "Method": "CambiarEstadoRegion",
+    "RelativePath": "api/Region/{regionID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regionID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RegistroAsistenciaController",
+    "Method": "RegistrarEntrada",
+    "RelativePath": "api/RegistroAsistencia/entrada",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "AttendanceControlSystem.Controllers.RegistrarAsistenciaRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RegistroAsistenciaController",
+    "Method": "RegistrarSalida",
+    "RelativePath": "api/RegistroAsistencia/salida",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "AttendanceControlSystem.Controllers.RegistrarAsistenciaRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.ReporteController",
+    "Method": "ReporteAsistenciaEmpleado",
+    "RelativePath": "api/Reporte/asistencia-empleado",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empleadoID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "departamentoID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaInicio",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.ReporteController",
+    "Method": "ReporteJustificaciones",
+    "RelativePath": "api/Reporte/justificaciones",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "estadoAprobacion",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "departamentoID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaInicio",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.ReporteController",
+    "Method": "ResumenAsistencia",
+    "RelativePath": "api/Reporte/resumen-asistencia",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "departamentoID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaInicio",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "fechaFin",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RolController",
+    "Method": "CrearRol",
+    "RelativePath": "api/Rol",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rol",
+        "Type": "AttendanceControlSystem.Models.Rol",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RolController",
+    "Method": "ObtenerRoles",
+    "RelativePath": "api/Rol",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RolController",
+    "Method": "ObtenerRol",
+    "RelativePath": "api/Rol/{rolID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rolID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RolController",
+    "Method": "ActualizarRol",
+    "RelativePath": "api/Rol/{rolID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rolID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "rol",
+        "Type": "AttendanceControlSystem.Models.Rol",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.RolController",
+    "Method": "CambiarEstadoRol",
+    "RelativePath": "api/Rol/{rolID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rolID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.SucursalController",
+    "Method": "CrearSucursal",
+    "RelativePath": "api/Sucursal",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sucursal",
+        "Type": "AttendanceControlSystem.Models.Sucursal",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.SucursalController",
+    "Method": "ObtenerSucursales",
+    "RelativePath": "api/Sucursal",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.SucursalController",
+    "Method": "ObtenerSucursal",
+    "RelativePath": "api/Sucursal/{sucursalID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sucursalID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.SucursalController",
+    "Method": "ActualizarSucursal",
+    "RelativePath": "api/Sucursal/{sucursalID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sucursalID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "sucursal",
+        "Type": "AttendanceControlSystem.Models.Sucursal",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.SucursalController",
+    "Method": "CambiarEstadoSucursal",
+    "RelativePath": "api/Sucursal/{sucursalID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sucursalID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.TipoJustificacionController",
+    "Method": "CrearTipoJustificacion",
+    "RelativePath": "api/TipoJustificacion",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tipoJustificacion",
+        "Type": "AttendanceControlSystem.Models.TipoJustificacion",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.TipoJustificacionController",
+    "Method": "ObtenerTiposJustificacion",
+    "RelativePath": "api/TipoJustificacion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.TipoJustificacionController",
+    "Method": "ObtenerTipoJustificacion",
+    "RelativePath": "api/TipoJustificacion/{tipoJustificacionID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tipoJustificacionID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.TipoJustificacionController",
+    "Method": "ActualizarTipoJustificacion",
+    "RelativePath": "api/TipoJustificacion/{tipoJustificacionID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tipoJustificacionID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "tipoJustificacion",
+        "Type": "AttendanceControlSystem.Models.TipoJustificacion",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.TipoJustificacionController",
+    "Method": "CambiarEstadoTipoJustificacion",
+    "RelativePath": "api/TipoJustificacion/{tipoJustificacionID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "tipoJustificacionID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.UsuarioController",
+    "Method": "CrearUsuario",
+    "RelativePath": "api/Usuario",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuario",
+        "Type": "AttendanceControlSystem.Models.Usuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.UsuarioController",
+    "Method": "ObtenerUsuarios",
+    "RelativePath": "api/Usuario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rolID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "regionID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "sucursalID",
+        "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "IsRequired": false
+      },
+      {
+        "Name": "incluirInactivos",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.UsuarioController",
+    "Method": "ObtenerUsuario",
+    "RelativePath": "api/Usuario/{usuarioID}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.UsuarioController",
+    "Method": "ActualizarUsuario",
+    "RelativePath": "api/Usuario/{usuarioID}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "usuario",
+        "Type": "AttendanceControlSystem.Models.Usuario",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.UsuarioController",
+    "Method": "RegistrarAccesoUsuario",
+    "RelativePath": "api/Usuario/{usuarioID}/acceso",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.UsuarioController",
+    "Method": "CambiarEstadoUsuario",
+    "RelativePath": "api/Usuario/{usuarioID}/estado",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "activo",
+        "Type": "System.Boolean",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AttendanceControlSystem.Controllers.UsuarioController",
+    "Method": "CambiarPasswordUsuario",
+    "RelativePath": "api/Usuario/{usuarioID}/password",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioID",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "password",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]

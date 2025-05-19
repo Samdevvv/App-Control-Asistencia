@@ -1,137 +1,1859 @@
-create database control_asistencia;
-go
-use control_asistencia;
-go
+-- Creación de la base de datos
+CREATE DATABASE DefensoriaAsistencia;
 
-create table regiones (
-    id_region int primary key auto_increment,
-    nombre varchar(100) unique not null,
-    descripcion text
+-- Tabla de Regiones
+CREATE TABLE Regiones (
+    RegionID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(50) NOT NULL,
+    CodigoRegion VARCHAR(25) NOT NULL,
+    Descripcion VARCHAR(255),
+    CantidadSucursales INT NOT NULL,
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Estado BOOLEAN DEFAULT 1
 );
 
-create table sucursales (
-    id_sucursal int primary key auto_increment,
-    id_region int not null,
-    nombre varchar(100) unique not null,
-    direccion text not null,
-    telefono varchar(15) check (telefono regexp '^[0-9]{10}$'),
-    foreign key (id_region) references regiones(id_region) on delete cascade
+-- Tabla de Sucursales
+CREATE TABLE Sucursales (
+    SucursalID SERIAL PRIMARY KEY,
+    RegionID INT NOT NULL,
+    Nombre VARCHAR(100) NOT NULL,
+    Direccion VARCHAR(255) NOT NULL,
+    Telefono VARCHAR(20),
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Estado BOOLEAN DEFAULT 1,
+    CONSTRAINT FK_Sucursales_Regiones FOREIGN KEY (RegionID) REFERENCES Regiones(RegionID)
 );
 
-create table oficinas (
-    id_oficina int primary key auto_increment,
-    id_sucursal int not null,
-    nombre varchar(100) not null,
-    foreign key (id_sucursal) references sucursales(id_sucursal) on delete cascade
+-- Tabla de Oficinas
+CREATE TABLE Oficinas (
+    OficinaID SERIAL PRIMARY KEY,
+    SucursalID INT NOT NULL,
+    Nombre VARCHAR(100) NOT NULL,
+    CodigoOficina VARCHAR(100) NOT NULL,
+    Direccion VARCHAR(255) NOT NULL,
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Estado BOOLEAN DEFAULT 1,
+    CONSTRAINT FK_Oficinas_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID)
 );
 
-create table departamentos (
-    id_departamento int primary key auto_increment,
-    nombre varchar(100) unique not null,
-    descripcion text
+-- Tabla de Roles
+CREATE TABLE Roles (
+    RolID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(50) NOT NULL,
+    Descripcion VARCHAR(255),
+    Estado BOOLEAN DEFAULT 1
 );
 
-create table cargos (
-    id_cargo int primary key auto_increment,
-    nombre varchar(100) unique not null,
-    descripcion text
+-- Tabla de Departamentos
+CREATE TABLE Departamentos (
+    DepartamentoID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Descripcion VARCHAR(255),
+    Estado BOOLEAN DEFAULT 1
 );
 
-create table empleados (
-    id_empleado int primary key auto_increment,
-    codigo varchar(20) unique not null, 
-    cedula varchar(11) unique not null check (cedula regexp '^[0-9]{11}$'),
-    nombre varchar(100) not null,
-    apellido varchar(100) not null,
-    correo varchar(100) unique not null,
-    telefono varchar(15) check (telefono regexp '^[0-9]{10}$'),
-    fecha_contratacion date not null,
-    id_departamento int,
-    id_oficina int not null,
-    id_cargo int not null,
-    estado enum('activo', 'inactivo') default 'activo',
-    huella_biometrica blob,
-    rostro_biometrico blob,
-    foreign key (id_departamento) references departamentos(id_departamento),
-    foreign key (id_oficina) references oficinas(id_oficina) on delete cascade,
-    foreign key (id_cargo) references cargos(id_cargo) on delete cascade
+-- Tabla de Cargos
+CREATE TABLE Cargos (
+    CargoID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Descripcion VARCHAR(255),
+    DepartamentoID INT NOT NULL,
+    Estado BOOLEAN DEFAULT 1,
+    CONSTRAINT FK_Cargos_Departamentos FOREIGN KEY (DepartamentoID) REFERENCES Departamentos(DepartamentoID)
 );
 
-create table turnos (
-    id_turno int primary key auto_increment,
-    nombre varchar(50) not null,
-    hora_entrada time not null,
-    hora_salida time not null,
-    tolerancia_minutos int default 5
+-- Tabla de Usuarios (Sin FK a Empleados temporalmente)
+CREATE TABLE Usuarios (
+    UsuarioID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Apellido VARCHAR(100) NOT NULL,
+    NombreUsuario VARCHAR(50) NOT NULL UNIQUE,
+    Contrasena VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) UNIQUE,
+    RolID INT NOT NULL,
+    RegionID INT NOT NULL,
+    SucursalID INT NOT NULL,
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UltimoAcceso TIMESTAMP,
+    Estado BOOLEAN DEFAULT 1,
+    CONSTRAINT FK_Usuarios_Roles FOREIGN KEY (RolID) REFERENCES Roles(RolID),
+    CONSTRAINT FK_Usuarios_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID),
+    CONSTRAINT FK_Usuarios_Regiones FOREIGN KEY (RegionID) REFERENCES Regiones(RegionID)
 );
 
-create table empleado_turno (
-    id_empleado int,
-    id_turno int,
-    fecha_inicio date not null,
-    fecha_fin date default null,
-    primary key (id_empleado, id_turno, fecha_inicio),
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade,
-    foreign key (id_turno) references turnos(id_turno) on delete cascade
+-- Tabla de Log del Sistema (Antes de los triggers)
+CREATE TABLE LogSistema (
+    LogID SERIAL PRIMARY KEY,
+    UsuarioID INT NULL, -- Permitimos NULL temporalmente
+    Fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Accion VARCHAR(100) NOT NULL,
+    Tabla VARCHAR(50) NOT NULL,
+    Registro INT, -- ID del registro afectado
+    Detalles VARCHAR(MAX)
 );
 
-create table asistencias (
-    id_asistencia int primary key auto_increment,
-    id_empleado int not null,
-    fecha date not null,
-    hora_entrada time default null,
-    hora_salida time default null,
-    tipo_registro enum('huella', 'rostro') not null,
-    estado enum('a tiempo', 'tarde', 'ausente') default 'a tiempo',
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+-- Tabla de Empleados
+CREATE TABLE Empleados (
+    EmpleadoID SERIAL PRIMARY KEY,
+    Cedula VARCHAR(20) NOT NULL UNIQUE,
+    Nombre VARCHAR(100) NOT NULL,
+    Apellido VARCHAR(100) NOT NULL,
+    FechaNacimiento DATE,
+    Sexo CHAR(1),
+    Direccion VARCHAR(255),
+    Telefono VARCHAR(20),
+    Email VARCHAR(100),
+    FechaIngreso DATE NOT NULL,
+    CargoID INT NOT NULL,
+    SucursalID INT NOT NULL,
+    DepartamentoID INT NOT NULL,
+    HuellaDigital VARBINARY(MAX), -- Aquí se almacenaría la huella digital (simulada)
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
+    Estado BOOLEAN DEFAULT 1,
+    CONSTRAINT FK_Empleados_Cargos FOREIGN KEY (CargoID) REFERENCES Cargos(CargoID),
+    CONSTRAINT FK_Empleados_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID),
+    CONSTRAINT FK_Empleados_Departamentos FOREIGN KEY (DepartamentoID) REFERENCES Departamentos(DepartamentoID)
 );
 
-create table permisos (
-    id_permiso int primary key auto_increment,
-    id_empleado int not null,
-    fecha_inicio date not null,
-    fecha_fin date not null,
-    motivo text not null,
-    estado enum('pendiente', 'aprobado', 'rechazado') default 'pendiente',
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+-- Agregar constraint de FK a Empleados para UsuarioCreacion
+ALTER TABLE Empleados
+ADD CONSTRAINT FK_Empleados_UsuarioCreacion FOREIGN KEY (UsuarioCreacion) REFERENCES Usuarios(UsuarioID);
+
+-- Tabla de Horarios
+CREATE TABLE Horarios (
+    HorarioID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(50) NOT NULL,
+    HoraEntrada TIME NOT NULL,
+    HoraSalida TIME NOT NULL,
+    ToleranciaEntrada INT DEFAULT 10, -- Minutos de tolerancia
+    ToleranciaSalida INT DEFAULT 10, -- Minutos de tolerancia
+    Descripcion VARCHAR(255),
+    Estado BOOLEAN DEFAULT 1
 );
 
-create table historial_faltas (
-    id_historial int primary key auto_increment,
-    id_empleado int not null,
-    cantidad_faltas int default 0,
-    ultima_falta date default null,
-    motivo_ultima_falta text default null,
-    estado_disciplinario enum('normal', 'advertencia', 'sancionado', 'despido') default 'normal',
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+-- Tabla de Asistencias (Sin FK temporalmente)
+CREATE TABLE Asistencias (
+    AsistenciaID SERIAL PRIMARY KEY,
+    EmpleadoID INT NOT NULL,
+    Fecha DATE NOT NULL,
+    HoraEntrada TIMESTAMP,
+    HoraSalida TIMESTAMP,
+    EstadoEntrada VARCHAR(20), -- A tiempo, Tarde, etc.
+    EstadoSalida VARCHAR(20), -- A tiempo, Temprano, etc.
+    Observaciones VARCHAR(MAX),
+    CONSTRAINT FK_Asistencias_Empleados FOREIGN KEY (EmpleadoID) REFERENCES Empleados(EmpleadoID)
 );
 
-create table usuarios (
-    id_usuario int primary key auto_increment,
-    id_empleado int unique not null,
-    username varchar(50) unique not null,
-    password_hash varchar(255) not null,
-    rol enum('administrador', 'rrhh', 'empleado') not null,
-    foreign key (id_empleado) references empleados(id_empleado) on delete cascade
+-- Tabla de Días No Laborables
+CREATE TABLE DiasNoLaborables (
+    DiaNoLaborableID SERIAL PRIMARY KEY,
+    Fecha DATE NOT NULL,
+    Descripcion VARCHAR(255) NOT NULL,
+    AplicaTodasSucursales BOOLEAN DEFAULT 1,
+    SucursalID INT NULL,
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
+    Estado BOOLEAN DEFAULT 1,
+    CONSTRAINT FK_DiasNoLaborables_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID)
 );
 
-create index idx_sucursales_id_region on sucursales(id_region);
+-- Agregar constraint de FK a DiasNoLaborables para UsuarioCreacion
+ALTER TABLE DiasNoLaborables
+ADD CONSTRAINT FK_DiasNoLaborables_Usuarios FOREIGN KEY (UsuarioCreacion) REFERENCES Usuarios(UsuarioID);
 
-create index idx_oficinas_id_sucursal on oficinas(id_sucursal);
+-- Tabla de Asignación de Horarios a Empleados
+CREATE TABLE HorariosEmpleados (
+    HorarioEmpleadoID SERIAL PRIMARY KEY,
+    EmpleadoID INT NOT NULL,
+    HorarioID INT NOT NULL,
+    FechaInicio DATE NOT NULL,
+    FechaFin DATE NULL, -- NULL significa que está vigente indefinidamente
+    UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Estado BOOLEAN DEFAULT 1,
+    CONSTRAINT FK_HorariosEmpleados_Empleados FOREIGN KEY (EmpleadoID) REFERENCES Empleados(EmpleadoID),
+    CONSTRAINT FK_HorariosEmpleados_Horarios FOREIGN KEY (HorarioID) REFERENCES Horarios(HorarioID)
+);
 
-create index idx_empleados_id_oficina on empleados(id_oficina);
-create index idx_empleados_id_departamento on empleados(id_departamento);
-create index idx_empleados_id_cargo on empleados(id_cargo);
+-- Agregar constraint de FK a HorariosEmpleados para UsuarioCreacion
+ALTER TABLE HorariosEmpleados
+ADD CONSTRAINT FK_HorariosEmpleados_Usuarios FOREIGN KEY (UsuarioCreacion) REFERENCES Usuarios(UsuarioID);
 
-create index idx_empleado_turno_id_empleado on empleado_turno(id_empleado);
-create index idx_empleado_turno_id_turno on empleado_turno(id_turno);
+-- Tabla de Tipos de Permisos
+CREATE TABLE TiposPermisos (
+    TipoPermisoID SERIAL PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Descripcion VARCHAR(255),
+    RequiereJustificacion BOOLEAN DEFAULT 1,
+    AfectaSalario BOOLEAN DEFAULT 0,
+    Estado BOOLEAN DEFAULT 1
+);
 
-create index idx_asistencias_id_empleado on asistencias(id_empleado);
-create index idx_asistencias_fecha on asistencias(fecha);
+-- Tabla de Permisos
+CREATE TABLE Permisos (
+    PermisoID SERIAL PRIMARY KEY,
+    EmpleadoID INT NOT NULL,
+    TipoPermisoID INT NOT NULL,
+    FechaInicio TIMESTAMP NOT NULL,
+    FechaFin TIMESTAMP NOT NULL,
+    Justificacion VARCHAR(MAX),
+    DocumentoJustificacion VARCHAR(255), -- Ruta al documento de justificación
+    UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Estado BOOLEAN DEFAULT 1, -- 1=Aprobado, 0=Rechazado
+    Comentarios VARCHAR(MAX),
+    CONSTRAINT FK_Permisos_Empleados FOREIGN KEY (EmpleadoID) REFERENCES Empleados(EmpleadoID),
+    CONSTRAINT FK_Permisos_TiposPermisos FOREIGN KEY (TipoPermisoID) REFERENCES TiposPermisos(TipoPermisoID)
+);
 
-create index idx_permisos_id_empleado on permisos(id_empleado);
-create index idx_permisos_fecha_inicio on permisos(fecha_inicio);
+-- Agregar constraint de FK a Permisos para UsuarioCreacion
+ALTER TABLE Permisos
+ADD CONSTRAINT FK_Permisos_Usuarios FOREIGN KEY (UsuarioCreacion) REFERENCES Usuarios(UsuarioID);
 
-create index idx_historial_faltas_id_empleado on historial_faltas(id_empleado);
+-- Tabla de Justificaciones de Asistencias
+CREATE TABLE JustificacionesAsistencias (
+    JustificacionID SERIAL PRIMARY KEY,
+    AsistenciaID INT NOT NULL,
+    Justificacion VARCHAR(MAX) NOT NULL,
+    DocumentoJustificacion VARCHAR(255), -- Ruta al documento de justificación
+    UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
+    FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    Estado BOOLEAN DEFAULT 1, -- 1=Aprobado, 0=Rechazado
+    Comentarios VARCHAR(MAX),
+    CONSTRAINT FK_JustificacionesAsistencias_Asistencias FOREIGN KEY (AsistenciaID) REFERENCES Asistencias(AsistenciaID)
+);
 
-create index idx_usuarios_username on usuarios(username);
+-- Agregar constraint de FK a JustificacionesAsistencias para UsuarioCreacion
+ALTER TABLE JustificacionesAsistencias
+ADD CONSTRAINT FK_JustificacionesAsistencias_Usuarios FOREIGN KEY (UsuarioCreacion) REFERENCES Usuarios(UsuarioID);
+
+-- Actualizar la FK en LogSistema para que utilice el UsuarioID de Usuarios
+ALTER TABLE LogSistema
+ADD CONSTRAINT FK_LogSistema_Usuarios FOREIGN KEY (UsuarioID) REFERENCES Usuarios(UsuarioID);
+
+-- Procedimiento almacenado para registrar asistencia (simulación de huella digital)
+CREATE PROCEDURE sp_RegistrarAsistencia
+    @EmpleadoID INT,
+    @HuellaDigital VARBINARY(MAX)
+AS
+BEGIN
+    DECLARE @FechaActual DATE = CAST(CURRENT_TIMESTAMP AS DATE);
+    DECLARE @HoraActual TIMESTAMP = CURRENT_TIMESTAMP;
+    DECLARE @ExisteAsistencia INT;
+    DECLARE @HorarioID INT;
+    DECLARE @HoraEntrada TIME;
+    DECLARE @HoraSalida TIME;
+    DECLARE @ToleranciaEntrada INT;
+    DECLARE @ToleranciaSalida INT;
+    DECLARE @EstadoEntrada VARCHAR(20);
+    DECLARE @EstadoSalida VARCHAR(20);
+
+    -- Verificar si existe la asistencia para hoy
+    SELECT @ExisteAsistencia = COUNT(*) 
+    FROM Asistencias 
+    WHERE EmpleadoID = @EmpleadoID AND Fecha = @FechaActual;
+
+    -- Obtener el horario actual del empleado
+    SELECT TOP 1 @HorarioID = h.HorarioID,
+           @HoraEntrada = h.HoraEntrada,
+           @HoraSalida = h.HoraSalida,
+           @ToleranciaEntrada = h.ToleranciaEntrada,
+           @ToleranciaSalida = h.ToleranciaSalida
+    FROM HorariosEmpleados he
+    INNER JOIN Horarios h ON he.HorarioID = h.HorarioID
+    WHERE he.EmpleadoID = @EmpleadoID
+    AND he.FechaInicio <= @FechaActual
+    AND (he.FechaFin IS NULL OR he.FechaFin >= @FechaActual)
+    AND he.Estado = 1
+    ORDER BY he.FechaInicio DESC;
+
+    -- Verificar si es entrada o salida
+    IF @ExisteAsistencia = 0
+    BEGIN
+        -- Es una entrada
+        -- Determinar el estado de la entrada
+        DECLARE @MinutosAtraso INT;
+        SET @MinutosAtraso = DATEDIFF(MINUTE, 
+                            CAST(@FechaActual AS TIMESTAMP) + CAST(@HoraEntrada AS TIMESTAMP), 
+                            @HoraActual);
+
+        IF @MinutosAtraso <= 0
+            SET @EstadoEntrada = 'A tiempo';
+        ELSE IF @MinutosAtraso <= @ToleranciaEntrada
+            SET @EstadoEntrada = 'Tolerancia';
+        ELSE
+            SET @EstadoEntrada = 'Tarde';
+
+        -- Registrar la entrada
+        INSERT INTO Asistencias (EmpleadoID, Fecha, HoraEntrada, EstadoEntrada)
+        VALUES (@EmpleadoID, @FechaActual, @HoraActual, @EstadoEntrada);
+    END
+    ELSE
+    BEGIN
+        -- Es una salida
+        -- Determinar el estado de la salida
+        DECLARE @MinutosAnticipacion INT;
+        SET @MinutosAnticipacion = DATEDIFF(MINUTE, 
+                                 @HoraActual,
+                                 CAST(@FechaActual AS TIMESTAMP) + CAST(@HoraSalida AS TIMESTAMP));
+
+        IF @MinutosAnticipacion <= 0
+            SET @EstadoSalida = 'Completo';
+        ELSE IF @MinutosAnticipacion <= @ToleranciaSalida
+            SET @EstadoSalida = 'Tolerancia';
+        ELSE
+            SET @EstadoSalida = 'Temprano';
+
+        -- Actualizar la salida
+        UPDATE Asistencias
+        SET HoraSalida = @HoraActual,
+            EstadoSalida = @EstadoSalida
+        WHERE EmpleadoID = @EmpleadoID AND Fecha = @FechaActual;
+    END
+END;
+
+-- Trigger para registrar acciones en el log del sistema
+CREATE TRIGGER tr_LogSistema_Regiones
+ON Regiones
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @Accion VARCHAR(100);
+
+    -- Obtener el ID del usuario predeterminado (el primer usuario administrador)
+    DECLARE @UsuarioID INT = 1; -- El primer usuario administrador tendrá ID 1
+
+    -- Inserción
+    IF EXISTS (SELECT * FROM inserted) AND NOT EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Inserción';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Regiones',
+            i.RegionID,
+            'Nombre: ' + i.Nombre
+        FROM inserted i;
+    END
+
+    -- Actualización
+    IF EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Actualización';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Regiones',
+            i.RegionID,
+            'Anterior: ' + d.Nombre + ', Nuevo: ' + i.Nombre
+        FROM inserted i
+        INNER JOIN deleted d ON i.RegionID = d.RegionID;
+    END
+
+    -- Eliminación
+    IF NOT EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Eliminación';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Regiones',
+            d.RegionID,
+            'Nombre: ' + d.Nombre
+        FROM deleted d;
+    END
+END;
+
+-- Trigger para registrar acciones de Sucursales
+CREATE TRIGGER tr_LogSistema_Sucursales
+ON Sucursales
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @Accion VARCHAR(100);
+
+    -- Obtener el ID del usuario predeterminado (el primer usuario administrador)
+    DECLARE @UsuarioID INT = 1; -- El primer usuario administrador tendrá ID 1
+
+    -- Inserción
+    IF EXISTS (SELECT * FROM inserted) AND NOT EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Inserción';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Sucursales',
+            i.SucursalID,
+            'Nombre: ' + i.Nombre + ', RegionID: ' + CAST(i.RegionID AS VARCHAR)
+        FROM inserted i;
+    END
+
+    -- Actualización
+    IF EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Actualización';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Sucursales',
+            i.SucursalID,
+            'Anterior: ' + d.Nombre + ', Nuevo: ' + i.Nombre
+        FROM inserted i
+        INNER JOIN deleted d ON i.SucursalID = d.SucursalID;
+    END
+
+    -- Eliminación
+    IF NOT EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Eliminación';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Sucursales',
+            d.SucursalID,
+            'Nombre: ' + d.Nombre + ', RegionID: ' + CAST(d.RegionID AS VARCHAR)
+        FROM deleted d;
+    END
+END;
+
+-- Trigger para registrar acciones de Empleados
+CREATE TRIGGER tr_LogSistema_Empleados
+ON Empleados
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @Accion VARCHAR(100);
+
+    -- Obtener el ID del usuario predeterminado (el primer usuario administrador)
+    DECLARE @UsuarioID INT = 1; -- El primer usuario administrador tendrá ID 1
+
+    -- Inserción
+    IF EXISTS (SELECT * FROM inserted) AND NOT EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Inserción';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Empleados',
+            i.EmpleadoID,
+            'Nombre: ' + i.Nombre + ' ' + i.Apellido + ', Cédula: ' + i.Cedula
+        FROM inserted i;
+    END
+
+    -- Actualización
+    IF EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Actualización';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Empleados',
+            i.EmpleadoID,
+            'Actualización de datos del empleado: ' + i.Nombre + ' ' + i.Apellido
+        FROM inserted i
+        INNER JOIN deleted d ON i.EmpleadoID = d.EmpleadoID;
+    END
+
+    -- Eliminación (desactivación)
+    IF NOT EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Eliminación';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Empleados',
+            d.EmpleadoID,
+            'Nombre: ' + d.Nombre + ' ' + d.Apellido + ', Cédula: ' + d.Cedula
+        FROM deleted d;
+    END
+END;
+
+-- Trigger para registrar acciones de Asistencias
+CREATE TRIGGER tr_LogSistema_Asistencias
+ON Asistencias
+AFTER INSERT, UPDATE, DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @Accion VARCHAR(100);
+
+    -- Obtener el ID del usuario predeterminado (el primer usuario administrador)
+    DECLARE @UsuarioID INT = 1; -- El primer usuario administrador tendrá ID 1
+
+    -- Inserción
+    IF EXISTS (SELECT * FROM inserted) AND NOT EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Registro de Entrada';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Asistencias',
+            i.AsistenciaID,
+            'EmpleadoID: ' + CAST(i.EmpleadoID AS VARCHAR) + 
+            ', Fecha: ' + CONVERT(VARCHAR, i.Fecha, 103) + 
+            ', Hora: ' + CONVERT(VARCHAR, i.HoraEntrada, 108) + 
+            ', Estado: ' + i.EstadoEntrada
+        FROM inserted i;
+    END
+
+    -- Actualización
+    IF EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        -- Si solo se actualizó la hora de salida (registro de salida)
+        IF EXISTS(SELECT 1 FROM inserted i JOIN deleted d ON i.AsistenciaID = d.AsistenciaID 
+                 WHERE i.HoraSalida IS NOT NULL AND d.HoraSalida IS NULL)
+        BEGIN
+            SET @Accion = 'Registro de Salida';
+
+            INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+            SELECT 
+                @UsuarioID,
+                CURRENT_TIMESTAMP,
+                @Accion,
+                'Asistencias',
+                i.AsistenciaID,
+                'EmpleadoID: ' + CAST(i.EmpleadoID AS VARCHAR) + 
+                ', Fecha: ' + CONVERT(VARCHAR, i.Fecha, 103) + 
+                ', Hora: ' + CONVERT(VARCHAR, i.HoraSalida, 108) + 
+                ', Estado: ' + i.EstadoSalida
+            FROM inserted i
+            INNER JOIN deleted d ON i.AsistenciaID = d.AsistenciaID
+            WHERE i.HoraSalida IS NOT NULL AND d.HoraSalida IS NULL;
+        END
+        ELSE
+        BEGIN
+            SET @Accion = 'Actualización de Asistencia';
+
+            INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+            SELECT 
+                @UsuarioID,
+                CURRENT_TIMESTAMP,
+                @Accion,
+                'Asistencias',
+                i.AsistenciaID,
+                'EmpleadoID: ' + CAST(i.EmpleadoID AS VARCHAR) + 
+                ', Fecha: ' + CONVERT(VARCHAR, i.Fecha, 103)
+            FROM inserted i
+            INNER JOIN deleted d ON i.AsistenciaID = d.AsistenciaID;
+        END
+    END
+
+    -- Eliminación
+    IF NOT EXISTS (SELECT * FROM inserted) AND EXISTS (SELECT * FROM deleted)
+    BEGIN
+        SET @Accion = 'Eliminación de Asistencia';
+
+        INSERT INTO LogSistema (UsuarioID, Fecha, Accion, Tabla, Registro, Detalles)
+        SELECT 
+            @UsuarioID,
+            CURRENT_TIMESTAMP,
+            @Accion,
+            'Asistencias',
+            d.AsistenciaID,
+            'EmpleadoID: ' + CAST(d.EmpleadoID AS VARCHAR) + 
+            ', Fecha: ' + CONVERT(VARCHAR, d.Fecha, 103)
+        FROM deleted d;
+    END
+END;
+
+-- Procedimientos almacenados para CRUD de Regiones
+-- Crear Region
+CREATE PROCEDURE sp_CrearRegion
+    @Nombre VARCHAR(50),
+    @Descripcion VARCHAR(255)
+AS
+BEGIN
+    -- Verificar si ya existe una región con ese nombre
+    IF EXISTS (SELECT 1 FROM Regiones WHERE Nombre = @Nombre)
+    BEGIN
+        RAISERROR('Ya existe una región con ese nombre.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO Regiones (Nombre, Descripcion)
+    VALUES (@Nombre, @Descripcion);
+
+    SELECT SCOPE_IDENTITY() AS RegionID;
+END;
+
+-- Obtener todas las Regiones
+CREATE PROCEDURE sp_ObtenerRegiones
+AS
+BEGIN
+    SELECT * FROM Regiones WHERE Estado = 1;
+END;
+
+-- Obtener Region por ID
+CREATE PROCEDURE sp_ObtenerRegionPorID
+    @RegionID INT
+AS
+BEGIN
+    SELECT * FROM Regiones WHERE RegionID = @RegionID AND Estado = 1;
+END;
+
+-- Actualizar Region
+CREATE PROCEDURE sp_ActualizarRegion
+    @RegionID INT,
+    @Nombre VARCHAR(50),
+    @Descripcion VARCHAR(255)
+AS
+BEGIN
+    -- Verificar si ya existe otra región con ese nombre
+    IF EXISTS (SELECT 1 FROM Regiones WHERE Nombre = @Nombre AND RegionID <> @RegionID)
+    BEGIN
+        RAISERROR('Ya existe otra región con ese nombre.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Regiones
+    SET Nombre = @Nombre,
+        Descripcion = @Descripcion
+    WHERE RegionID = @RegionID;
+
+    SELECT @RegionID AS RegionID;
+END;
+
+-- Eliminar Region
+CREATE PROCEDURE sp_EliminarRegion
+    @RegionID INT
+AS
+BEGIN
+    -- Verificar si la región tiene sucursales asociadas
+    IF EXISTS (SELECT 1 FROM Sucursales WHERE RegionID = @RegionID AND Estado = 1)
+    BEGIN
+        RAISERROR('No se puede eliminar la región porque tiene sucursales asociadas.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Regiones
+    SET Estado = 0
+    WHERE RegionID = @RegionID;
+
+    SELECT @RegionID AS RegionID;
+END;
+
+-- Procedimientos almacenados para CRUD de Sucursales
+-- Crear Sucursal
+CREATE PROCEDURE sp_CrearSucursal
+    @RegionID INT,
+    @Nombre VARCHAR(100),
+    @Direccion VARCHAR(255),
+    @Telefono VARCHAR(20)
+AS
+BEGIN
+    -- Verificar si existe la región
+    IF NOT EXISTS (SELECT 1 FROM Regiones WHERE RegionID = @RegionID AND Estado = 1)
+    BEGIN
+        RAISERROR('La región no existe o está inactiva.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si ya existe una sucursal con ese nombre en esa región
+    IF EXISTS (SELECT 1 FROM Sucursales WHERE Nombre = @Nombre AND RegionID = @RegionID AND Estado = 1)
+    BEGIN
+        RAISERROR('Ya existe una sucursal con ese nombre en esta región.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO Sucursales (RegionID, Nombre, Direccion, Telefono)
+    VALUES (@RegionID, @Nombre, @Direccion, @Telefono);
+
+    SELECT SCOPE_IDENTITY() AS SucursalID;
+END;
+
+-- Obtener todas las Sucursales
+CREATE PROCEDURE sp_ObtenerSucursales
+AS
+BEGIN
+    SELECT s.*, r.Nombre AS NombreRegion
+    FROM Sucursales s
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE s.Estado = 1;
+END;
+
+-- Obtener Sucursales por Región
+CREATE PROCEDURE sp_ObtenerSucursalesPorRegion
+    @RegionID INT
+AS
+BEGIN
+    SELECT s.*, r.Nombre AS NombreRegion
+    FROM Sucursales s
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE s.RegionID = @RegionID AND s.Estado = 1;
+END;
+
+-- Obtener Sucursal por ID
+CREATE PROCEDURE sp_ObtenerSucursalPorID
+    @SucursalID INT
+AS
+BEGIN
+    SELECT s.*, r.Nombre AS NombreRegion
+    FROM Sucursales s
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE s.SucursalID = @SucursalID AND s.Estado = 1;
+END;
+
+-- Actualizar Sucursal
+CREATE PROCEDURE sp_ActualizarSucursal
+    @SucursalID INT,
+    @RegionID INT,
+    @Nombre VARCHAR(100),
+    @Direccion VARCHAR(255),
+    @Telefono VARCHAR(20)
+AS
+BEGIN
+    -- Verificar si existe la región
+    IF NOT EXISTS (SELECT 1 FROM Regiones WHERE RegionID = @RegionID AND Estado = 1)
+    BEGIN
+        RAISERROR('La región no existe o está inactiva.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si ya existe otra sucursal con ese nombre en esa región
+    IF EXISTS (SELECT 1 FROM Sucursales 
+               WHERE Nombre = @Nombre AND RegionID = @RegionID AND SucursalID <> @SucursalID AND Estado = 1)
+    BEGIN
+        RAISERROR('Ya existe otra sucursal con ese nombre en esta región.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Sucursales
+    SET RegionID = @RegionID,
+        Nombre = @Nombre,
+        Direccion = @Direccion,
+        Telefono = @Telefono
+    WHERE SucursalID = @SucursalID;
+
+    SELECT @SucursalID AS SucursalID;
+END;
+
+-- Eliminar Sucursal
+CREATE PROCEDURE sp_EliminarSucursal
+    @SucursalID INT
+AS
+BEGIN
+    -- Verificar si la sucursal tiene empleados asociados
+    IF EXISTS (SELECT 1 FROM Empleados WHERE SucursalID = @SucursalID AND Estado = 1)
+    BEGIN
+        RAISERROR('No se puede eliminar la sucursal porque tiene empleados asociados.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Sucursales
+    SET Estado = 0
+    WHERE SucursalID = @SucursalID;
+
+    SELECT @SucursalID AS SucursalID;
+END;
+
+-- Procedimientos almacenados para CRUD de Usuarios
+-- Crear Usuario
+CREATE PROCEDURE sp_CrearUsuario
+    @Nombre VARCHAR(100),
+    @Apellido VARCHAR(100),
+    @NombreUsuario VARCHAR(50),
+    @Contrasena VARCHAR(100),
+    @Email VARCHAR(100),
+    @RolID INT,
+    @SucursalID INT
+AS
+BEGIN
+    -- Verificar si ya existe un usuario con ese nombre de usuario
+    IF EXISTS (SELECT 1 FROM Usuarios WHERE NombreUsuario = @NombreUsuario)
+    BEGIN
+        RAISERROR('Ya existe un usuario con ese nombre de usuario.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si ya existe un usuario con ese email
+    IF EXISTS (SELECT 1 FROM Usuarios WHERE Email = @Email)
+    BEGIN
+        RAISERROR('Ya existe un usuario con ese correo electrónico.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si existe el rol
+    IF NOT EXISTS (SELECT 1 FROM Roles WHERE RolID = @RolID AND Estado = 1)
+    BEGIN
+        RAISERROR('El rol no existe o está inactivo.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si existe la sucursal
+    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    BEGIN
+        RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO Usuarios (Nombre, Apellido, NombreUsuario, Contrasena, Email, RolID, SucursalID)
+    VALUES (@Nombre, @Apellido, @NombreUsuario, @Contrasena, @Email, @RolID, @SucursalID);
+
+    SELECT SCOPE_IDENTITY() AS UsuarioID;
+END;
+
+-- Obtener todos los Usuarios
+CREATE PROCEDURE sp_ObtenerUsuarios
+AS
+BEGIN
+    SELECT u.*, r.Nombre AS NombreRol, s.Nombre AS NombreSucursal
+    FROM Usuarios u
+    INNER JOIN Roles r ON u.RolID = r.RolID
+    INNER JOIN Sucursales s ON u.SucursalID = s.SucursalID
+    WHERE u.Estado = 1
+    ORDER BY u.Apellido, u.Nombre;
+END;
+
+-- Obtener Usuario por ID
+CREATE PROCEDURE sp_ObtenerUsuarioPorID
+    @UsuarioID INT
+AS
+BEGIN
+    SELECT u.*, r.Nombre AS NombreRol, s.Nombre AS NombreSucursal
+    FROM Usuarios u
+    INNER JOIN Roles r ON u.RolID = r.RolID
+    INNER JOIN Sucursales s ON u.SucursalID = s.SucursalID
+    WHERE u.UsuarioID = @UsuarioID AND u.Estado = 1;
+END;
+
+-- Autenticar Usuario
+CREATE PROCEDURE sp_AutenticarUsuario
+    @NombreUsuario VARCHAR(50),
+    @Contrasena VARCHAR(100)
+AS
+BEGIN
+    SELECT u.*, r.Nombre AS NombreRol, s.Nombre AS NombreSucursal
+    FROM Usuarios u
+    INNER JOIN Roles r ON u.RolID = r.RolID
+    INNER JOIN Sucursales s ON u.SucursalID = s.SucursalID
+    WHERE u.NombreUsuario = @NombreUsuario 
+    AND u.Contrasena = @Contrasena
+    AND u.Estado = 1;
+
+    -- Actualizar último acceso si el usuario existe
+    IF @@ROWCOUNT > 0
+    BEGIN
+        UPDATE Usuarios
+        SET UltimoAcceso = CURRENT_TIMESTAMP
+        WHERE NombreUsuario = @NombreUsuario;
+    END
+END;
+
+-- Actualizar Usuario
+CREATE PROCEDURE sp_ActualizarUsuario
+    @UsuarioID INT,
+    @Nombre VARCHAR(100),
+    @Apellido VARCHAR(100),
+    @NombreUsuario VARCHAR(50),
+    @Contrasena VARCHAR(100) = NULL,
+    @Email VARCHAR(100),
+    @RolID INT,
+    @SucursalID INT
+AS
+BEGIN
+    -- Verificar si ya existe otro usuario con ese nombre de usuario
+    IF EXISTS (SELECT 1 FROM Usuarios 
+              WHERE NombreUsuario = @NombreUsuario AND UsuarioID <> @UsuarioID)
+    BEGIN
+        RAISERROR('Ya existe otro usuario con ese nombre de usuario.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si ya existe otro usuario con ese email
+    IF EXISTS (SELECT 1 FROM Usuarios 
+              WHERE Email = @Email AND UsuarioID <> @UsuarioID)
+    BEGIN
+        RAISERROR('Ya existe otro usuario con ese correo electrónico.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si existe el rol
+    IF NOT EXISTS (SELECT 1 FROM Roles WHERE RolID = @RolID AND Estado = 1)
+    BEGIN
+        RAISERROR('El rol no existe o está inactivo.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si existe la sucursal
+    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    BEGIN
+        RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Usuarios
+    SET Nombre = @Nombre,
+        Apellido = @Apellido,
+        NombreUsuario = @NombreUsuario,
+        Contrasena = CASE WHEN @Contrasena IS NULL THEN Contrasena ELSE @Contrasena END,
+        Email = @Email,
+        RolID = @RolID,
+        SucursalID = @SucursalID
+    WHERE UsuarioID = @UsuarioID;
+
+    SELECT @UsuarioID AS UsuarioID;
+END;
+
+-- Cambiar Contraseña
+CREATE PROCEDURE sp_CambiarContrasena
+    @UsuarioID INT,
+    @ContrasenaActual VARCHAR(100),
+    @ContrasenaNueva VARCHAR(100)
+AS
+BEGIN
+    -- Verificar si la contraseña actual es correcta
+    IF NOT EXISTS (SELECT 1 FROM Usuarios 
+                  WHERE UsuarioID = @UsuarioID AND Contrasena = @ContrasenaActual)
+    BEGIN
+        RAISERROR('La contraseña actual es incorrecta.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Usuarios
+    SET Contrasena = @ContrasenaNueva
+    WHERE UsuarioID = @UsuarioID;
+
+    SELECT @UsuarioID AS UsuarioID;
+END;
+
+-- Eliminar Usuario
+CREATE PROCEDURE sp_EliminarUsuario
+    @UsuarioID INT
+AS
+BEGIN
+    UPDATE Usuarios
+    SET Estado = 0
+    WHERE UsuarioID = @UsuarioID;
+
+    SELECT @UsuarioID AS UsuarioID;
+END;
+
+-- Procedimientos almacenados para CRUD de Horarios
+-- Crear Horario
+CREATE PROCEDURE sp_CrearHorario
+    @Nombre VARCHAR(50),
+    @HoraEntrada TIME,
+    @HoraSalida TIME,
+    @ToleranciaEntrada INT,
+    @ToleranciaSalida INT,
+    @Descripcion VARCHAR(255)
+AS
+BEGIN
+    -- Verificar si ya existe un horario con ese nombre
+    IF EXISTS (SELECT 1 FROM Horarios WHERE Nombre = @Nombre AND Estado = 1)
+    BEGIN
+        RAISERROR('Ya existe un horario con ese nombre.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO Horarios (Nombre, HoraEntrada, HoraSalida, ToleranciaEntrada, ToleranciaSalida, Descripcion)
+    VALUES (@Nombre, @HoraEntrada, @HoraSalida, @ToleranciaEntrada, @ToleranciaSalida, @Descripcion);
+
+    SELECT SCOPE_IDENTITY() AS HorarioID;
+END;
+
+-- Obtener todos los Horarios
+CREATE PROCEDURE sp_ObtenerHorarios
+AS
+BEGIN
+    SELECT * FROM Horarios WHERE Estado = 1;
+END;
+
+-- Obtener Horario por ID
+CREATE PROCEDURE sp_ObtenerHorarioPorID
+    @HorarioID INT
+AS
+BEGIN
+    SELECT * FROM Horarios WHERE HorarioID = @HorarioID AND Estado = 1;
+END;
+
+-- Actualizar Horario
+CREATE PROCEDURE sp_ActualizarHorario
+    @HorarioID INT,
+    @Nombre VARCHAR(50),
+    @HoraEntrada TIME,
+    @HoraSalida TIME,
+    @ToleranciaEntrada INT,
+    @ToleranciaSalida INT,
+    @Descripcion VARCHAR(255)
+AS
+BEGIN
+    -- Verificar si ya existe otro horario con ese nombre
+    IF EXISTS (SELECT 1 FROM Horarios WHERE Nombre = @Nombre AND HorarioID <> @HorarioID AND Estado = 1)
+    BEGIN
+        RAISERROR('Ya existe otro horario con ese nombre.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Horarios
+    SET Nombre = @Nombre,
+        HoraEntrada = @HoraEntrada,
+        HoraSalida = @HoraSalida,
+        ToleranciaEntrada = @ToleranciaEntrada,
+        ToleranciaSalida = @ToleranciaSalida,
+        Descripcion = @Descripcion
+    WHERE HorarioID = @HorarioID;
+
+    SELECT @HorarioID AS HorarioID;
+END;
+
+-- Eliminar Horario
+CREATE PROCEDURE sp_EliminarHorario
+    @HorarioID INT
+AS
+BEGIN
+    -- Verificar si el horario está asignado a algún empleado
+    IF EXISTS (SELECT 1 FROM HorariosEmpleados WHERE HorarioID = @HorarioID AND Estado = 1)
+    BEGIN
+        RAISERROR('No se puede eliminar el horario porque está asignado a empleados.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Horarios
+    SET Estado = 0
+    WHERE HorarioID = @HorarioID;
+
+    SELECT @HorarioID AS HorarioID;
+END;
+
+-- Procedimientos almacenados para CRUD de Días No Laborables
+-- Crear Día No Laborable
+CREATE PROCEDURE sp_CrearDiaNoLaborable
+    @Fecha DATE,
+    @Descripcion VARCHAR(255),
+    @AplicaTodasSucursales BOOLEAN,
+    @SucursalID INT = NULL,
+    @UsuarioCreacion INT
+AS
+BEGIN
+    -- Verificar si ya existe ese día no laborable para esa sucursal
+    IF @AplicaTodasSucursales = 1
+    BEGIN
+        IF EXISTS (SELECT 1 FROM DiasNoLaborables 
+                  WHERE Fecha = @Fecha AND AplicaTodasSucursales = 1 AND Estado = 1)
+        BEGIN
+            RAISERROR('Ya existe un día no laborable global para esa fecha.', 16, 1);
+            RETURN;
+        END
+    END
+    ELSE
+    BEGIN
+        IF EXISTS (SELECT 1 FROM DiasNoLaborables 
+                  WHERE Fecha = @Fecha AND SucursalID = @SucursalID AND Estado = 1)
+        BEGIN
+            RAISERROR('Ya existe un día no laborable para esa sucursal en esa fecha.', 16, 1);
+            RETURN;
+        END
+    END
+
+    -- Verificar si existe la sucursal cuando no aplica a todas
+    IF @AplicaTodasSucursales = 0 AND NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    BEGIN
+        RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO DiasNoLaborables (Fecha, Descripcion, AplicaTodasSucursales, SucursalID, UsuarioCreacion)
+    VALUES (@Fecha, @Descripcion, @AplicaTodasSucursales, 
+           CASE WHEN @AplicaTodasSucursales = 1 THEN NULL ELSE @SucursalID END, 
+           @UsuarioCreacion);
+
+    SELECT SCOPE_IDENTITY() AS DiaNoLaborableID;
+END;
+
+-- Obtener todos los Días No Laborables
+CREATE PROCEDURE sp_ObtenerDiasNoLaborables
+AS
+BEGIN
+    SELECT d.*, s.Nombre AS NombreSucursal
+    FROM DiasNoLaborables d
+    LEFT JOIN Sucursales s ON d.SucursalID = s.SucursalID
+    WHERE d.Estado = 1
+    ORDER BY d.Fecha DESC;
+END;
+
+-- Obtener Días No Laborables por Sucursal
+CREATE PROCEDURE sp_ObtenerDiasNoLaborablesPorSucursal
+    @SucursalID INT
+AS
+BEGIN
+    SELECT d.*, s.Nombre AS NombreSucursal
+    FROM DiasNoLaborables d
+    LEFT JOIN Sucursales s ON d.SucursalID = s.SucursalID
+    WHERE (d.SucursalID = @SucursalID OR d.AplicaTodasSucursales = 1) AND d.Estado = 1
+    ORDER BY d.Fecha DESC;
+END;
+
+-- Obtener Día No Laborable por ID
+CREATE PROCEDURE sp_ObtenerDiaNoLaborablePorID
+    @DiaNoLaborableID INT
+AS
+BEGIN
+    SELECT d.*, s.Nombre AS NombreSucursal
+    FROM DiasNoLaborables d
+    LEFT JOIN Sucursales s ON d.SucursalID = s.SucursalID
+    WHERE d.DiaNoLaborableID = @DiaNoLaborableID AND d.Estado = 1;
+END;
+
+-- Actualizar Día No Laborable
+CREATE PROCEDURE sp_ActualizarDiaNoLaborable
+    @DiaNoLaborableID INT,
+    @Fecha DATE,
+    @Descripcion VARCHAR(255),
+    @AplicaTodasSucursales BOOLEAN,
+    @SucursalID INT = NULL,
+    @UsuarioCreacion INT
+AS
+BEGIN
+    -- Verificar si ya existe otro día no laborable para esa sucursal en esa fecha
+    IF @AplicaTodasSucursales = 1
+    BEGIN
+        IF EXISTS (SELECT 1 FROM DiasNoLaborables 
+                  WHERE Fecha = @Fecha AND AplicaTodasSucursales = 1 
+                  AND DiaNoLaborableID <> @DiaNoLaborableID AND Estado = 1)
+        BEGIN
+            RAISERROR('Ya existe otro día no laborable global para esa fecha.', 16, 1);
+            RETURN;
+        END
+    END
+    ELSE
+    BEGIN
+        IF EXISTS (SELECT 1 FROM DiasNoLaborables 
+                  WHERE Fecha = @Fecha AND SucursalID = @SucursalID 
+                  AND DiaNoLaborableID <> @DiaNoLaborableID AND Estado = 1)
+        BEGIN
+            RAISERROR('Ya existe otro día no laborable para esa sucursal en esa fecha.', 16, 1);
+            RETURN;
+        END
+    END
+
+    -- Verificar si existe la sucursal cuando no aplica a todas
+    IF @AplicaTodasSucursales = 0 AND NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    BEGIN
+        RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE DiasNoLaborables
+    SET Fecha = @Fecha,
+        Descripcion = @Descripcion,
+        AplicaTodasSucursales = @AplicaTodasSucursales,
+        SucursalID = CASE WHEN @AplicaTodasSucursales = 1 THEN NULL ELSE @SucursalID END,
+        UsuarioCreacion = @UsuarioCreacion
+    WHERE DiaNoLaborableID = @DiaNoLaborableID;
+
+    SELECT @DiaNoLaborableID AS DiaNoLaborableID;
+END;
+
+-- Eliminar Día No Laborable
+CREATE PROCEDURE sp_EliminarDiaNoLaborable
+    @DiaNoLaborableID INT
+AS
+BEGIN
+    UPDATE DiasNoLaborables
+    SET Estado = 0
+    WHERE DiaNoLaborableID = @DiaNoLaborableID;
+
+    SELECT @DiaNoLaborableID AS DiaNoLaborableID;
+END;
+
+-- Procedimientos almacenados para CRUD de Empleados
+-- Crear Empleado
+CREATE PROCEDURE sp_CrearEmpleado
+    @Cedula VARCHAR(20),
+    @Nombre VARCHAR(100),
+    @Apellido VARCHAR(100),
+    @FechaNacimiento DATE,
+    @Sexo CHAR(1),
+    @Direccion VARCHAR(255),
+    @Telefono VARCHAR(20),
+    @Email VARCHAR(100),
+    @FechaIngreso DATE,
+    @CargoID INT,
+    @SucursalID INT,
+    @HuellaDigital VARBINARY(MAX),
+    @UsuarioCreacion INT
+AS
+BEGIN
+    -- Verificar si ya existe un empleado con esa cédula
+    IF EXISTS (SELECT 1 FROM Empleados WHERE Cedula = @Cedula)
+    BEGIN
+        RAISERROR('Ya existe un empleado con esa cédula.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si existe el cargo
+    IF NOT EXISTS (SELECT 1 FROM Cargos WHERE CargoID = @CargoID AND Estado = 1)
+    BEGIN
+        RAISERROR('El cargo no existe o está inactivo.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si existe la sucursal
+    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    BEGIN
+        RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
+        RETURN;
+    END
+
+    INSERT INTO Empleados (Cedula, Nombre, Apellido, FechaNacimiento, Sexo, Direccion, 
+                         Telefono, Email, FechaIngreso, CargoID, SucursalID, 
+                         HuellaDigital, UsuarioCreacion)
+    VALUES (@Cedula, @Nombre, @Apellido, @FechaNacimiento, @Sexo, @Direccion, 
+          @Telefono, @Email, @FechaIngreso, @CargoID, @SucursalID, 
+          @HuellaDigital, @UsuarioCreacion);
+
+    SELECT SCOPE_IDENTITY() AS EmpleadoID;
+END;
+
+-- Obtener todos los Empleados
+CREATE PROCEDURE sp_ObtenerEmpleados
+AS
+BEGIN
+    SELECT e.*, c.Nombre AS NombreCargo, s.Nombre AS NombreSucursal, r.Nombre AS NombreRegion
+    FROM Empleados e
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE e.Estado = 1
+    ORDER BY e.Apellido, e.Nombre;
+END;
+
+-- Obtener Empleados por Sucursal
+CREATE PROCEDURE sp_ObtenerEmpleadosPorSucursal
+    @SucursalID INT
+AS
+BEGIN
+    SELECT e.*, c.Nombre AS NombreCargo, s.Nombre AS NombreSucursal, r.Nombre AS NombreRegion
+    FROM Empleados e
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE e.SucursalID = @SucursalID AND e.Estado = 1
+    ORDER BY e.Apellido, e.Nombre;
+END;
+
+-- Obtener Empleados por Region
+CREATE PROCEDURE sp_ObtenerEmpleadosPorRegion
+    @RegionID INT
+AS
+BEGIN
+    SELECT e.*, c.Nombre AS NombreCargo, s.Nombre AS NombreSucursal, r.Nombre AS NombreRegion
+    FROM Empleados e
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE r.RegionID = @RegionID AND e.Estado = 1
+    ORDER BY e.Apellido, e.Nombre;
+END;
+
+-- Obtener Empleado por ID
+CREATE PROCEDURE sp_ObtenerEmpleadoPorID
+    @EmpleadoID INT
+AS
+BEGIN
+    SELECT e.*, c.Nombre AS NombreCargo, s.Nombre AS NombreSucursal, r.Nombre AS NombreRegion
+    FROM Empleados e
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE e.EmpleadoID = @EmpleadoID AND e.Estado = 1;
+END;
+
+-- Actualizar Empleado
+CREATE PROCEDURE sp_ActualizarEmpleado
+    @EmpleadoID INT,
+    @Cedula VARCHAR(20),
+    @Nombre VARCHAR(100),
+    @Apellido VARCHAR(100),
+    @FechaNacimiento DATE,
+    @Sexo CHAR(1),
+    @Direccion VARCHAR(255),
+    @Telefono VARCHAR(20),
+    @Email VARCHAR(100),
+    @FechaIngreso DATE,
+    @CargoID INT,
+    @SucursalID INT,
+    @HuellaDigital VARBINARY(MAX),
+    @UsuarioCreacion INT
+AS
+BEGIN
+    -- Verificar si ya existe otro empleado con esa cédula
+    IF EXISTS (SELECT 1 FROM Empleados WHERE Cedula = @Cedula AND EmpleadoID <> @EmpleadoID)
+    BEGIN
+        RAISERROR('Ya existe otro empleado con esa cédula.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si existe el cargo
+    IF NOT EXISTS (SELECT 1 FROM Cargos WHERE CargoID = @CargoID AND Estado = 1)
+    BEGIN
+        RAISERROR('El cargo no existe o está inactivo.', 16, 1);
+        RETURN;
+    END
+
+    -- Verificar si existe la sucursal
+    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    BEGIN
+        RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
+        RETURN;
+    END
+
+    UPDATE Empleados
+    SET Cedula = @Cedula,
+        Nombre = @Nombre,
+        Apellido = @Apellido,
+        FechaNacimiento = @FechaNacimiento,
+        Sexo = @Sexo,
+        Direccion = @Direccion,
+        Telefono = @Telefono,
+        Email = @Email,
+        FechaIngreso = @FechaIngreso,
+        CargoID = @CargoID,
+        SucursalID = @SucursalID,
+        HuellaDigital = CASE WHEN @HuellaDigital IS NULL THEN HuellaDigital ELSE @HuellaDigital END,
+        UsuarioCreacion = @UsuarioCreacion
+    WHERE EmpleadoID = @EmpleadoID;
+
+    SELECT @EmpleadoID AS EmpleadoID;
+END;
+
+-- Activar/Desactivar Empleado
+CREATE PROCEDURE sp_CambiarEstadoEmpleado
+    @EmpleadoID INT,
+    @Estado BOOLEAN
+AS
+BEGIN
+    UPDATE Empleados
+    SET Estado = @Estado
+    WHERE EmpleadoID = @EmpleadoID;
+
+    SELECT @EmpleadoID AS EmpleadoID;
+END;
+
+-- Procedimientos almacenados para Reportes
+-- Reporte de Asistencias por Período
+CREATE PROCEDURE sp_ReporteAsistenciasPorPeriodo
+    @FechaInicio DATE,
+    @FechaFin DATE,
+    @SucursalID INT = NULL,
+    @RegionID INT = NULL,
+    @EmpleadoID INT = NULL
+AS
+BEGIN
+    -- Reporte principal de asistencias
+    SELECT 
+        a.AsistenciaID,
+        a.Fecha,
+        a.HoraEntrada,
+        a.HoraSalida,
+        a.EstadoEntrada,
+        a.EstadoSalida,
+        e.EmpleadoID,
+        e.Cedula,
+        e.Nombre + ' ' + e.Apellido AS NombreCompleto,
+        c.Nombre AS Cargo,
+        s.Nombre AS Sucursal,
+        r.Nombre AS Region,
+        CASE 
+            WHEN a.HoraEntrada IS NULL THEN 'Ausente'
+            WHEN a.HoraSalida IS NULL THEN 'Sin salida registrada'
+            ELSE 'Completo'
+        END AS EstadoAsistencia,
+        CASE 
+            WHEN a.HoraEntrada IS NULL THEN 0
+            WHEN a.HoraSalida IS NULL THEN 0
+            ELSE DATEDIFF(MINUTE, a.HoraEntrada, a.HoraSalida) / 60.0
+        END AS HorasTrabajadas
+    FROM Empleados e
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID AND a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    WHERE e.Estado = 1
+    AND (@EmpleadoID IS NULL OR e.EmpleadoID = @EmpleadoID)
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    ORDER BY a.Fecha DESC, e.Apellido, e.Nombre;
+END;
+
+-- Procedimiento separado para el top de empleados puntuales
+CREATE PROCEDURE sp_TopEmpleadosPuntuales
+    @FechaInicio DATE,
+    @FechaFin DATE,
+    @SucursalID INT = NULL,
+    @RegionID INT = NULL
+AS
+BEGIN
+    -- Top 10 empleados con más asistencias puntuales
+    SELECT TOP 10
+        e.EmpleadoID,
+        e.Cedula,
+        e.Nombre + ' ' + e.Apellido AS NombreCompleto,
+        c.Nombre AS Cargo,
+        s.Nombre AS Sucursal,
+        r.Nombre AS Region,
+        COUNT(a.AsistenciaID) AS TotalAsistencias,
+        SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) AS EntradasATiempo,
+        CAST(SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) * 100.0 / 
+            CASE WHEN COUNT(a.AsistenciaID) = 0 THEN 1 ELSE COUNT(a.AsistenciaID) END 
+        AS DECIMAL(5,2)) AS PorcentajePuntualidad
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@SucursalID IS NULL OR s.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    GROUP BY e.EmpleadoID, e.Cedula, e.Nombre, e.Apellido, c.Nombre, s.Nombre, r.Nombre
+    ORDER BY PorcentajePuntualidad DESC, TotalAsistencias DESC;
+END;
+
+-- Reporte de Ausencias por Período
+CREATE PROCEDURE sp_ReporteAusenciasPorPeriodo
+    @FechaInicio DATE,
+    @FechaFin DATE,
+    @SucursalID INT = NULL,
+    @RegionID INT = NULL
+AS
+BEGIN
+    -- Crear tabla temporal para los días laborables en el período
+    DECLARE @DiasLaborables TABLE (Fecha DATE);
+
+    -- Llenar la tabla con todos los días en el período
+    DECLARE @FechaActual DATE = @FechaInicio;
+    WHILE @FechaActual <= @FechaFin
+    BEGIN
+        INSERT INTO @DiasLaborables (Fecha) VALUES (@FechaActual);
+        SET @FechaActual = DATEADD(DAY, 1, @FechaActual);
+    END
+
+    -- Reporte de ausencias (empleados que no registraron asistencia en días laborables)
+    SELECT 
+        e.EmpleadoID,
+        e.Cedula,
+        e.Nombre + ' ' + e.Apellido AS NombreCompleto,
+        c.Nombre AS Cargo,
+        s.Nombre AS Sucursal,
+        r.Nombre AS Region,
+        dl.Fecha AS FechaAusencia,
+        CASE 
+            WHEN EXISTS (
+                SELECT 1 FROM Permisos p 
+                WHERE p.EmpleadoID = e.EmpleadoID 
+                AND p.Estado = 1
+                AND dl.Fecha BETWEEN CAST(p.FechaInicio AS DATE) AND CAST(p.FechaFin AS DATE)
+            ) THEN 'Con permiso'
+            WHEN EXISTS (
+                SELECT 1 FROM DiasNoLaborables dnl 
+                WHERE (dnl.AplicaTodasSucursales = 1 OR dnl.SucursalID = e.SucursalID)
+                AND dnl.Fecha = dl.Fecha
+                AND dnl.Estado = 1
+            ) THEN 'Día no laborable'
+            ELSE 'Ausente sin justificación'
+        END AS EstadoAusencia
+    FROM Empleados e
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    CROSS JOIN @DiasLaborables dl
+    LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID AND a.Fecha = dl.Fecha
+    WHERE e.Estado = 1
+    AND a.AsistenciaID IS NULL -- No hay registro de asistencia
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    -- Excluir días no laborables que aplican a todas las sucursales o a la sucursal específica
+    AND NOT EXISTS (
+        SELECT 1 FROM DiasNoLaborables dnl 
+        WHERE (dnl.AplicaTodasSucursales = 1 OR dnl.SucursalID = e.SucursalID)
+        AND dnl.Fecha = dl.Fecha
+        AND dnl.Estado = 1
+    )
+    ORDER BY dl.Fecha DESC, e.Apellido, e.Nombre;
+END;
+
+CREATE OR ALTER PROCEDURE sp_ReporteEstadisticasAsistenciaPorEmpleado
+    @FechaInicio DATE,
+    @FechaFin DATE,
+    @EmpleadoID INT = NULL,
+    @SucursalID INT = NULL,
+    @RegionID INT = NULL
+AS
+BEGIN
+    -- Crear tabla temporal para los días laborables en el período
+    DECLARE @DiasLaborables TABLE (Fecha DATE);
+
+    -- Llenar la tabla con todos los días en el período
+    DECLARE @FechaActual DATE = @FechaInicio;
+    WHILE @FechaActual <= @FechaFin
+    BEGIN
+        INSERT INTO @DiasLaborables (Fecha) VALUES (@FechaActual);
+        SET @FechaActual = DATEADD(DAY, 1, @FechaActual);
+    END
+
+    SELECT 
+        e.EmpleadoID,
+        e.Cedula,
+        e.Nombre + ' ' + e.Apellido AS NombreCompleto,
+        c.Nombre AS Cargo,
+        s.Nombre AS Sucursal,
+        r.Nombre AS Region,
+        COUNT(a.AsistenciaID) AS TotalAsistencias,
+        SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) AS EntradasATiempo,
+        SUM(CASE WHEN a.EstadoEntrada = 'Tolerancia' THEN 1 ELSE 0 END) AS EntradasEnTolerancia,
+        SUM(CASE WHEN a.EstadoEntrada = 'Tarde' THEN 1 ELSE 0 END) AS EntradasTarde,
+        SUM(CASE WHEN a.EstadoSalida = 'Completo' THEN 1 ELSE 0 END) AS SalidasCompletas,
+        SUM(CASE WHEN a.EstadoSalida = 'Tolerancia' THEN 1 ELSE 0 END) AS SalidasEnTolerancia,
+        SUM(CASE WHEN a.EstadoSalida = 'Temprano' THEN 1 ELSE 0 END) AS SalidasTempranas,
+        (
+            SELECT COUNT(*)
+            FROM @DiasLaborables dl
+            WHERE NOT EXISTS (
+                SELECT 1 FROM Asistencias a2
+                WHERE a2.EmpleadoID = e.EmpleadoID AND a2.Fecha = dl.Fecha
+            )
+            AND NOT EXISTS (
+                SELECT 1 FROM DiasNoLaborables dnl 
+                WHERE (dnl.AplicaTodasSucursales = 1 OR dnl.SucursalID = e.SucursalID)
+                AND dnl.Fecha = dl.Fecha
+                AND dnl.Estado = 1
+            )
+            AND NOT EXISTS (
+                SELECT 1 FROM Permisos p 
+                WHERE p.EmpleadoID = e.EmpleadoID 
+                AND p.Estado = 1
+                AND dl.Fecha BETWEEN CAST(p.FechaInicio AS DATE) AND CAST(p.FechaFin AS DATE)
+            )
+        ) AS TotalAusencias,
+        (
+            SELECT COUNT(*)
+            FROM Permisos p 
+            WHERE p.EmpleadoID = e.EmpleadoID 
+            AND p.Estado = 1
+            AND (
+                CAST(p.FechaInicio AS DATE) BETWEEN @FechaInicio AND @FechaFin
+                OR CAST(p.FechaFin AS DATE) BETWEEN @FechaInicio AND @FechaFin
+                OR (@FechaInicio BETWEEN CAST(p.FechaInicio AS DATE) AND CAST(p.FechaFin AS DATE))
+            )
+        ) AS TotalPermisos,
+        ROUND(AVG(CASE 
+            WHEN a.HoraEntrada IS NULL OR a.HoraSalida IS NULL THEN NULL
+            ELSE DATEDIFF(MINUTE, a.HoraEntrada, a.HoraSalida) / 60.0
+        END), 2) AS PromedioHorasTrabajadas
+    FROM Empleados e
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID 
+                          AND a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    WHERE e.Estado = 1
+    AND (@EmpleadoID IS NULL OR e.EmpleadoID = @EmpleadoID)
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    GROUP BY 
+        e.EmpleadoID,
+        e.Cedula,
+        e.Nombre,
+        e.Apellido,
+        c.Nombre,
+        s.Nombre,
+        r.Nombre,
+        e.SucursalID  -- Añadido este campo al GROUP BY
+    ORDER BY 
+        r.Nombre,
+        s.Nombre,
+        e.Apellido,
+        e.Nombre;
+END;
+
+-- Reporte de Dashboard
+CREATE PROCEDURE sp_ReporteDashboard
+    @FechaInicio DATE,
+    @FechaFin DATE,
+    @SucursalID INT = NULL,
+    @RegionID INT = NULL
+AS
+BEGIN
+    -- Total de empleados
+    SELECT COUNT(*) AS TotalEmpleados
+    FROM Empleados e
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    WHERE e.Estado = 1
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID);
+
+    -- Total de asistencias en el período
+    SELECT COUNT(*) AS TotalAsistencias
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID);
+
+    -- Estadísticas de entrada
+    SELECT 
+        SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) AS EntradasATiempo,
+        SUM(CASE WHEN a.EstadoEntrada = 'Tolerancia' THEN 1 ELSE 0 END) AS EntradasEnTolerancia,
+        SUM(CASE WHEN a.EstadoEntrada = 'Tarde' THEN 1 ELSE 0 END) AS EntradasTarde
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID);
+
+    -- Estadísticas de salida
+    SELECT 
+        SUM(CASE WHEN a.EstadoSalida = 'Completo' THEN 1 ELSE 0 END) AS SalidasCompletas,
+        SUM(CASE WHEN a.EstadoSalida = 'Tolerancia' THEN 1 ELSE 0 END) AS SalidasEnTolerancia,
+        SUM(CASE WHEN a.EstadoSalida = 'Temprano' THEN 1 ELSE 0 END) AS SalidasTempranas,
+        SUM(CASE WHEN a.EstadoSalida IS NULL THEN 1 ELSE 0 END) AS SinSalidaRegistrada
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID);
+
+    -- Asistencias por día de la semana
+    SELECT 
+        DATEPART(WEEKDAY, a.Fecha) AS DiaSemana,
+        COUNT(*) AS TotalAsistencias
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    GROUP BY DATEPART(WEEKDAY, a.Fecha)
+    ORDER BY DiaSemana;
+
+    -- Asistencias por región
+    SELECT 
+        r.RegionID,
+        r.Nombre AS Region,
+        COUNT(*) AS TotalAsistencias
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    GROUP BY r.RegionID, r.Nombre
+    ORDER BY TotalAsistencias DESC;
+
+    -- Asistencias por sucursal
+    SELECT 
+        s.SucursalID,
+        s.Nombre AS Sucursal,
+        r.Nombre AS Region,
+        COUNT(*) AS TotalAsistencias
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@SucursalID IS NULL OR s.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    GROUP BY s.SucursalID, s.Nombre, r.Nombre
+    ORDER BY TotalAsistencias DESC;
+
+    -- Top 10 empleados con más asistencias puntuales
+    SELECT TOP 10
+        e.EmpleadoID,
+        e.Cedula,
+        e.Nombre + ' ' + e.Apellido AS NombreCompleto,
+        c.Nombre AS Cargo,
+        s.Nombre AS Sucursal,
+        r.Nombre AS Region,
+        COUNT(*) AS TotalAsistencias,
+        SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) AS EntradasATiempo,
+        CAST(SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) * 100.0 / COUNT(*) AS DECIMAL(5,2)) AS PorcentajePuntualidad
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Cargos c ON e.CargoID = c.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    INNER JOIN Regiones r ON s.RegionID = r.RegionID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@SucursalID IS NULL OR s.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    GROUP BY e.EmpleadoID, e.Cedula, e.Nombre, e.Apellido, c.Nombre, s.Nombre, r.Nombre
+    ORDER BY PorcentajePuntualidad DESC, TotalAsistencias DESC;
+
+    -- Top departamentos con mejor asistencia
+    SELECT TOP 5
+        d.DepartamentoID,
+        d.Nombre AS Departamento,
+        COUNT(DISTINCT e.EmpleadoID) AS TotalEmpleados,
+        COUNT(a.AsistenciaID) AS TotalAsistencias,
+        SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) AS EntradasATiempo,
+        CAST(SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) * 100.0 / 
+            CASE WHEN COUNT(a.AsistenciaID) = 0 THEN 1 ELSE COUNT(a.AsistenciaID) END AS DECIMAL(5,2)) AS PorcentajePuntualidad
+    FROM Departamentos d
+    INNER JOIN Cargos c ON d.DepartamentoID = c.DepartamentoID
+    INNER JOIN Empleados e ON c.CargoID = e.CargoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID AND a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    WHERE e.Estado = 1
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    GROUP BY d.DepartamentoID, d.Nombre
+    ORDER BY PorcentajePuntualidad DESC, TotalAsistencias DESC;
+
+    -- Estadísticas por día
+    SELECT 
+        a.Fecha,
+        COUNT(*) AS TotalAsistencias,
+        SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) AS EntradasATiempo,
+        SUM(CASE WHEN a.EstadoEntrada = 'Tolerancia' THEN 1 ELSE 0 END) AS EntradasEnTolerancia,
+        SUM(CASE WHEN a.EstadoEntrada = 'Tarde' THEN 1 ELSE 0 END) AS EntradasTarde,
+        CAST(SUM(CASE WHEN a.EstadoEntrada = 'A tiempo' THEN 1 ELSE 0 END) * 100.0 / 
+            CASE WHEN COUNT(*) = 0 THEN 1 ELSE COUNT(*) END AS DECIMAL(5,2)) AS PorcentajePuntualidad
+    FROM Asistencias a
+    INNER JOIN Empleados e ON a.EmpleadoID = e.EmpleadoID
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    WHERE a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID)
+    GROUP BY a.Fecha
+    ORDER BY a.Fecha;
+
+    -- Estadísticas de asistencia vs ausencias
+    SELECT 
+        COUNT(DISTINCT e.EmpleadoID) AS TotalEmpleados,
+        COUNT(DISTINCT CASE WHEN a.AsistenciaID IS NOT NULL THEN e.EmpleadoID END) AS EmpleadosConAsistencia,
+        COUNT(DISTINCT CASE WHEN a.AsistenciaID IS NULL THEN e.EmpleadoID END) AS EmpleadosSinAsistencia,
+        COUNT(a.AsistenciaID) AS TotalAsistenciasRegistradas,
+        DATEDIFF(DAY, @FechaInicio, @FechaFin) + 1 - 
+        (SELECT COUNT(*) FROM DiasNoLaborables WHERE Fecha BETWEEN @FechaInicio AND @FechaFin AND 
+         (AplicaTodasSucursales = 1 OR (@SucursalID IS NOT NULL AND SucursalID = @SucursalID))) AS DiasLaborables,
+        (COUNT(DISTINCT e.EmpleadoID) * 
+         (DATEDIFF(DAY, @FechaInicio, @FechaFin) + 1 - 
+          (SELECT COUNT(*) FROM DiasNoLaborables WHERE Fecha BETWEEN @FechaInicio AND @FechaFin AND 
+           (AplicaTodasSucursales = 1 OR (@SucursalID IS NOT NULL AND SucursalID = @SucursalID))))) AS AsistenciasEsperadas,
+        CAST(COUNT(a.AsistenciaID) * 100.0 / 
+        NULLIF((COUNT(DISTINCT e.EmpleadoID) * 
+         (DATEDIFF(DAY, @FechaInicio, @FechaFin) + 1 - 
+          (SELECT COUNT(*) FROM DiasNoLaborables WHERE Fecha BETWEEN @FechaInicio AND @FechaFin AND 
+           (AplicaTodasSucursales = 1 OR (@SucursalID IS NOT NULL AND SucursalID = @SucursalID))))), 0) AS DECIMAL(5,2)) AS PorcentajeAsistencia
+    FROM Empleados e
+    INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
+    LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID AND a.Fecha BETWEEN @FechaInicio AND @FechaFin
+    WHERE e.Estado = 1
+    AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
+    AND (@RegionID IS NULL OR s.RegionID = @RegionID);
+END;
+
+-- Deshabilitar los triggers para las inserciones iniciales
+DISABLE TRIGGER tr_LogSistema_Regiones ON Regiones;
+DISABLE TRIGGER tr_LogSistema_Sucursales ON Sucursales;
+DISABLE TRIGGER tr_LogSistema_Empleados ON Empleados;
+DISABLE TRIGGER tr_LogSistema_Asistencias ON Asistencias;
+
+-- Insertar roles primero
+INSERT INTO Roles (Nombre, Descripcion) VALUES ('Administrador', 'Acceso completo al sistema');
+INSERT INTO Roles (Nombre, Descripcion) VALUES ('Supervisor', 'Gestión de asistencias y reportes');
+INSERT INTO Roles (Nombre, Descripcion) VALUES ('Operador', 'Registro de asistencias');
+
+-- Insertar regiones
+INSERT INTO Regiones (Nombre, Descripcion) VALUES ('Norte', 'Región Norte del país');
+INSERT INTO Regiones (Nombre, Descripcion) VALUES ('Este', 'Región Este del país');
+INSERT INTO Regiones (Nombre, Descripcion) VALUES ('Sur', 'Región Sur del país');
+
+-- Insertar sucursales
+INSERT INTO Sucursales (RegionID, Nombre, Direccion, Telefono) 
+VALUES (1, 'Santiago', 'Calle Principal #123, Santiago', '809-555-1234');
+INSERT INTO Sucursales (RegionID, Nombre, Direccion, Telefono) 
+VALUES (1, 'Puerto Plata', 'Av. Malecón #45, Puerto Plata', '809-555-2345');
+INSERT INTO Sucursales (RegionID, Nombre, Direccion, Telefono) 
+VALUES (2, 'Santo Domingo', 'Av. Independencia #100, Santo Domingo', '809-555-3456');
+INSERT INTO Sucursales (RegionID, Nombre, Direccion, Telefono) 
+VALUES (2, 'La Romana', 'Calle Duarte #67, La Romana', '809-555-4567');
+INSERT INTO Sucursales (RegionID, Nombre, Direccion, Telefono) 
+VALUES (3, 'Barahona', 'Av. Enriquillo #22, Barahona', '809-555-5678');
+INSERT INTO Sucursales (RegionID, Nombre, Direccion, Telefono) 
+VALUES (3, 'San Juan', 'Calle Sánchez #15, San Juan de la Maguana', '809-555-6789');
+
+-- Insertar departamentos
+INSERT INTO Departamentos (Nombre, Descripcion) VALUES ('Administrativo', 'Departamento de administración');
+INSERT INTO Departamentos (Nombre, Descripcion) VALUES ('Legal', 'Departamento legal');
+INSERT INTO Departamentos (Nombre, Descripcion) VALUES ('Recursos Humanos', 'Departamento de recursos humanos');
+INSERT INTO Departamentos (Nombre, Descripcion) VALUES ('Atención al Ciudadano', 'Departamento de atención al ciudadano');
+
+-- Insertar cargos
+INSERT INTO Cargos (Nombre, Descripcion, DepartamentoID) VALUES ('Director', 'Director de departamento', 1);
+INSERT INTO Cargos (Nombre, Descripcion, DepartamentoID) VALUES ('Coordinador', 'Coordinador de departamento', 1);
+INSERT INTO Cargos (Nombre, Descripcion, DepartamentoID) VALUES ('Abogado', 'Abogado del departamento legal', 2);
+INSERT INTO Cargos (Nombre, Descripcion, DepartamentoID) VALUES ('Analista', 'Analista de recursos humanos', 3);
+INSERT INTO Cargos (Nombre, Descripcion, DepartamentoID) VALUES ('Asistente', 'Asistente administrativo', 1);
+INSERT INTO Cargos (Nombre, Descripcion, DepartamentoID) VALUES ('Recepcionista', 'Recepcionista de atención al público', 4);
+
+-- Insertar un usuario administrador
+INSERT INTO Usuarios (Nombre, Apellido, NombreUsuario, Contrasena, Email, RolID, SucursalID)
+VALUES ('Admin', 'Sistema', 'admin', 'admin123', 'admin@defensoriapueblo.gob.do', 1, 3);
+
+-- Insertar horarios
+INSERT INTO Horarios (Nombre, HoraEntrada, HoraSalida, ToleranciaEntrada, ToleranciaSalida, Descripcion)
+VALUES ('Horario Regular', '08:00:00', '16:00:00', 10, 10, 'Horario regular de trabajo');
+INSERT INTO Horarios (Nombre, HoraEntrada, HoraSalida, ToleranciaEntrada, ToleranciaSalida, Descripcion)
+VALUES ('Horario Extendido', '08:00:00', '18:00:00', 10, 10, 'Horario extendido para puestos directivos');
+INSERT INTO Horarios (Nombre, HoraEntrada, HoraSalida, ToleranciaEntrada, ToleranciaSalida, Descripcion)
+VALUES ('Medio Tiempo Mañana', '08:00:00', '12:00:00', 10, 10, 'Horario de medio tiempo por la mañana');
+INSERT INTO Horarios (Nombre, HoraEntrada, HoraSalida, ToleranciaEntrada, ToleranciaSalida, Descripcion)
+VALUES ('Medio Tiempo Tarde', '13:00:00', '17:00:00', 10, 10, 'Horario de medio tiempo por la tarde');
+
+-- Insertar tipos de permisos
+INSERT INTO TiposPermisos (Nombre, Descripcion, RequiereJustificacion, AfectaSalario)
+VALUES ('Vacaciones', 'Período de vacaciones reglamentarias', 0, 0);
+INSERT INTO TiposPermisos (Nombre, Descripcion, RequiereJustificacion, AfectaSalario)
+VALUES ('Enfermedad', 'Permiso por enfermedad o condición médica', 1, 0);
+INSERT INTO TiposPermisos (Nombre, Descripcion, RequiereJustificacion, AfectaSalario)
+VALUES ('Personal', 'Permiso por asuntos personales', 1, 1);
+INSERT INTO TiposPermisos (Nombre, Descripcion, RequiereJustificacion, AfectaSalario)
+VALUES ('Capacitación', 'Permiso para asistir a cursos o capacitaciones', 1, 0);
+
+-- Volver a habilitar los triggers después de completar todas las inserciones
+ENABLE TRIGGER tr_LogSistema_Regiones ON Regiones;
+ENABLE TRIGGER tr_LogSistema_Sucursales ON Sucursales;
+ENABLE TRIGGER tr_LogSistema_Empleados ON Empleados;
+ENABLE TRIGGER tr_LogSistema_Asistencias ON Asistencias;

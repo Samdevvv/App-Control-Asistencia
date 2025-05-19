@@ -1,12 +1,1852 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\programacion 28\\Desktop\\App Control de Asistencia\\backend\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\automapperprofile.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\automapperprofile.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\rolescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\empleadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\empleadoscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\rolservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\rolservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\permisoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\permisoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\usuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\reportescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\reportescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\asistenciascontroller.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\asistenciascontroller.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\regionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\regionescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\sucursalescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\sucursalescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\horarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\horarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\reporteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\reporteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\sucursalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\sucursalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\tipopermisoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\tipopermisoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\horarioempleadoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\horarioempleadoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\dianolaborableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\dianolaborableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\departamentoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\departamentoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\cargoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\cargoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\asistenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\asistenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\regionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\regionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\justificacionasistenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\justificacionasistenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\services\\empleadoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\services\\empleadoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\empleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\empleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\tipopermiso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\tipopermiso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\sucursal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\sucursal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\region.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\region.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\permiso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\permiso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\logsistema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\logsistema.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\justificacionasistencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\justificacionasistencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\horarioempleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\horarioempleado.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\horario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\horario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\dianolaborable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\dianolaborable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\departamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\departamento.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\cargo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\cargo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\models\\asistencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\models\\asistencia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\usuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\usuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\sucursalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\sucursalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\rolrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\rolrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\reporterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\reporterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\regionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\regionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\empleadorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\empleadorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\departamentorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\departamentorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\cargorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\cargorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\repositories\\asistenciarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\repositories\\asistenciarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\context\\defensoriadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\context\\defensoriadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ireporteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ireporteservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\itipopermisoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\itipopermisoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ijustificacionasistenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ijustificacionasistenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ijustificacionasistenciarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ijustificacionasistenciarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\isucursalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\isucursalrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ipermisoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ipermisoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ipermisorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ipermisorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\itipopermisorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\itipopermisorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\isucursalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\isucursalservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ihorarioempleadorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ihorarioempleadorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ihorarioempleadoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ihorarioempleadoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\idianolaborableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\idianolaborableservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\idianolaborablerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\idianolaborablerepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iasistenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iasistenciaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iasistenciarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iasistenciarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ihorarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ihorarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ihorariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ihorariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iempleadoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iempleadoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iempleadorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iempleadorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iusuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iusuarioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iusuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iusuariorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iregionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iregionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\icargoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\icargoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\icargorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\icargorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\irolrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\irolrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\idepartamentoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\idepartamentoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\idepartamentorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\idepartamentorepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\irolservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\irolservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\iregionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\iregionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ireporterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ireporterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\interfaces\\ilogsistemarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\interfaces\\ilogsistemarepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\asistenciadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\asistenciadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\reportedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\reportedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\justificacionasistenciadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\justificacionasistenciadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\permisodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\permisodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\tipopermisodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\tipopermisodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\sucursaldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\sucursaldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\horarioempleadodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\horarioempleadodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\dianolaborabledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\dianolaborabledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\horariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\horariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\empleadodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\empleadodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\cargodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\cargodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\departamentodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\departamentodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\roldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\roldto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\dto\\regiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\dto\\regiondto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|c:\\users\\xamue\\onedrive\\desktop\\app-control-asistencia\\backend\\api\\api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{5AE72031-F956-4419-9AC8-EECBAF3936CB}|Api\\Api.csproj|solutionrelative:api\\api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\JwtService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Api\\Services\\JwtService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\ActividadReciene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Api\\Models\\ActividadReciene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "PermisoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\PermisoService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\PermisoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\PermisoService.cs",
+              "RelativeToolTip": "Api\\Services\\PermisoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:25:24.586Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RolService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\RolService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\RolService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\RolService.cs",
+              "RelativeToolTip": "Api\\Services\\RolService.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAADwv4kAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:26:00.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EmpleadosController.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\EmpleadosController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\EmpleadosController.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\EmpleadosController.cs",
+              "RelativeToolTip": "Api\\Controllers\\EmpleadosController.cs",
+              "ViewState": "AgIAAFIAAAAAAAAAAADwv3YAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:04:24.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RolesController.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\RolesController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\RolesController.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\RolesController.cs",
+              "RelativeToolTip": "Api\\Controllers\\RolesController.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAADwv00AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:04:58.37Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AutoMapperProfile.cs.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\AutoMapperProfile.cs.cs",
+              "RelativeDocumentMoniker": "Api\\AutoMapperProfile.cs.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\AutoMapperProfile.cs.cs",
+              "RelativeToolTip": "Api\\AutoMapperProfile.cs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:05:36.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Program.cs",
+              "RelativeDocumentMoniker": "Api\\Program.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Program.cs",
+              "RelativeToolTip": "Api\\Program.cs",
+              "ViewState": "AgIAAGYAAAAAAAAAAAAAAGMAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-18T17:49:21.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\DashboardController.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "Api\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAPkAAAAAAAAAAADwvx0BAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:04:08.788Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\UsuariosController.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "Api\\Controllers\\UsuariosController.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAADwv24AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:05:16.993Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "UsuarioService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\UsuarioService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\UsuarioService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\UsuarioService.cs",
+              "RelativeToolTip": "Api\\Services\\UsuarioService.cs",
+              "ViewState": "AgIAALsAAAAAAAAAAADwv98AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:26:34.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ReportesController.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\ReportesController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\ReportesController.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\ReportesController.cs",
+              "RelativeToolTip": "Api\\Controllers\\ReportesController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAADwv0oAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:04:49.767Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AsistenciasController.cs.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\AsistenciasController.cs.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\AsistenciasController.cs.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\AsistenciasController.cs.cs",
+              "RelativeToolTip": "Api\\Controllers\\AsistenciasController.cs.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAADwv2IAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:03:43.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "RegionesController.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\RegionesController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\RegionesController.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\RegionesController.cs",
+              "RelativeToolTip": "Api\\Controllers\\RegionesController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAwwE0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:04:39.311Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "SucursalesController.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\SucursalesController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\SucursalesController.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\SucursalesController.cs",
+              "RelativeToolTip": "Api\\Controllers\\SucursalesController.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAADwv1gAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:05:07.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "Api\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "Api\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:03:55.601Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "HorarioService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\HorarioService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\HorarioService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\HorarioService.cs",
+              "RelativeToolTip": "Api\\Services\\HorarioService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:25:05.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ReporteService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\ReporteService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\ReporteService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\ReporteService.cs",
+              "RelativeToolTip": "Api\\Services\\ReporteService.cs",
+              "ViewState": "AgIAAIsAAAAAAAAAAADwv68AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:25:45.416Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "SucursalService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\SucursalService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\SucursalService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\SucursalService.cs",
+              "RelativeToolTip": "Api\\Services\\SucursalService.cs",
+              "ViewState": "AgIAAI8AAAAAAAAAAADwv7MAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:26:11.366Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "TipoPermisoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\TipoPermisoService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\TipoPermisoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\TipoPermisoService.cs",
+              "RelativeToolTip": "Api\\Services\\TipoPermisoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:26:24.926Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "HorarioEmpleadoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\HorarioEmpleadoService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\HorarioEmpleadoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\HorarioEmpleadoService.cs",
+              "RelativeToolTip": "Api\\Services\\HorarioEmpleadoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:24:57.668Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "DiaNoLaborableService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\DiaNoLaborableService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\DiaNoLaborableService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\DiaNoLaborableService.cs",
+              "RelativeToolTip": "Api\\Services\\DiaNoLaborableService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:24:38.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "DepartamentoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\DepartamentoService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\DepartamentoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\DepartamentoService.cs",
+              "RelativeToolTip": "Api\\Services\\DepartamentoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:24:27.233Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "CargoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\CargoService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\CargoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\CargoService.cs",
+              "RelativeToolTip": "Api\\Services\\CargoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:24:18.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\AuthService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\AuthService.cs",
+              "RelativeToolTip": "Api\\Services\\AuthService.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAowFUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:24:09.972Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "AsistenciaService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\AsistenciaService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\AsistenciaService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\AsistenciaService.cs",
+              "RelativeToolTip": "Api\\Services\\AsistenciaService.cs",
+              "ViewState": "AgIAAJMAAAAAAAAAAAAAALEAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:24:02.309Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "RegionService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\RegionService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\RegionService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\RegionService.cs",
+              "RelativeToolTip": "Api\\Services\\RegionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:25:33.913Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "JustificacionAsistenciaService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\JustificacionAsistenciaService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\JustificacionAsistenciaService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\JustificacionAsistenciaService.cs",
+              "RelativeToolTip": "Api\\Services\\JustificacionAsistenciaService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:25:15.362Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "EmpleadoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\EmpleadoService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\EmpleadoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\EmpleadoService.cs",
+              "RelativeToolTip": "Api\\Services\\EmpleadoService.cs",
+              "ViewState": "AgIAAM8AAAAAAAAAAADwv/MAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:24:47.98Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Empleado.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Empleado.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Empleado.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Empleado.cs",
+              "RelativeToolTip": "Api\\Models\\Empleado.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAiwEUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:18:59.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Usuario.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Usuario.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Usuario.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Usuario.cs",
+              "RelativeToolTip": "Api\\Models\\Usuario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:21:20.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "TipoPermiso.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\TipoPermiso.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\TipoPermiso.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\TipoPermiso.cs",
+              "RelativeToolTip": "Api\\Models\\TipoPermiso.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:21:11.028Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Sucursal.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Sucursal.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Sucursal.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Sucursal.cs",
+              "RelativeToolTip": "Api\\Models\\Sucursal.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:21:01.692Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Rol.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Rol.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Rol.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Rol.cs",
+              "RelativeToolTip": "Api\\Models\\Rol.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:20:52.674Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Region.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Region.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Region.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Region.cs",
+              "RelativeToolTip": "Api\\Models\\Region.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:20:30.542Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Permiso.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Permiso.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Permiso.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Permiso.cs",
+              "RelativeToolTip": "Api\\Models\\Permiso.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAiwC4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:19:50.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "LogSistema.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\LogSistema.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\LogSistema.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\LogSistema.cs",
+              "RelativeToolTip": "Api\\Models\\LogSistema.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:19:41.742Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "JustificacionAsistencia.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\JustificacionAsistencia.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\JustificacionAsistencia.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\JustificacionAsistencia.cs",
+              "RelativeToolTip": "Api\\Models\\JustificacionAsistencia.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:19:29.793Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "HorarioEmpleado.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\HorarioEmpleado.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\HorarioEmpleado.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\HorarioEmpleado.cs",
+              "RelativeToolTip": "Api\\Models\\HorarioEmpleado.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAiwCYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:19:18.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "Horario.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Horario.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Horario.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Horario.cs",
+              "RelativeToolTip": "Api\\Models\\Horario.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:19:08.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "DiaNoLaborable.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\DiaNoLaborable.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\DiaNoLaborable.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\DiaNoLaborable.cs",
+              "RelativeToolTip": "Api\\Models\\DiaNoLaborable.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:18:49.782Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Departamento.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Departamento.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Departamento.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Departamento.cs",
+              "RelativeToolTip": "Api\\Models\\Departamento.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:18:41.162Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Cargo.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Cargo.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Cargo.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Cargo.cs",
+              "RelativeToolTip": "Api\\Models\\Cargo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:18:32.602Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Asistencia.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Asistencia.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\Asistencia.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\Asistencia.cs",
+              "RelativeToolTip": "Api\\Models\\Asistencia.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:18:24.001Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "UsuarioRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\UsuarioRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\UsuarioRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\UsuarioRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\UsuarioRepository.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAIwFYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:44:27.947Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "SucursalRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\SucursalRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\SucursalRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\SucursalRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\SucursalRepository.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAiwDAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:44:10.137Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "RolRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\RolRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\RolRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\RolRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\RolRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:44:00.192Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "ReporteRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\ReporteRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\ReporteRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\ReporteRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\ReporteRepository.cs",
+              "ViewState": "AgIAAKEBAAAAAAAAAAAiwMcBAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:43:52.037Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "RegionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\RegionRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\RegionRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\RegionRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\RegionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:43:43.649Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\GenericRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\GenericRepository.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAmwFYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:36:44.172Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "EmpleadoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\EmpleadoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\EmpleadoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\EmpleadoRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\EmpleadoRepository.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAiwF0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:36:25.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "DepartamentoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\DepartamentoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\DepartamentoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\DepartamentoRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\DepartamentoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:36:03.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "CargoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\CargoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\CargoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\CargoRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\CargoRepository.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAiwCsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:35:54.317Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "AsistenciaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\AsistenciaRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Repositories\\AsistenciaRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Repositories\\AsistenciaRepository.cs",
+              "RelativeToolTip": "Api\\Repositories\\AsistenciaRepository.cs",
+              "ViewState": "AgIAANMAAAAAAAAAAAAiwPkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:35:46.885Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "DefensoriaDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Context\\DefensoriaDbContext.cs",
+              "RelativeDocumentMoniker": "Api\\Context\\DefensoriaDbContext.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Context\\DefensoriaDbContext.cs",
+              "RelativeToolTip": "Api\\Context\\DefensoriaDbContext.cs",
+              "ViewState": "AgIAAIIAAAAAAAAAAAAiwKgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:35:32.102Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "IReporteService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IReporteService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IReporteService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IReporteService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IReporteService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:16:51.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "ITipoPermisoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ITipoPermisoService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\ITipoPermisoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ITipoPermisoService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\ITipoPermisoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:17:49.982Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "IJustificacionAsistenciaService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IJustificacionAsistenciaService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IJustificacionAsistenciaService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IJustificacionAsistenciaService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IJustificacionAsistenciaService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:15:35.639Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "IJustificacionAsistenciaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IJustificacionAsistenciaRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IJustificacionAsistenciaRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IJustificacionAsistenciaRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IJustificacionAsistenciaRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:15:26.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "ISucursalRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ISucursalRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\ISucursalRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ISucursalRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\ISucursalRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:17:20.698Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "IPermisoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IPermisoService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IPermisoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IPermisoService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IPermisoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:16:10.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "IPermisoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IPermisoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IPermisoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IPermisoRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IPermisoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:15:57.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "ITipoPermisoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ITipoPermisoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\ITipoPermisoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ITipoPermisoRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\ITipoPermisoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:17:39.622Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "ISucursalService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ISucursalService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\ISucursalService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ISucursalService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\ISucursalService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:17:30.232Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "IHorarioEmpleadoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IHorarioEmpleadoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IHorarioEmpleadoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IHorarioEmpleadoRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IHorarioEmpleadoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:14:22.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IGenericRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IGenericRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IGenericRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:14:10.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "IHorarioEmpleadoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IHorarioEmpleadoService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IHorarioEmpleadoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IHorarioEmpleadoService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IHorarioEmpleadoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:14:34.471Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "IDiaNoLaborableService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IDiaNoLaborableService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IDiaNoLaborableService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IDiaNoLaborableService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IDiaNoLaborableService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:13:31.148Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "IDiaNoLaborableRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IDiaNoLaborableRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IDiaNoLaborableRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IDiaNoLaborableRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IDiaNoLaborableRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:13:21.998Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "IAsistenciaService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IAsistenciaService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IAsistenciaService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IAsistenciaService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IAsistenciaService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:12:28.287Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "IAsistenciaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IAsistenciaRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IAsistenciaRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IAsistenciaRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IAsistenciaRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:12:15.813Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "IHorarioService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IHorarioService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IHorarioService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IHorarioService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IHorarioService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:15:17.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "IHorarioRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IHorarioRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IHorarioRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IHorarioRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IHorarioRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:15:09.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "IEmpleadoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IEmpleadoService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IEmpleadoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IEmpleadoService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IEmpleadoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:13:58.341Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "IEmpleadoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IEmpleadoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IEmpleadoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IEmpleadoRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IEmpleadoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:13:42.448Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IAuthService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IAuthService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:12:37.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "IUsuarioService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IUsuarioService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IUsuarioService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IUsuarioService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IUsuarioService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:18:08.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "IUsuarioRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IUsuarioRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IUsuarioRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IUsuarioRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IUsuarioRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:18:00.227Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "IRegionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IRegionRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IRegionRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IRegionRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IRegionRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:16:18.833Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "ICargoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ICargoService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\ICargoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ICargoService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\ICargoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:12:55.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "ICargoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ICargoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\ICargoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ICargoRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\ICargoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:12:46.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "IRolRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IRolRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IRolRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IRolRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IRolRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:17:02.598Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "IDepartamentoService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IDepartamentoService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IDepartamentoService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IDepartamentoService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IDepartamentoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:13:14.063Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 81,
+              "Title": "IDepartamentoRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IDepartamentoRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IDepartamentoRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IDepartamentoRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IDepartamentoRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:13:04.873Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 82,
+              "Title": "IRolService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IRolService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IRolService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IRolService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IRolService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:17:12.109Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 83,
+              "Title": "IRegionService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IRegionService.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IRegionService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IRegionService.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IRegionService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:16:32.329Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 84,
+              "Title": "IReporteRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IReporteRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\IReporteRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\IReporteRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\IReporteRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:16:42.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 85,
+              "Title": "ILogSistemaRepository.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ILogSistemaRepository.cs",
+              "RelativeDocumentMoniker": "Api\\Interfaces\\ILogSistemaRepository.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Interfaces\\ILogSistemaRepository.cs",
+              "RelativeToolTip": "Api\\Interfaces\\ILogSistemaRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:15:49.729Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 86,
+              "Title": "AuthResponseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\AuthResponseDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\AuthResponseDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\AuthResponseDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\AuthResponseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:08:13.955Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 87,
+              "Title": "AsistenciaDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\AsistenciaDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\AsistenciaDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\AsistenciaDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\AsistenciaDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:08:05.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 88,
+              "Title": "ApiResponse.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\ApiResponse.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\ApiResponse.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\ApiResponse.cs",
+              "RelativeToolTip": "Api\\DTO\\ApiResponse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:07:36.538Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 89,
+              "Title": "ReporteDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\ReporteDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\ReporteDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\ReporteDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\ReporteDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:11:12.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 90,
+              "Title": "JustificacionAsistenciaDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\JustificacionAsistenciaDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\JustificacionAsistenciaDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\JustificacionAsistenciaDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\JustificacionAsistenciaDTO.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAiwCcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:10:33.088Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 91,
+              "Title": "PermisoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\PermisoDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\PermisoDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\PermisoDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\PermisoDTO.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA4wDAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:10:51.393Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 92,
+              "Title": "TipoPermisoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\TipoPermisoDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\TipoPermisoDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\TipoPermisoDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\TipoPermisoDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:11:46.803Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 93,
+              "Title": "SucursalDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\SucursalDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\SucursalDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\SucursalDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\SucursalDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:11:32.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 94,
+              "Title": "HorarioEmpleadoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\HorarioEmpleadoDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\HorarioEmpleadoDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\HorarioEmpleadoDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\HorarioEmpleadoDTO.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAA4wCgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:10:25.511Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 95,
+              "Title": "DiaNoLaborableDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\DiaNoLaborableDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\DiaNoLaborableDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\DiaNoLaborableDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\DiaNoLaborableDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:08:57.638Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 96,
+              "Title": "LoginDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\LoginDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\LoginDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\LoginDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\LoginDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:10:41.296Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 97,
+              "Title": "HorarioDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\HorarioDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\HorarioDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\HorarioDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\HorarioDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:09:15.589Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 98,
+              "Title": "EmpleadoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\EmpleadoDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\EmpleadoDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\EmpleadoDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\EmpleadoDTO.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAA4wEMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:09:06.973Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 99,
+              "Title": "UsuarioDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\UsuarioDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\UsuarioDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\UsuarioDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\UsuarioDTO.cs",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAiwEQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:11:54.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 100,
+              "Title": "CargoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\CargoDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\CargoDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\CargoDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\CargoDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:08:24.096Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 101,
+              "Title": "DepartamentoDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\DepartamentoDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\DepartamentoDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\DepartamentoDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\DepartamentoDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:08:47.238Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 102,
+              "Title": "RolDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\RolDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\RolDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\RolDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\RolDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:11:21.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 103,
+              "Title": "RegionDTO.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\RegionDTO.cs",
+              "RelativeDocumentMoniker": "Api\\DTO\\RegionDTO.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\DTO\\RegionDTO.cs",
+              "RelativeToolTip": "Api\\DTO\\RegionDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T02:11:03.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 104,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\appsettings.json",
+              "RelativeDocumentMoniker": "Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\appsettings.json",
+              "RelativeToolTip": "Api\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-04-18T17:49:19.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 105,
+              "Title": "Api",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Api.csproj",
+              "RelativeDocumentMoniker": "Api\\Api.csproj",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Api.csproj",
+              "RelativeToolTip": "Api\\Api.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-04-22T02:01:37.938Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 106,
+              "Title": "JwtService.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\JwtService.cs",
+              "RelativeDocumentMoniker": "Api\\Services\\JwtService.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Services\\JwtService.cs",
+              "RelativeToolTip": "Api\\Services\\JwtService.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T19:46:25.777Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 107,
+              "Title": "ActividadReciene.cs",
+              "DocumentMoniker": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\ActividadReciene.cs",
+              "RelativeDocumentMoniker": "Api\\Models\\ActividadReciene.cs",
+              "ToolTip": "C:\\Users\\xamue\\OneDrive\\Desktop\\App-Control-Asistencia\\backend\\Api\\Models\\ActividadReciene.cs",
+              "RelativeToolTip": "Api\\Models\\ActividadReciene.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T00:19:41.201Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

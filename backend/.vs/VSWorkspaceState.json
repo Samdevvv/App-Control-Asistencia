@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Api",
+    "\\Api\\bin",
+    "\\Api\\Controllers",
+    "\\Api\\DTOs",
+    "\\Api\\Helpers",
+    "\\Api\\Models",
+    "\\Api\\obj",
+    "\\Api\\Properties",
+    "\\Api\\Services"
+  ],
+  "SelectedNode": "\\Api\\obj",
+  "PreviewInSolutionExplorer": false
+}
