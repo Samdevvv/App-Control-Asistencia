@@ -9,7 +9,7 @@ CREATE TABLE Regiones (
     Descripcion VARCHAR(255),
     CantidadSucursales INT NOT NULL,
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Estado BOOLEAN DEFAULT 1
+    estado_enum DEFAULT 'Activo'
 );
 
 -- Tabla de Sucursales
@@ -20,7 +20,7 @@ CREATE TABLE Sucursales (
     Direccion VARCHAR(255) NOT NULL,
     Telefono VARCHAR(20),
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Estado BOOLEAN DEFAULT 1,
+    estado_enum DEFAULT 'Activo',
     CONSTRAINT FK_Sucursales_Regiones FOREIGN KEY (RegionID) REFERENCES Regiones(RegionID)
 );
 
@@ -32,7 +32,7 @@ CREATE TABLE Oficinas (
     CodigoOficina VARCHAR(100) NOT NULL,
     Direccion VARCHAR(255) NOT NULL,
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Estado BOOLEAN DEFAULT 1,
+    estado_enum DEFAULT 'Activo',
     CONSTRAINT FK_Oficinas_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID)
 );
 
@@ -41,7 +41,7 @@ CREATE TABLE Roles (
     RolID SERIAL PRIMARY KEY,
     Nombre VARCHAR(50) NOT NULL,
     Descripcion VARCHAR(255),
-    Estado BOOLEAN DEFAULT 1
+    estado_enum DEFAULT 'Activo',
 );
 
 -- Tabla de Departamentos
@@ -49,7 +49,7 @@ CREATE TABLE Departamentos (
     DepartamentoID SERIAL PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Descripcion VARCHAR(255),
-    Estado BOOLEAN DEFAULT 1
+    estado_enum DEFAULT 'Activo',
 );
 
 -- Tabla de Cargos
@@ -58,7 +58,7 @@ CREATE TABLE Cargos (
     Nombre VARCHAR(100) NOT NULL,
     Descripcion VARCHAR(255),
     DepartamentoID INT NOT NULL,
-    Estado BOOLEAN DEFAULT 1,
+    estado_enum DEFAULT 'Activo',
     CONSTRAINT FK_Cargos_Departamentos FOREIGN KEY (DepartamentoID) REFERENCES Departamentos(DepartamentoID)
 );
 
@@ -75,7 +75,7 @@ CREATE TABLE Usuarios (
     SucursalID INT NOT NULL,
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UltimoAcceso TIMESTAMP,
-    Estado BOOLEAN DEFAULT 1,
+    estado_enum DEFAULT 'Activo',
     CONSTRAINT FK_Usuarios_Roles FOREIGN KEY (RolID) REFERENCES Roles(RolID),
     CONSTRAINT FK_Usuarios_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID),
     CONSTRAINT FK_Usuarios_Regiones FOREIGN KEY (RegionID) REFERENCES Regiones(RegionID)
@@ -110,7 +110,7 @@ CREATE TABLE Empleados (
     HuellaDigital VARBINARY(MAX), -- Aquí se almacenaría la huella digital (simulada)
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
-    Estado BOOLEAN DEFAULT 1,
+    estado_enum DEFAULT 'Activo',
     CONSTRAINT FK_Empleados_Cargos FOREIGN KEY (CargoID) REFERENCES Cargos(CargoID),
     CONSTRAINT FK_Empleados_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID),
     CONSTRAINT FK_Empleados_Departamentos FOREIGN KEY (DepartamentoID) REFERENCES Departamentos(DepartamentoID)
@@ -129,7 +129,7 @@ CREATE TABLE Horarios (
     ToleranciaEntrada INT DEFAULT 10, -- Minutos de tolerancia
     ToleranciaSalida INT DEFAULT 10, -- Minutos de tolerancia
     Descripcion VARCHAR(255),
-    Estado BOOLEAN DEFAULT 1
+    estado_enum DEFAULT 'Activo',
 );
 
 -- Tabla de Asistencias (Sin FK temporalmente)
@@ -154,7 +154,7 @@ CREATE TABLE DiasNoLaborables (
     SucursalID INT NULL,
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
-    Estado BOOLEAN DEFAULT 1,
+    estado_enum DEFAULT 'Activo',
     CONSTRAINT FK_DiasNoLaborables_Sucursales FOREIGN KEY (SucursalID) REFERENCES Sucursales(SucursalID)
 );
 
@@ -171,7 +171,7 @@ CREATE TABLE HorariosEmpleados (
     FechaFin DATE NULL, -- NULL significa que está vigente indefinidamente
     UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Estado BOOLEAN DEFAULT 1,
+    estado_enum DEFAULT 'Activo',
     CONSTRAINT FK_HorariosEmpleados_Empleados FOREIGN KEY (EmpleadoID) REFERENCES Empleados(EmpleadoID),
     CONSTRAINT FK_HorariosEmpleados_Horarios FOREIGN KEY (HorarioID) REFERENCES Horarios(HorarioID)
 );
@@ -187,7 +187,7 @@ CREATE TABLE TiposPermisos (
     Descripcion VARCHAR(255),
     RequiereJustificacion BOOLEAN DEFAULT 1,
     AfectaSalario BOOLEAN DEFAULT 0,
-    Estado BOOLEAN DEFAULT 1
+    estado_enum DEFAULT 'Activo'
 );
 
 -- Tabla de Permisos
@@ -201,7 +201,7 @@ CREATE TABLE Permisos (
     DocumentoJustificacion VARCHAR(255), -- Ruta al documento de justificación
     UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Estado BOOLEAN DEFAULT 1, -- 1=Aprobado, 0=Rechazado
+    estado_enum DEFAULT 'Activo',
     Comentarios VARCHAR(MAX),
     CONSTRAINT FK_Permisos_Empleados FOREIGN KEY (EmpleadoID) REFERENCES Empleados(EmpleadoID),
     CONSTRAINT FK_Permisos_TiposPermisos FOREIGN KEY (TipoPermisoID) REFERENCES TiposPermisos(TipoPermisoID)
@@ -219,10 +219,13 @@ CREATE TABLE JustificacionesAsistencias (
     DocumentoJustificacion VARCHAR(255), -- Ruta al documento de justificación
     UsuarioCreacion INT NULL, -- Permitimos NULL temporalmente
     FechaCreacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    Estado BOOLEAN DEFAULT 1, -- 1=Aprobado, 0=Rechazado
+    estado_enum DEFAULT 'Activo',
     Comentarios VARCHAR(MAX),
     CONSTRAINT FK_JustificacionesAsistencias_Asistencias FOREIGN KEY (AsistenciaID) REFERENCES Asistencias(AsistenciaID)
 );
+
+-- Estado ENUM
+CREATE TYPE estado_enum as ENUM('Activo','Inactivo')
 
 -- Agregar constraint de FK a JustificacionesAsistencias para UsuarioCreacion
 ALTER TABLE JustificacionesAsistencias
@@ -265,7 +268,7 @@ BEGIN
     WHERE he.EmpleadoID = @EmpleadoID
     AND he.FechaInicio <= @FechaActual
     AND (he.FechaFin IS NULL OR he.FechaFin >= @FechaActual)
-    AND he.Estado = 1
+    AND he.estado_enum = 'Activo',
     ORDER BY he.FechaInicio DESC;
 
     -- Verificar si es entrada o salida
@@ -618,7 +621,7 @@ END;
 CREATE PROCEDURE sp_ObtenerRegiones
 AS
 BEGIN
-    SELECT * FROM Regiones WHERE Estado = 1;
+    SELECT * FROM Regiones WHERE estado_enum = 'Activo';
 END;
 
 -- Obtener Region por ID
@@ -626,7 +629,7 @@ CREATE PROCEDURE sp_ObtenerRegionPorID
     @RegionID INT
 AS
 BEGIN
-    SELECT * FROM Regiones WHERE RegionID = @RegionID AND Estado = 1;
+    SELECT * FROM Regiones WHERE RegionID = @RegionID AND estado_enum = 'Activo';
 END;
 
 -- Actualizar Region
@@ -657,14 +660,14 @@ CREATE PROCEDURE sp_EliminarRegion
 AS
 BEGIN
     -- Verificar si la región tiene sucursales asociadas
-    IF EXISTS (SELECT 1 FROM Sucursales WHERE RegionID = @RegionID AND Estado = 1)
+    IF EXISTS (SELECT 1 FROM Sucursales WHERE RegionID = @RegionID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('No se puede eliminar la región porque tiene sucursales asociadas.', 16, 1);
         RETURN;
     END
 
     UPDATE Regiones
-    SET Estado = 0
+    SET estado_enum = 'Activo'
     WHERE RegionID = @RegionID;
 
     SELECT @RegionID AS RegionID;
@@ -680,14 +683,14 @@ CREATE PROCEDURE sp_CrearSucursal
 AS
 BEGIN
     -- Verificar si existe la región
-    IF NOT EXISTS (SELECT 1 FROM Regiones WHERE RegionID = @RegionID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Regiones WHERE RegionID = @RegionID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('La región no existe o está inactiva.', 16, 1);
         RETURN;
     END
 
     -- Verificar si ya existe una sucursal con ese nombre en esa región
-    IF EXISTS (SELECT 1 FROM Sucursales WHERE Nombre = @Nombre AND RegionID = @RegionID AND Estado = 1)
+    IF EXISTS (SELECT 1 FROM Sucursales WHERE Nombre = @Nombre AND RegionID = @RegionID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('Ya existe una sucursal con ese nombre en esta región.', 16, 1);
         RETURN;
@@ -706,7 +709,7 @@ BEGIN
     SELECT s.*, r.Nombre AS NombreRegion
     FROM Sucursales s
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
-    WHERE s.Estado = 1;
+    WHERE s.estado_enum = 'Activo';
 END;
 
 -- Obtener Sucursales por Región
@@ -717,7 +720,7 @@ BEGIN
     SELECT s.*, r.Nombre AS NombreRegion
     FROM Sucursales s
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
-    WHERE s.RegionID = @RegionID AND s.Estado = 1;
+    WHERE s.RegionID = @RegionID AND s.estado_enum = 'Activo';
 END;
 
 -- Obtener Sucursal por ID
@@ -728,7 +731,7 @@ BEGIN
     SELECT s.*, r.Nombre AS NombreRegion
     FROM Sucursales s
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
-    WHERE s.SucursalID = @SucursalID AND s.Estado = 1;
+    WHERE s.SucursalID = @SucursalID AND s.estado_enum = 'Activo';
 END;
 
 -- Actualizar Sucursal
@@ -741,7 +744,7 @@ CREATE PROCEDURE sp_ActualizarSucursal
 AS
 BEGIN
     -- Verificar si existe la región
-    IF NOT EXISTS (SELECT 1 FROM Regiones WHERE RegionID = @RegionID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Regiones WHERE RegionID = @RegionID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('La región no existe o está inactiva.', 16, 1);
         RETURN;
@@ -749,7 +752,7 @@ BEGIN
 
     -- Verificar si ya existe otra sucursal con ese nombre en esa región
     IF EXISTS (SELECT 1 FROM Sucursales 
-               WHERE Nombre = @Nombre AND RegionID = @RegionID AND SucursalID <> @SucursalID AND Estado = 1)
+               WHERE Nombre = @Nombre AND RegionID = @RegionID AND SucursalID <> @SucursalID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('Ya existe otra sucursal con ese nombre en esta región.', 16, 1);
         RETURN;
@@ -771,14 +774,14 @@ CREATE PROCEDURE sp_EliminarSucursal
 AS
 BEGIN
     -- Verificar si la sucursal tiene empleados asociados
-    IF EXISTS (SELECT 1 FROM Empleados WHERE SucursalID = @SucursalID AND Estado = 1)
+    IF EXISTS (SELECT 1 FROM Empleados WHERE SucursalID = @SucursalID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('No se puede eliminar la sucursal porque tiene empleados asociados.', 16, 1);
         RETURN;
     END
 
     UPDATE Sucursales
-    SET Estado = 0
+    SET estado_enum = 'inactivo'
     WHERE SucursalID = @SucursalID;
 
     SELECT @SucursalID AS SucursalID;
@@ -811,14 +814,14 @@ BEGIN
     END
 
     -- Verificar si existe el rol
-    IF NOT EXISTS (SELECT 1 FROM Roles WHERE RolID = @RolID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Roles WHERE RolID = @RolID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('El rol no existe o está inactivo.', 16, 1);
         RETURN;
     END
 
     -- Verificar si existe la sucursal
-    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
         RETURN;
@@ -838,7 +841,7 @@ BEGIN
     FROM Usuarios u
     INNER JOIN Roles r ON u.RolID = r.RolID
     INNER JOIN Sucursales s ON u.SucursalID = s.SucursalID
-    WHERE u.Estado = 1
+    WHERE u.estado_enum = 'Activo'
     ORDER BY u.Apellido, u.Nombre;
 END;
 
@@ -851,7 +854,7 @@ BEGIN
     FROM Usuarios u
     INNER JOIN Roles r ON u.RolID = r.RolID
     INNER JOIN Sucursales s ON u.SucursalID = s.SucursalID
-    WHERE u.UsuarioID = @UsuarioID AND u.Estado = 1;
+    WHERE u.UsuarioID = @UsuarioID AND u.estado_enum = 'Activo';
 END;
 
 -- Autenticar Usuario
@@ -866,7 +869,7 @@ BEGIN
     INNER JOIN Sucursales s ON u.SucursalID = s.SucursalID
     WHERE u.NombreUsuario = @NombreUsuario 
     AND u.Contrasena = @Contrasena
-    AND u.Estado = 1;
+    AND u.estado_enum = 'Activo';
 
     -- Actualizar último acceso si el usuario existe
     IF @@ROWCOUNT > 0
@@ -906,14 +909,14 @@ BEGIN
     END
 
     -- Verificar si existe el rol
-    IF NOT EXISTS (SELECT 1 FROM Roles WHERE RolID = @RolID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Roles WHERE RolID = @RolID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('El rol no existe o está inactivo.', 16, 1);
         RETURN;
     END
 
     -- Verificar si existe la sucursal
-    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
         RETURN;
@@ -960,7 +963,7 @@ CREATE PROCEDURE sp_EliminarUsuario
 AS
 BEGIN
     UPDATE Usuarios
-    SET Estado = 0
+    SET estado_enum = 'inactivo'
     WHERE UsuarioID = @UsuarioID;
 
     SELECT @UsuarioID AS UsuarioID;
@@ -978,7 +981,7 @@ CREATE PROCEDURE sp_CrearHorario
 AS
 BEGIN
     -- Verificar si ya existe un horario con ese nombre
-    IF EXISTS (SELECT 1 FROM Horarios WHERE Nombre = @Nombre AND Estado = 1)
+    IF EXISTS (SELECT 1 FROM Horarios WHERE Nombre = @Nombre AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('Ya existe un horario con ese nombre.', 16, 1);
         RETURN;
@@ -994,7 +997,7 @@ END;
 CREATE PROCEDURE sp_ObtenerHorarios
 AS
 BEGIN
-    SELECT * FROM Horarios WHERE Estado = 1;
+    SELECT * FROM Horarios WHERE estado_enum = 'Activo';
 END;
 
 -- Obtener Horario por ID
@@ -1002,7 +1005,7 @@ CREATE PROCEDURE sp_ObtenerHorarioPorID
     @HorarioID INT
 AS
 BEGIN
-    SELECT * FROM Horarios WHERE HorarioID = @HorarioID AND Estado = 1;
+    SELECT * FROM Horarios WHERE HorarioID = @HorarioID AND estado_enum = 'Activo';
 END;
 
 -- Actualizar Horario
@@ -1017,7 +1020,7 @@ CREATE PROCEDURE sp_ActualizarHorario
 AS
 BEGIN
     -- Verificar si ya existe otro horario con ese nombre
-    IF EXISTS (SELECT 1 FROM Horarios WHERE Nombre = @Nombre AND HorarioID <> @HorarioID AND Estado = 1)
+    IF EXISTS (SELECT 1 FROM Horarios WHERE Nombre = @Nombre AND HorarioID <> @HorarioID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('Ya existe otro horario con ese nombre.', 16, 1);
         RETURN;
@@ -1041,14 +1044,14 @@ CREATE PROCEDURE sp_EliminarHorario
 AS
 BEGIN
     -- Verificar si el horario está asignado a algún empleado
-    IF EXISTS (SELECT 1 FROM HorariosEmpleados WHERE HorarioID = @HorarioID AND Estado = 1)
+    IF EXISTS (SELECT 1 FROM HorariosEmpleados WHERE HorarioID = @HorarioID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('No se puede eliminar el horario porque está asignado a empleados.', 16, 1);
         RETURN;
     END
 
     UPDATE Horarios
-    SET Estado = 0
+    SET estado_enum = 'inactivo'
     WHERE HorarioID = @HorarioID;
 
     SELECT @HorarioID AS HorarioID;
@@ -1068,7 +1071,7 @@ BEGIN
     IF @AplicaTodasSucursales = 1
     BEGIN
         IF EXISTS (SELECT 1 FROM DiasNoLaborables 
-                  WHERE Fecha = @Fecha AND AplicaTodasSucursales = 1 AND Estado = 1)
+                  WHERE Fecha = @Fecha AND AplicaTodasSucursales = 1 AND estado_enum = 'Activo')
         BEGIN
             RAISERROR('Ya existe un día no laborable global para esa fecha.', 16, 1);
             RETURN;
@@ -1077,7 +1080,7 @@ BEGIN
     ELSE
     BEGIN
         IF EXISTS (SELECT 1 FROM DiasNoLaborables 
-                  WHERE Fecha = @Fecha AND SucursalID = @SucursalID AND Estado = 1)
+                  WHERE Fecha = @Fecha AND SucursalID = @SucursalID AND estado_enum = 'Activo')
         BEGIN
             RAISERROR('Ya existe un día no laborable para esa sucursal en esa fecha.', 16, 1);
             RETURN;
@@ -1085,7 +1088,7 @@ BEGIN
     END
 
     -- Verificar si existe la sucursal cuando no aplica a todas
-    IF @AplicaTodasSucursales = 0 AND NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    IF @AplicaTodasSucursales = 0 AND NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
         RETURN;
@@ -1106,7 +1109,7 @@ BEGIN
     SELECT d.*, s.Nombre AS NombreSucursal
     FROM DiasNoLaborables d
     LEFT JOIN Sucursales s ON d.SucursalID = s.SucursalID
-    WHERE d.Estado = 1
+    WHERE d.estado_enum = 'Activo'
     ORDER BY d.Fecha DESC;
 END;
 
@@ -1118,7 +1121,7 @@ BEGIN
     SELECT d.*, s.Nombre AS NombreSucursal
     FROM DiasNoLaborables d
     LEFT JOIN Sucursales s ON d.SucursalID = s.SucursalID
-    WHERE (d.SucursalID = @SucursalID OR d.AplicaTodasSucursales = 1) AND d.Estado = 1
+    WHERE (d.SucursalID = @SucursalID OR d.AplicaTodasSucursales = 1) AND d.estado_enum = 'Activo'
     ORDER BY d.Fecha DESC;
 END;
 
@@ -1130,7 +1133,7 @@ BEGIN
     SELECT d.*, s.Nombre AS NombreSucursal
     FROM DiasNoLaborables d
     LEFT JOIN Sucursales s ON d.SucursalID = s.SucursalID
-    WHERE d.DiaNoLaborableID = @DiaNoLaborableID AND d.Estado = 1;
+    WHERE d.DiaNoLaborableID = @DiaNoLaborableID AND d.estado_enum = 'Activo';
 END;
 
 -- Actualizar Día No Laborable
@@ -1148,7 +1151,7 @@ BEGIN
     BEGIN
         IF EXISTS (SELECT 1 FROM DiasNoLaborables 
                   WHERE Fecha = @Fecha AND AplicaTodasSucursales = 1 
-                  AND DiaNoLaborableID <> @DiaNoLaborableID AND Estado = 1)
+                  AND DiaNoLaborableID <> @DiaNoLaborableID AND estado_enum = 'Activo')
         BEGIN
             RAISERROR('Ya existe otro día no laborable global para esa fecha.', 16, 1);
             RETURN;
@@ -1158,7 +1161,7 @@ BEGIN
     BEGIN
         IF EXISTS (SELECT 1 FROM DiasNoLaborables 
                   WHERE Fecha = @Fecha AND SucursalID = @SucursalID 
-                  AND DiaNoLaborableID <> @DiaNoLaborableID AND Estado = 1)
+                  AND DiaNoLaborableID <> @DiaNoLaborableID AND estado_enum = 'Activo')
         BEGIN
             RAISERROR('Ya existe otro día no laborable para esa sucursal en esa fecha.', 16, 1);
             RETURN;
@@ -1166,7 +1169,7 @@ BEGIN
     END
 
     -- Verificar si existe la sucursal cuando no aplica a todas
-    IF @AplicaTodasSucursales = 0 AND NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    IF @AplicaTodasSucursales = 0 AND NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
         RETURN;
@@ -1189,7 +1192,7 @@ CREATE PROCEDURE sp_EliminarDiaNoLaborable
 AS
 BEGIN
     UPDATE DiasNoLaborables
-    SET Estado = 0
+    SET estado_enum = 'Inactivo'
     WHERE DiaNoLaborableID = @DiaNoLaborableID;
 
     SELECT @DiaNoLaborableID AS DiaNoLaborableID;
@@ -1221,14 +1224,14 @@ BEGIN
     END
 
     -- Verificar si existe el cargo
-    IF NOT EXISTS (SELECT 1 FROM Cargos WHERE CargoID = @CargoID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Cargos WHERE CargoID = @CargoID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('El cargo no existe o está inactivo.', 16, 1);
         RETURN;
     END
 
     -- Verificar si existe la sucursal
-    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
         RETURN;
@@ -1253,7 +1256,7 @@ BEGIN
     INNER JOIN Cargos c ON e.CargoID = c.CargoID
     INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
-    WHERE e.Estado = 1
+    WHERE e.estado_enum = 'Activo'
     ORDER BY e.Apellido, e.Nombre;
 END;
 
@@ -1267,7 +1270,7 @@ BEGIN
     INNER JOIN Cargos c ON e.CargoID = c.CargoID
     INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
-    WHERE e.SucursalID = @SucursalID AND e.Estado = 1
+    WHERE e.SucursalID = @SucursalID AND e.estado_enum = 'Activo'
     ORDER BY e.Apellido, e.Nombre;
 END;
 
@@ -1281,7 +1284,7 @@ BEGIN
     INNER JOIN Cargos c ON e.CargoID = c.CargoID
     INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
-    WHERE r.RegionID = @RegionID AND e.Estado = 1
+    WHERE r.RegionID = @RegionID AND e.estado_enum = 'Activo'
     ORDER BY e.Apellido, e.Nombre;
 END;
 
@@ -1295,7 +1298,7 @@ BEGIN
     INNER JOIN Cargos c ON e.CargoID = c.CargoID
     INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
-    WHERE e.EmpleadoID = @EmpleadoID AND e.Estado = 1;
+    WHERE e.EmpleadoID = @EmpleadoID AND e.estado_enum = 'Activo';
 END;
 
 -- Actualizar Empleado
@@ -1324,14 +1327,14 @@ BEGIN
     END
 
     -- Verificar si existe el cargo
-    IF NOT EXISTS (SELECT 1 FROM Cargos WHERE CargoID = @CargoID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Cargos WHERE CargoID = @CargoID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('El cargo no existe o está inactivo.', 16, 1);
         RETURN;
     END
 
     -- Verificar si existe la sucursal
-    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND Estado = 1)
+    IF NOT EXISTS (SELECT 1 FROM Sucursales WHERE SucursalID = @SucursalID AND estado_enum = 'Activo')
     BEGIN
         RAISERROR('La sucursal no existe o está inactiva.', 16, 1);
         RETURN;
@@ -1408,7 +1411,7 @@ BEGIN
     INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
     LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID AND a.Fecha BETWEEN @FechaInicio AND @FechaFin
-    WHERE e.Estado = 1
+    WHERE e.estado_enum = 'Activo'
     AND (@EmpleadoID IS NULL OR e.EmpleadoID = @EmpleadoID)
     AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
     AND (@RegionID IS NULL OR s.RegionID = @RegionID)
@@ -1480,14 +1483,14 @@ BEGIN
             WHEN EXISTS (
                 SELECT 1 FROM Permisos p 
                 WHERE p.EmpleadoID = e.EmpleadoID 
-                AND p.Estado = 1
+                AND p.estado_enum = 'Activo'
                 AND dl.Fecha BETWEEN CAST(p.FechaInicio AS DATE) AND CAST(p.FechaFin AS DATE)
             ) THEN 'Con permiso'
             WHEN EXISTS (
                 SELECT 1 FROM DiasNoLaborables dnl 
                 WHERE (dnl.AplicaTodasSucursales = 1 OR dnl.SucursalID = e.SucursalID)
                 AND dnl.Fecha = dl.Fecha
-                AND dnl.Estado = 1
+                AND dnl.estado_enum = 'Activo'
             ) THEN 'Día no laborable'
             ELSE 'Ausente sin justificación'
         END AS EstadoAusencia
@@ -1497,7 +1500,7 @@ BEGIN
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
     CROSS JOIN @DiasLaborables dl
     LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID AND a.Fecha = dl.Fecha
-    WHERE e.Estado = 1
+    WHERE e.estado_enum = 'Activo'
     AND a.AsistenciaID IS NULL -- No hay registro de asistencia
     AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
     AND (@RegionID IS NULL OR s.RegionID = @RegionID)
@@ -1506,7 +1509,7 @@ BEGIN
         SELECT 1 FROM DiasNoLaborables dnl 
         WHERE (dnl.AplicaTodasSucursales = 1 OR dnl.SucursalID = e.SucursalID)
         AND dnl.Fecha = dl.Fecha
-        AND dnl.Estado = 1
+        AND dnl.estado_enum = 'Activo'
     )
     ORDER BY dl.Fecha DESC, e.Apellido, e.Nombre;
 END;
@@ -1555,12 +1558,12 @@ BEGIN
                 SELECT 1 FROM DiasNoLaborables dnl 
                 WHERE (dnl.AplicaTodasSucursales = 1 OR dnl.SucursalID = e.SucursalID)
                 AND dnl.Fecha = dl.Fecha
-                AND dnl.Estado = 1
+                AND dnl.estado_enum = 'Activo'
             )
             AND NOT EXISTS (
                 SELECT 1 FROM Permisos p 
                 WHERE p.EmpleadoID = e.EmpleadoID 
-                AND p.Estado = 1
+                AND p.estado_enum = 'Activo'
                 AND dl.Fecha BETWEEN CAST(p.FechaInicio AS DATE) AND CAST(p.FechaFin AS DATE)
             )
         ) AS TotalAusencias,
@@ -1568,7 +1571,7 @@ BEGIN
             SELECT COUNT(*)
             FROM Permisos p 
             WHERE p.EmpleadoID = e.EmpleadoID 
-            AND p.Estado = 1
+            AND p.estado_enum = 'Activo'
             AND (
                 CAST(p.FechaInicio AS DATE) BETWEEN @FechaInicio AND @FechaFin
                 OR CAST(p.FechaFin AS DATE) BETWEEN @FechaInicio AND @FechaFin
@@ -1585,7 +1588,7 @@ BEGIN
     INNER JOIN Regiones r ON s.RegionID = r.RegionID
     LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID 
                           AND a.Fecha BETWEEN @FechaInicio AND @FechaFin
-    WHERE e.Estado = 1
+    WHERE e.estado_enum = 'Activo'
     AND (@EmpleadoID IS NULL OR e.EmpleadoID = @EmpleadoID)
     AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
     AND (@RegionID IS NULL OR s.RegionID = @RegionID)
@@ -1617,7 +1620,7 @@ BEGIN
     SELECT COUNT(*) AS TotalEmpleados
     FROM Empleados e
     INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
-    WHERE e.Estado = 1
+    WHERE e.estado_enum = 'Activo'
     AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
     AND (@RegionID IS NULL OR s.RegionID = @RegionID);
 
@@ -1734,7 +1737,7 @@ BEGIN
     INNER JOIN Empleados e ON c.CargoID = e.CargoID
     INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
     LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID AND a.Fecha BETWEEN @FechaInicio AND @FechaFin
-    WHERE e.Estado = 1
+    WHERE e.estado_enum = 'Activo'
     AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
     AND (@RegionID IS NULL OR s.RegionID = @RegionID)
     GROUP BY d.DepartamentoID, d.Nombre
@@ -1779,7 +1782,7 @@ BEGIN
     FROM Empleados e
     INNER JOIN Sucursales s ON e.SucursalID = s.SucursalID
     LEFT JOIN Asistencias a ON e.EmpleadoID = a.EmpleadoID AND a.Fecha BETWEEN @FechaInicio AND @FechaFin
-    WHERE e.Estado = 1
+    WHERE e.estado_enum = 'Activo'
     AND (@SucursalID IS NULL OR e.SucursalID = @SucursalID)
     AND (@RegionID IS NULL OR s.RegionID = @RegionID);
 END;
